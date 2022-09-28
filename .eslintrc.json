@@ -1,5 +1,6 @@
 {
   "extends": [
+    "./tsconfig.json",
     "next/core-web-vitals",
     "plugin:import/recommended",
     "plugin:import/warnings",
@@ -14,5 +15,7 @@
         }
       }
     ]
-  }
+  },
+  "includes": ["src/**/*.ts", "src/**/*.tsx", ".eslintrc.json"],
+  "exclude": ["node_modules", "dist"]
 }
