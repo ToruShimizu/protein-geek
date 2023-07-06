@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm dev",
-    "build": "pnpm build",
-    "start": "pnpm start",
-    "lint": "pnpm lint --dir src",
-    "lint:fix": "yarn lint --fix",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --dir src",
+    "lint:fix": "next lint --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "check-types": "tsc --noEmit"
   },
@@ -16,7 +16,6 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^6",
-    "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "next": "12.3.1",
     "react": "18.2.0",
@@ -39,12 +38,13 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "pnpm lint",
-      "pnpm format",
-      "pnpm lint:fix"
+      "next lint",
+      "next format",
+      "next lint:fix"
     ]
   },
   "volta": {
-    "node": "16.17.1"
+    "node": "18.10.0",
+    "yarn": "1.22.19 "
   }
 }
