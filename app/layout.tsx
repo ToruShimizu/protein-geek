@@ -1,6 +1,7 @@
 import "./styles/reset.css"
 import "./styles/globals.css"
 import Header from "./components/header"
+import Footer from "./components/footer"
 
 export const metadata = {
   title: "Next.js",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
