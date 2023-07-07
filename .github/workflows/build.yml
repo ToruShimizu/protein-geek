@@ -9,20 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.0.2
+      uses: actions/checkout@v3.0.2
 
       - uses: actions/setup-node@v3.1.1
         with:
           node-version: 18.10.0
 
       - name: Get node_modules cache
-        uses: actions/cache@v3.0.2
+      uses: actions/cache@v3.0.2
         id: node_modules
         with:
           path: |
             **/node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
 
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn build
+        run: yarn install
+
+      - name: Check yarn.lock
+        run: '! git diff --name-only | grep yarn.lock'
+
+        run: yarn lint
+        run: yarn build
