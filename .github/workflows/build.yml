@@ -23,10 +23,14 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
 
+      - name: Install dependencies
         run: yarn install
 
       - name: Check yarn.lock
         run: '! git diff --name-only | grep yarn.lock'
 
+      - name: Run lint
         run: yarn lint
+
+      - name: Build
         run: yarn build
