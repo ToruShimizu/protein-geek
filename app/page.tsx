@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main>Hello Next.js 13</main>
+  return <main className='text-3xl font-bold'>Hello Next.js 13</main>
 }
