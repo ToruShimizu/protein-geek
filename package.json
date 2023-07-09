@@ -9,9 +9,12 @@
     "lint": "next lint --dir src",
     "lint:fix": "next lint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,json}'",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "compile": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local",
+    "generate": "graphql-codegen --config graphql.config.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.17",
     "@supabase/supabase-js": "^2.26.0",
     "graphql": "^16.7.1",
     "lint-staged": "^13.0.3",
@@ -22,7 +25,9 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^4.0.1",
     "@graphql-codegen/typescript": "^4.0.1",
-    "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@graphql-codegen/typescript-graphql-request": "^5.0.0",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@types/node": "20.4.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
@@ -38,7 +43,7 @@
     "postcss": "^8.4.25",
     "prettier": "^3.0.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "5.1.6"
+    "typescript": "^5.1.6"
   },
   "volta": {
     "node": "18.10.0",

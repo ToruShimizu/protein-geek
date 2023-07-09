@@ -1,0 +1,10 @@
+query MakerQuery {
+  makersCollection {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}

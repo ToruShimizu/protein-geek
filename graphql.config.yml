@@ -1,0 +1,10 @@
+schema:
+  - "http://localhost:54321/graphql/v1"
+documents:
+  - "./graphql/{queries,mutations}.graphql"
+generates:
+  ./graphql/__generated__/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
