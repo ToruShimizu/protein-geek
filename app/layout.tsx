@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ApolloWrapper>
           <Header />
-          {children}
+          <div className="p-5 md:py-8 md:px-32">{children}</div>
           <Footer />
         </ApolloWrapper>
       </body>
