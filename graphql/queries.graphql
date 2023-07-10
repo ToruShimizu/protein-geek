@@ -4,6 +4,7 @@ query Makers {
       node {
         id
         name
+        src
       }
     }
   }
