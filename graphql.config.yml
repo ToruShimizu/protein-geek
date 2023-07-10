@@ -3,7 +3,7 @@ schema:
 documents:
   - "./graphql/{queries,mutations}.graphql"
 generates:
-  ./graphql/__generated__/graphql.ts:
+  ./graphql/generated/graphql.ts:
     plugins:
       - typescript
       - typescript-operations

@@ -577,14 +577,14 @@ export type ReviewsUpdateResponse = {
   records: Array<Reviews>;
 };
 
-export type MakerQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MakerQueryQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string } }> } | null };
+export type MakersQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string } }> } | null };
 
 
-export const MakerQueryDocument = gql`
-    query MakerQuery {
+export const MakersDocument = gql`
+    query Makers {
   makersCollection {
     edges {
       node {
@@ -597,28 +597,28 @@ export const MakerQueryDocument = gql`
     `;
 
 /**
- * __useMakerQueryQuery__
+ * __useMakersQuery__
  *
- * To run a query within a React component, call `useMakerQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useMakerQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMakersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMakersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMakerQueryQuery({
+ * const { data, loading, error } = useMakersQuery({
  *   variables: {
  *   },
  * });
  */
-export function useMakerQueryQuery(baseOptions?: Apollo.QueryHookOptions<MakerQueryQuery, MakerQueryQueryVariables>) {
+export function useMakersQuery(baseOptions?: Apollo.QueryHookOptions<MakersQuery, MakersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MakerQueryQuery, MakerQueryQueryVariables>(MakerQueryDocument, options);
+        return Apollo.useQuery<MakersQuery, MakersQueryVariables>(MakersDocument, options);
       }
-export function useMakerQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MakerQueryQuery, MakerQueryQueryVariables>) {
+export function useMakersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MakersQuery, MakersQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MakerQueryQuery, MakerQueryQueryVariables>(MakerQueryDocument, options);
+          return Apollo.useLazyQuery<MakersQuery, MakersQueryVariables>(MakersDocument, options);
         }
-export type MakerQueryQueryHookResult = ReturnType<typeof useMakerQueryQuery>;
-export type MakerQueryLazyQueryHookResult = ReturnType<typeof useMakerQueryLazyQuery>;
-export type MakerQueryQueryResult = Apollo.QueryResult<MakerQueryQuery, MakerQueryQueryVariables>;
+export type MakersQueryHookResult = ReturnType<typeof useMakersQuery>;
+export type MakersLazyQueryHookResult = ReturnType<typeof useMakersLazyQuery>;
+export type MakersQueryResult = Apollo.QueryResult<MakersQuery, MakersQueryVariables>;
