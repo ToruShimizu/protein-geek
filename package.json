@@ -10,7 +10,6 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,json}'",
     "check-types": "tsc --noEmit",
-    "compile": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local",
     "generate": "graphql-codegen --config graphql.config.yml"
   },
   "dependencies": {
