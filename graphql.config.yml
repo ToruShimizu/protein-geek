@@ -4,6 +4,8 @@ documents:
   - "./graphql/{queries,mutations}.graphql"
 generates:
   ./graphql/generated/graphql.ts:
+    config:
+      - skipTypename: true
     plugins:
       - typescript
       - typescript-operations
