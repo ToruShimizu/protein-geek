@@ -1,4 +1,4 @@
-query MakerQuery {
+query Makers {
   makersCollection {
     edges {
       node {
