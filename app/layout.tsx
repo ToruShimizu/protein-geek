@@ -1,7 +1,9 @@
-import "./styles/reset.css"
-import "./styles/globals.css"
 import Header from "./components/header"
 import Footer from "./components/footer"
+import { ApolloWrapper } from "../api/apollo/apollo-wrapper"
+
+import "./styles/reset.css"
+import "./styles/globals.css"
 
 export const metadata = {
   title: "Next.js",
@@ -12,9 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <ApolloWrapper>
+          <Header />
+          {children}
+          <Footer />
+        </ApolloWrapper>
       </body>
     </html>
   )
