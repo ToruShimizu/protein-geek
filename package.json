@@ -10,7 +10,6 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,json}'",
     "check-types": "tsc --noEmit",
-    "compile": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local",
     "generate": "graphql-codegen --config graphql.config.yml"
   },
   "dependencies": {
@@ -35,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "autoprefixer": "^10.4.14",
+    "encoding": "^0.1.13",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "eslint-config-prettier": "^8.5.0",
