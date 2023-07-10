@@ -7,7 +7,7 @@ import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rs
 
 export const { getClient } = registerApolloClient(() => {
   return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
+    cache: new NextSSRInMemoryCache({ addTypename: false }),
     link: new HttpLink({
       uri: "http://localhost:54321/graphql/v1",
     }),
