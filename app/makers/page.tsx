@@ -12,8 +12,13 @@ export default async function Page() {
           {makers.map((maker) => (
             <li key={maker.id} className="grid gap-1 md:gap-2">
               <Link href={`/makers/${maker.id}`}>
-                <div className="grid gap-2">
-                  {maker.src && <img src={maker.src} alt="プロテインメーカー" />}
+                <div className="grid gap-2 group">
+                  {maker.src && (
+                    <div className="relative">
+                      <img src={maker.src} alt="プロテインメーカー" />
+                      <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
+                    </div>
+                  )}
                   <p className="text-sm md:text-lg">{maker.name}</p>
                 </div>
               </Link>
