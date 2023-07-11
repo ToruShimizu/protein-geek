@@ -1,5 +1,19 @@
+# メーカー一覧取得
 query Makers {
   makersCollection {
+    edges {
+      node {
+        id
+        name
+        src
+      }
+    }
+  }
+}
+
+# 任意のメーカーを1件取得
+query MakerById($id: BigInt!) {
+  makersCollection(filter: { id: { eq: $id } }) {
     edges {
       node {
         id
