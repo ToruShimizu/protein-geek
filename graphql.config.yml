@@ -1,9 +1,9 @@
 schema:
   - "http://localhost:54321/graphql/v1"
 documents:
-  - "./graphql/{queries,mutations}.graphql"
+  - "./api/graphql/{queries,mutations}.graphql"
 generates:
-  ./graphql/generated/graphql.ts:
+  ./api/graphql/generated/graphql.ts:
     config:
       - skipTypename: true
     plugins:
