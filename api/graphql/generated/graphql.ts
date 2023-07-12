@@ -812,6 +812,13 @@ export type MakerByIdQueryVariables = Exact<{
 
 export type MakerByIdQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src?: string | null } }> } | null };
 
+export type ProteinByMakerIdQueryVariables = Exact<{
+  id: Scalars['BigInt']['input'];
+}>;
+
+
+export type ProteinByMakerIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string } }> } | null };
+
 
 export const MakersDocument = gql`
     query Makers {
@@ -894,3 +901,46 @@ export function useMakerByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type MakerByIdQueryHookResult = ReturnType<typeof useMakerByIdQuery>;
 export type MakerByIdLazyQueryHookResult = ReturnType<typeof useMakerByIdLazyQuery>;
 export type MakerByIdQueryResult = Apollo.QueryResult<MakerByIdQuery, MakerByIdQueryVariables>;
+export const ProteinByMakerIdDocument = gql`
+    query ProteinByMakerId($id: BigInt!) {
+  proteinsCollection(filter: {id: {eq: $id}}) {
+    edges {
+      node {
+        id
+        name
+        capacity
+        flavor
+        price
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProteinByMakerIdQuery__
+ *
+ * To run a query within a React component, call `useProteinByMakerIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProteinByMakerIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProteinByMakerIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProteinByMakerIdQuery(baseOptions: Apollo.QueryHookOptions<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>(ProteinByMakerIdDocument, options);
+      }
+export function useProteinByMakerIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>(ProteinByMakerIdDocument, options);
+        }
+export type ProteinByMakerIdQueryHookResult = ReturnType<typeof useProteinByMakerIdQuery>;
+export type ProteinByMakerIdLazyQueryHookResult = ReturnType<typeof useProteinByMakerIdLazyQuery>;
+export type ProteinByMakerIdQueryResult = Apollo.QueryResult<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>;

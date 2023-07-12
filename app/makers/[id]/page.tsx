@@ -1,8 +1,8 @@
-import { makerRepo } from "../../../repos/makers"
+import { proteinRepo } from "../../../repos/proteins"
 
 export default async function Page({ params }: { params: { id: string } }) {
   // eslint-disable-next-line
-  const maker = await makerRepo.fetchById(Number(params.id))
+  const proteins = await proteinRepo.fetchByMakerId(Number(params.id))
 
   return (
     <main>
