@@ -26,7 +26,7 @@ query MakerById($id: BigInt!) {
 
 # 任意のメーカーに紐づくプロテイン一覧を取得
 query ProteinByMakerId($id: BigInt!) {
-  proteinsCollection(filter: { id: { eq: $id } }) {
+  proteinsCollection(filter: { maker_id: { eq: $id } }) {
     edges {
       node {
         id
@@ -34,6 +34,7 @@ query ProteinByMakerId($id: BigInt!) {
         capacity
         flavor
         price
+        src
       }
     }
   }

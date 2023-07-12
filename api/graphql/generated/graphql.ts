@@ -117,50 +117,24 @@ export type IntFilter = {
 /** The root type for creating and mutating data */
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Deletes zero or more records from the `cities` collection */
-  deleteFromcitiesCollection: CitiesDeleteResponse;
-  /** Deletes zero or more records from the `countries` collection */
-  deleteFromcountriesCollection: CountriesDeleteResponse;
   /** Deletes zero or more records from the `makers` collection */
   deleteFrommakersCollection: MakersDeleteResponse;
   /** Deletes zero or more records from the `proteins` collection */
   deleteFromproteinsCollection: ProteinsDeleteResponse;
   /** Deletes zero or more records from the `reviews` collection */
   deleteFromreviewsCollection: ReviewsDeleteResponse;
-  /** Adds one or more `cities` records to the collection */
-  insertIntocitiesCollection?: Maybe<CitiesInsertResponse>;
-  /** Adds one or more `countries` records to the collection */
-  insertIntocountriesCollection?: Maybe<CountriesInsertResponse>;
   /** Adds one or more `makers` records to the collection */
   insertIntomakersCollection?: Maybe<MakersInsertResponse>;
   /** Adds one or more `proteins` records to the collection */
   insertIntoproteinsCollection?: Maybe<ProteinsInsertResponse>;
   /** Adds one or more `reviews` records to the collection */
   insertIntoreviewsCollection?: Maybe<ReviewsInsertResponse>;
-  /** Updates zero or more records in the `cities` collection */
-  updatecitiesCollection: CitiesUpdateResponse;
-  /** Updates zero or more records in the `countries` collection */
-  updatecountriesCollection: CountriesUpdateResponse;
   /** Updates zero or more records in the `makers` collection */
   updatemakersCollection: MakersUpdateResponse;
   /** Updates zero or more records in the `proteins` collection */
   updateproteinsCollection: ProteinsUpdateResponse;
   /** Updates zero or more records in the `reviews` collection */
   updatereviewsCollection: ReviewsUpdateResponse;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationDeleteFromcitiesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CitiesFilter>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationDeleteFromcountriesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CountriesFilter>;
 };
 
 
@@ -186,18 +160,6 @@ export type MutationDeleteFromreviewsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntocitiesCollectionArgs = {
-  objects: Array<CitiesInsertInput>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationInsertIntocountriesCollectionArgs = {
-  objects: Array<CountriesInsertInput>;
-};
-
-
-/** The root type for creating and mutating data */
 export type MutationInsertIntomakersCollectionArgs = {
   objects: Array<MakersInsertInput>;
 };
@@ -212,22 +174,6 @@ export type MutationInsertIntoproteinsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntoreviewsCollectionArgs = {
   objects: Array<ReviewsInsertInput>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationUpdatecitiesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CitiesFilter>;
-  set: CitiesUpdateInput;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationUpdatecountriesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CountriesFilter>;
-  set: CountriesUpdateInput;
 };
 
 
@@ -288,10 +234,6 @@ export type PageInfo = {
 /** The root type for querying data */
 export type Query = {
   __typename?: 'Query';
-  /** A pagable collection of type `cities` */
-  citiesCollection?: Maybe<CitiesConnection>;
-  /** A pagable collection of type `countries` */
-  countriesCollection?: Maybe<CountriesConnection>;
   /** A pagable collection of type `makers` */
   makersCollection?: Maybe<MakersConnection>;
   /** Retrieve a record by its `ID` */
@@ -300,28 +242,6 @@ export type Query = {
   proteinsCollection?: Maybe<ProteinsConnection>;
   /** A pagable collection of type `reviews` */
   reviewsCollection?: Maybe<ReviewsConnection>;
-};
-
-
-/** The root type for querying data */
-export type QueryCitiesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CitiesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CitiesOrderBy>>;
-};
-
-
-/** The root type for querying data */
-export type QueryCountriesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CountriesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CountriesOrderBy>>;
 };
 
 
@@ -396,149 +316,6 @@ export type UuidFilter = {
   in?: InputMaybe<Array<Scalars['UUID']['input']>>;
   is?: InputMaybe<FilterIs>;
   neq?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-export type Cities = Node & {
-  __typename?: 'cities';
-  countries?: Maybe<Countries>;
-  country_id?: Maybe<Scalars['Int']['output']>;
-  id: Scalars['Int']['output'];
-  name?: Maybe<Scalars['String']['output']>;
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-};
-
-export type CitiesConnection = {
-  __typename?: 'citiesConnection';
-  edges: Array<CitiesEdge>;
-  pageInfo: PageInfo;
-};
-
-export type CitiesDeleteResponse = {
-  __typename?: 'citiesDeleteResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Cities>;
-};
-
-export type CitiesEdge = {
-  __typename?: 'citiesEdge';
-  cursor: Scalars['String']['output'];
-  node: Cities;
-};
-
-export type CitiesFilter = {
-  country_id?: InputMaybe<IntFilter>;
-  id?: InputMaybe<IntFilter>;
-  name?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-};
-
-export type CitiesInsertInput = {
-  country_id?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type CitiesInsertResponse = {
-  __typename?: 'citiesInsertResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Cities>;
-};
-
-export type CitiesOrderBy = {
-  country_id?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  name?: InputMaybe<OrderByDirection>;
-};
-
-export type CitiesUpdateInput = {
-  country_id?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type CitiesUpdateResponse = {
-  __typename?: 'citiesUpdateResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Cities>;
-};
-
-export type Countries = Node & {
-  __typename?: 'countries';
-  citiesCollection?: Maybe<CitiesConnection>;
-  id: Scalars['Int']['output'];
-  name?: Maybe<Scalars['String']['output']>;
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-};
-
-
-export type CountriesCitiesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CitiesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CitiesOrderBy>>;
-};
-
-export type CountriesConnection = {
-  __typename?: 'countriesConnection';
-  edges: Array<CountriesEdge>;
-  pageInfo: PageInfo;
-};
-
-export type CountriesDeleteResponse = {
-  __typename?: 'countriesDeleteResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Countries>;
-};
-
-export type CountriesEdge = {
-  __typename?: 'countriesEdge';
-  cursor: Scalars['String']['output'];
-  node: Countries;
-};
-
-export type CountriesFilter = {
-  id?: InputMaybe<IntFilter>;
-  name?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-};
-
-export type CountriesInsertInput = {
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type CountriesInsertResponse = {
-  __typename?: 'countriesInsertResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Countries>;
-};
-
-export type CountriesOrderBy = {
-  id?: InputMaybe<OrderByDirection>;
-  name?: InputMaybe<OrderByDirection>;
-};
-
-export type CountriesUpdateInput = {
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type CountriesUpdateResponse = {
-  __typename?: 'countriesUpdateResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Countries>;
 };
 
 export type Makers = Node & {
@@ -817,7 +594,7 @@ export type ProteinByMakerIdQueryVariables = Exact<{
 }>;
 
 
-export type ProteinByMakerIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string } }> } | null };
+export type ProteinByMakerIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string, src: string } }> } | null };
 
 
 export const MakersDocument = gql`
@@ -903,7 +680,7 @@ export type MakerByIdLazyQueryHookResult = ReturnType<typeof useMakerByIdLazyQue
 export type MakerByIdQueryResult = Apollo.QueryResult<MakerByIdQuery, MakerByIdQueryVariables>;
 export const ProteinByMakerIdDocument = gql`
     query ProteinByMakerId($id: BigInt!) {
-  proteinsCollection(filter: {id: {eq: $id}}) {
+  proteinsCollection(filter: {maker_id: {eq: $id}}) {
     edges {
       node {
         id
@@ -911,6 +688,7 @@ export const ProteinByMakerIdDocument = gql`
         capacity
         flavor
         price
+        src
       }
     }
   }
