@@ -1,4 +1,9 @@
-export default async function Page({ params }: { params: { proteinId: string; makerId: string } }) {
+import { proteinRepo } from "../../../../../repos/proteins"
+
+export default async function Page({ params }: { params: { proteinId: string } }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const protein = await proteinRepo.fetchById(Number(params.proteinId))
+
   return (
     <main>
       <section>

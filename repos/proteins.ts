@@ -3,6 +3,8 @@ import {
   ProteinByMakerIdDocument,
   ProteinByMakerIdQuery,
   ProteinByMakerIdQueryVariables,
+  ProteinByIdQuery,
+  ProteinByIdQueryVariables,
 } from "../api/graphql/generated/graphql"
 
 const client = getClient()
@@ -25,5 +27,23 @@ export const proteinRepo = {
     if (!proteins) throw new Error("Protein not found")
 
     return proteins
+  },
+  /**
+   * 任意のプロテインを1件取得する
+   */
+  fetchById: async (id: number) => {
+    const {
+      data: { proteinsCollection },
+      error,
+    } = await client.query<ProteinByIdQuery, ProteinByIdQueryVariables>({
+      query: ProteinByMakerIdDocument,
+      variables: { id },
+    })
+    if (error) throw error
+
+    const protein = proteinsCollection?.edges?.[0].node
+    if (!protein) throw new Error("Protein not found")
+
+    return protein
   },
 }
