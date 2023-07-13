@@ -3,9 +3,9 @@ import { makerRepo } from "../../../repos/makers"
 import Link from "next/link"
 import Rate from "../../_components/rate"
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const maker = await makerRepo.fetchById(Number(params.id))
-  const proteins = await proteinRepo.fetchByMakerId(Number(params.id))
+export default async function Page({ params }: { params: { makerId: string } }) {
+  const maker = await makerRepo.fetchById(Number(params.makerId))
+  const proteins = await proteinRepo.fetchByMakerId(Number(params.makerId))
 
   return (
     <main>

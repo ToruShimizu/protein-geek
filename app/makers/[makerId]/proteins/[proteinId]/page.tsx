@@ -1,4 +1,4 @@
-export default async function Page({ params }: { params: { proteinId: string } }) {
+export default async function Page({ params }: { params: { proteinId: string; makerId: string } }) {
   return (
     <main>
       <section>
