@@ -1,6 +1,7 @@
 import { proteinRepo } from "../../../repos/proteins"
 import { makerRepo } from "../../../repos/makers"
 import Link from "next/link"
+import Rate from "../../_components/rate"
 
 export default async function Page({ params }: { params: { id: string } }) {
   const maker = await makerRepo.fetchById(Number(params.id))
@@ -21,9 +22,11 @@ export default async function Page({ params }: { params: { id: string } }) {
                       <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
                     </div>
                   )}
-                  <div>
-                    <p className="mb-1 text-xs lg:text-sm font-bold text-gray-400">{node.name}</p>
+                  <div className="grid gap-1">
+                    <p className="text-xs lg:text-sm font-bold text-gray-400">{node.name}</p>
                     <p className="text-sm md:text-base font-bold text-zinc-600">{node.flavor}</p>
+                    {/* TODO: 数値入れ替え */}
+                    <Rate rate={2} count={50} />
                   </div>
                 </div>
               </Link>
