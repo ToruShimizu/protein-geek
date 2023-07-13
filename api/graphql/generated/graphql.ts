@@ -596,6 +596,13 @@ export type ProteinByMakerIdQueryVariables = Exact<{
 
 export type ProteinByMakerIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string, src: string } }> } | null };
 
+export type ProteinByIdQueryVariables = Exact<{
+  id: Scalars['BigInt']['input'];
+}>;
+
+
+export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string, src: string } }> } | null };
+
 
 export const MakersDocument = gql`
     query Makers {
@@ -722,3 +729,47 @@ export function useProteinByMakerIdLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type ProteinByMakerIdQueryHookResult = ReturnType<typeof useProteinByMakerIdQuery>;
 export type ProteinByMakerIdLazyQueryHookResult = ReturnType<typeof useProteinByMakerIdLazyQuery>;
 export type ProteinByMakerIdQueryResult = Apollo.QueryResult<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>;
+export const ProteinByIdDocument = gql`
+    query ProteinById($id: BigInt!) {
+  proteinsCollection(filter: {id: {eq: $id}}) {
+    edges {
+      node {
+        id
+        name
+        capacity
+        flavor
+        price
+        src
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProteinByIdQuery__
+ *
+ * To run a query within a React component, call `useProteinByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProteinByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProteinByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProteinByIdQuery(baseOptions: Apollo.QueryHookOptions<ProteinByIdQuery, ProteinByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProteinByIdQuery, ProteinByIdQueryVariables>(ProteinByIdDocument, options);
+      }
+export function useProteinByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProteinByIdQuery, ProteinByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProteinByIdQuery, ProteinByIdQueryVariables>(ProteinByIdDocument, options);
+        }
+export type ProteinByIdQueryHookResult = ReturnType<typeof useProteinByIdQuery>;
+export type ProteinByIdLazyQueryHookResult = ReturnType<typeof useProteinByIdLazyQuery>;
+export type ProteinByIdQueryResult = Apollo.QueryResult<ProteinByIdQuery, ProteinByIdQueryVariables>;
