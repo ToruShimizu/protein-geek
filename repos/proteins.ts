@@ -21,7 +21,7 @@ export const proteinRepo = {
     })
     if (error) throw error
 
-    const proteins = proteinsCollection?.edges?.map((edge) => edge?.node)
+    const proteins = proteinsCollection?.edges
     if (!proteins) throw new Error("Protein not found")
 
     return proteins
