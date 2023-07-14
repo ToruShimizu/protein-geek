@@ -15,7 +15,7 @@ export const proteinRepo = {
    */
   fetchByMakerId: async (id: number) => {
     const {
-      data: { proteinsCollection },
+      data: { makersCollection },
       error,
     } = await client.query<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>({
       query: ProteinByMakerIdDocument,
@@ -23,8 +23,8 @@ export const proteinRepo = {
     })
     if (error) throw error
 
-    const proteins = proteinsCollection?.edges
-    if (!proteins) throw new Error("Protein not found")
+    const proteins = makersCollection?.edges?.[0]?.node?.proteins
+    if (!proteins) throw new Error("Proteins not found")
 
     return proteins
   },

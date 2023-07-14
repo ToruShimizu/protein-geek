@@ -326,7 +326,19 @@ export type Makers = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   protein_id?: Maybe<Scalars['BigInt']['output']>;
-  src?: Maybe<Scalars['String']['output']>;
+  proteins?: Maybe<Proteins>;
+  proteinsCollection?: Maybe<ProteinsConnection>;
+  src: Scalars['String']['output'];
+};
+
+
+export type MakersProteinsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ProteinsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ProteinsOrderBy>>;
 };
 
 export type MakersConnection = {
@@ -399,16 +411,38 @@ export type MakersUpdateResponse = {
 export type Proteins = Node & {
   __typename?: 'proteins';
   capacity: Scalars['String']['output'];
-  created_at?: Maybe<Scalars['Datetime']['output']>;
+  created_at: Scalars['Datetime']['output'];
   flavor: Scalars['String']['output'];
   id: Scalars['BigInt']['output'];
   maker_id: Scalars['BigInt']['output'];
+  makers?: Maybe<Makers>;
+  makersCollection?: Maybe<MakersConnection>;
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   price: Scalars['String']['output'];
-  review_id?: Maybe<Scalars['BigInt']['output']>;
+  reviewsCollection?: Maybe<ReviewsConnection>;
   src: Scalars['String']['output'];
+};
+
+
+export type ProteinsMakersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<MakersFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<MakersOrderBy>>;
+};
+
+
+export type ProteinsReviewsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ReviewsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ReviewsOrderBy>>;
 };
 
 export type ProteinsConnection = {
@@ -440,7 +474,6 @@ export type ProteinsFilter = {
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
   price?: InputMaybe<StringFilter>;
-  review_id?: InputMaybe<BigIntFilter>;
   src?: InputMaybe<StringFilter>;
 };
 
@@ -451,7 +484,6 @@ export type ProteinsInsertInput = {
   maker_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
-  review_id?: InputMaybe<Scalars['BigInt']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -471,7 +503,6 @@ export type ProteinsOrderBy = {
   maker_id?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
   price?: InputMaybe<OrderByDirection>;
-  review_id?: InputMaybe<OrderByDirection>;
   src?: InputMaybe<OrderByDirection>;
 };
 
@@ -482,7 +513,6 @@ export type ProteinsUpdateInput = {
   maker_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
-  review_id?: InputMaybe<Scalars['BigInt']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -502,6 +532,8 @@ export type Reviews = Node & {
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  protein_id: Scalars['BigInt']['output'];
+  proteins?: Maybe<Proteins>;
   rate: Scalars['BigFloat']['output'];
   title: Scalars['String']['output'];
 };
@@ -532,6 +564,7 @@ export type ReviewsFilter = {
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  protein_id?: InputMaybe<BigIntFilter>;
   rate?: InputMaybe<BigFloatFilter>;
   title?: InputMaybe<StringFilter>;
 };
@@ -540,6 +573,7 @@ export type ReviewsInsertInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
   rate?: InputMaybe<Scalars['BigFloat']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -557,6 +591,7 @@ export type ReviewsOrderBy = {
   description?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
+  protein_id?: InputMaybe<OrderByDirection>;
   rate?: InputMaybe<OrderByDirection>;
   title?: InputMaybe<OrderByDirection>;
 };
@@ -565,6 +600,7 @@ export type ReviewsUpdateInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
   rate?: InputMaybe<Scalars['BigFloat']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -580,21 +616,21 @@ export type ReviewsUpdateResponse = {
 export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MakersQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src?: string | null } }> } | null };
+export type MakersQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src: string } }> } | null };
 
 export type MakerByIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
 }>;
 
 
-export type MakerByIdQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src?: string | null } }> } | null };
+export type MakerByIdQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src: string } }> } | null };
 
 export type ProteinByMakerIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
 }>;
 
 
-export type ProteinByMakerIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string, src: string } }> } | null };
+export type ProteinByMakerIdQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', proteins?: { __typename?: 'proteins', id: any, name: string, capacity: string, flavor: string, price: string, src: string } | null } }> } | null };
 
 export type ProteinByIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
@@ -687,15 +723,17 @@ export type MakerByIdLazyQueryHookResult = ReturnType<typeof useMakerByIdLazyQue
 export type MakerByIdQueryResult = Apollo.QueryResult<MakerByIdQuery, MakerByIdQueryVariables>;
 export const ProteinByMakerIdDocument = gql`
     query ProteinByMakerId($id: BigInt!) {
-  proteinsCollection(filter: {maker_id: {eq: $id}}) {
+  makersCollection(filter: {id: {eq: $id}}) {
     edges {
       node {
-        id
-        name
-        capacity
-        flavor
-        price
-        src
+        proteins {
+          id
+          name
+          capacity
+          flavor
+          price
+          src
+        }
       }
     }
   }
