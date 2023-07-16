@@ -1,4 +1,5 @@
 import { proteinRepo } from "../../../../../repos/proteins"
+import Rate from "../../../../_components/rate"
 
 export default async function Page({ params }: { params: { proteinId: string } }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -7,7 +8,51 @@ export default async function Page({ params }: { params: { proteinId: string } }
   return (
     <main>
       <section>
-        <h2 className="text-3xl font-bold pb-6">プロテイン</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <img src={protein.src} alt={protein.name} />
+          </div>
+          <div className="grid gap-2">
+            <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold">{protein.name}</h2>
+            <Rate rate={3} count={50}></Rate>
+            <ul>
+              <li>特徴1</li>
+              <li>特徴2</li>
+              <li>特徴3</li>
+            </ul>
+            <hr className="border-1" />
+            <div>
+              {/* TODO: フレーバーの選択 */}
+              <label htmlFor="countries" className="font-bold text-sm md:text-base">
+                フレーバー
+              </label>
+              <select
+                id="countries"
+                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
+              >
+                <option selected>いちご</option>
+                <option value="US">チョコレート</option>
+                <option value="CA">バナナ</option>
+              </select>
+            </div>
+            <div>
+              {/* TODO: 容量の選択 */}
+              <h3 className="font-bold text-sm md:text-base">サイズ</h3>
+              <ul className="grid grid-cols-2 gap-4">
+                <li className=" p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
+                  容量
+                </li>
+                <li className="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
+                  容量
+                </li>
+                <li className="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
+                  容量
+                </li>
+              </ul>
+            </div>
+            <p className="mb-3 font-bold text-lg lg:text-2xl xl:text-3xl">¥{protein.price}</p>
+          </div>
+        </div>
       </section>
     </main>
   )
