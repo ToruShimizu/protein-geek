@@ -2,7 +2,7 @@
 
 type Rate = {
   rate: number
-  count: number
+  count?: number
 }
 
 export default function Rate({ rate, count }: Rate) {
@@ -28,7 +28,7 @@ export default function Rate({ rate, count }: Rate) {
           )
         })}
       </ul>
-      <p className="text-sm text-slate-600">({count})</p>
+      {count !== undefined && <p className="text-sm text-slate-600">({count})</p>}
     </div>
   )
 }
