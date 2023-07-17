@@ -54,16 +54,17 @@ export default async function Page({ params }: { params: { proteinId: string } }
           <hr className="border-1" />
           <div>
             {/* TODO: フレーバーの選択 */}
-            <label htmlFor="countries" className="font-bold text-sm md:text-base">
+            <label htmlFor="flavors" className="font-bold text-sm md:text-base">
               フレーバー
             </label>
             <select
-              id="countries"
-              className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
+              id="flavors"
+              className="border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
+              defaultValue="いちご"
             >
-              <option selected>いちご</option>
-              <option value="US">チョコレート</option>
-              <option value="CA">バナナ</option>
+              <option value="いちご">いちご</option>
+              <option value="チョコレート">チョコレート</option>
+              <option value="バナナ">バナナ</option>
             </select>
           </div>
           <div>
