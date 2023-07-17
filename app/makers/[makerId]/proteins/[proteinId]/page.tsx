@@ -94,7 +94,7 @@ export default async function Page({ params }: { params: { proteinId: string } }
           </AccordionItem>
         </Accordion>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid gap-6">
           <LinkButton href="/">公式サイト</LinkButton>
           <LinkButton href="/">amazon</LinkButton>
           <LinkButton href="/">yahoo</LinkButton>
