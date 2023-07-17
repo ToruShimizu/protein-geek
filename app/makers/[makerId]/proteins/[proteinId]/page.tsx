@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: { proteinId: string } }
 
   return (
     <main className="grid gap-16 md:gap-20">
-      <section className="grid md:grid-cols-2 gap-8">
+      <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
         <div>
           <img src={protein.src} alt={protein.name} />
         </div>
@@ -54,16 +54,17 @@ export default async function Page({ params }: { params: { proteinId: string } }
           <hr className="border-1" />
           <div>
             {/* TODO: フレーバーの選択 */}
-            <label htmlFor="countries" className="font-bold text-sm md:text-base">
+            <label htmlFor="flavors" className="font-bold text-sm md:text-base">
               フレーバー
             </label>
             <select
-              id="countries"
-              className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
+              id="flavors"
+              className="border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
+              defaultValue="いちご"
             >
-              <option selected>いちご</option>
-              <option value="US">チョコレート</option>
-              <option value="CA">バナナ</option>
+              <option value="いちご">いちご</option>
+              <option value="チョコレート">チョコレート</option>
+              <option value="バナナ">バナナ</option>
             </select>
           </div>
           <div>
@@ -95,10 +96,12 @@ export default async function Page({ params }: { params: { proteinId: string } }
           </AccordionItem>
         </Accordion>
 
-        <div className="grid gap-6">
-          <LinkButton href="/">公式サイト</LinkButton>
-          <LinkButton href="/">amazon</LinkButton>
-          <LinkButton href="/">yahoo</LinkButton>
+        <div>
+          <div className="grid gap-6">
+            <LinkButton href="/">公式サイト</LinkButton>
+            <LinkButton href="/">amazon</LinkButton>
+            <LinkButton href="/">yahoo</LinkButton>
+          </div>
         </div>
       </section>
       <section className="grid gap-8">
