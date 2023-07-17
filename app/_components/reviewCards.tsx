@@ -1,7 +1,6 @@
 import Rate from "./rate"
 
 type Props = {
-  flavor: string
   reviews: {
     id: number
     description: string
@@ -11,15 +10,9 @@ type Props = {
   }[]
 }
 
-export default function ReviewCard({ flavor, reviews }: Props) {
+export default function ReviewCards({ reviews }: Props) {
   return (
     <>
-      <div>
-        <h2 className="text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4">
-          {flavor}味のレビュー
-        </h2>
-        <hr className="border-1" />
-      </div>
       <div className="grid gap-4">
         {reviews.map((review) => (
           <>
