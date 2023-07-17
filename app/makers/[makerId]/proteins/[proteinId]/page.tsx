@@ -102,8 +102,14 @@ export default async function Page({ params }: { params: { proteinId: string } }
         </div>
       </section>
       <section className="grid gap-8">
+        <div>
+          <h2 className="text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4">
+            {protein.flavor}味のレビュー
+          </h2>
+          <hr className="border-1" />
+        </div>
         <ReviewForm />
-        <ReviewCards flavor={protein.flavor} reviews={DUMMY_REVIEWS} />
+        <ReviewCards reviews={DUMMY_REVIEWS} />
       </section>
     </main>
   )
