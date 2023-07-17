@@ -1,15 +1,33 @@
 "use client"
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "../_styles/animation.module.css"
+import { ReviewFormSchemaType, reviewFormSchema } from "../../modules/validateSchema"
 
 export default function ReviewForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    clearErrors,
+    setValue,
+  } = useForm<ReviewFormSchemaType>({
+    resolver: zodResolver(reviewFormSchema),
+  })
   const [isLoading, setIsLoading] = useState(false)
 
   const [rate, setRate] = useState(0)
   const [hoveredRate, setHoveredRate] = useState(0)
+  const handleSetRate = (value: number) => {
+    setValue("rate", value)
+    setRate(value)
+    clearErrors("rate")
+  }
 
   return (
-    <form className="w-full lg:w-2/4">
+    // TODO: submit時にpostする
+    <form className="w-full lg:w-2/4" onSubmit={handleSubmit((d) => console.log(d))}>
       <div className="mb-6 grid gap-4">
         <div className="grid gap-1">
           <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 ">
@@ -17,8 +35,15 @@ export default function ReviewForm() {
           </label>
           <input
             id="name"
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+            type="text"
+            className={`border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+              errors.name?.message && "bg-red-50 border border-red-500 text-red-500"
+            }`}
+            {...register("name")}
           />
+          {errors.name?.message && (
+            <p className="text-red-500 text-sm font-medium">{errors.name?.message}</p>
+          )}
         </div>
         <div className="grid gap-1">
           <label htmlFor="title" className="block text-sm font-bold text-gray-900 ">
@@ -26,14 +51,20 @@ export default function ReviewForm() {
           </label>
           <input
             id="title"
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+            type="text"
+            className={`border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+              errors.title?.message && "bg-red-50 border border-red-500 text-red-500"
+            }`}
+            {...register("title")}
           />
+          {errors.title?.message && (
+            <p className="text-red-500 text-sm font-medium">{errors.title?.message}</p>
+          )}
         </div>
         <div>
           <label htmlFor="rate" className="block mb-2 text-sm font-bold text-gray-900 ">
             評価
           </label>
-          {/* TODO:評価の選択 */}
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (
               <button
@@ -45,7 +76,7 @@ export default function ReviewForm() {
                 }`}
                 onMouseEnter={() => setHoveredRate(index + 1)}
                 onMouseLeave={() => setHoveredRate(0)}
-                onClick={() => setRate(index + 1)}
+                onClick={() => handleSetRate(index + 1)}
                 type="button"
               >
                 <svg
@@ -62,7 +93,16 @@ export default function ReviewForm() {
                 </svg>
               </button>
             ))}
+            <input
+              type="hidden"
+              id="rate"
+              {...register("rate", { valueAsNumber: true })}
+              defaultValue={rate}
+            />
           </div>
+          {errors.rate?.message && (
+            <p className="text-red-500 text-sm font-medium">{errors.rate?.message}</p>
+          )}
         </div>
         <div className="grid gap-1">
           <label htmlFor="description" className="block text-sm font-bold text-gray-900 ">
@@ -70,15 +110,21 @@ export default function ReviewForm() {
           </label>
           <input
             id="description"
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+            className={`border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
+              errors.description?.message && "bg-red-50 border border-red-500 text-red-500"
+            }`}
+            {...register("description")}
           />
+          {errors.description?.message && (
+            <p className="text-red-500 text-sm font-medium">{errors.description?.message}</p>
+          )}
         </div>
       </div>
       <div className="b h-12 w-full grid items-center relative px-8">
         <div
           className={`${styles.button} h-12 w-full bg-gradient-to-br from-teal-400 via-teal-500 to-teal-600 items-center shadow-2xl cursor-pointer absolute overflow-hidden transform hover:opacity-75  transition duration-300 ease-out`}
         />
-        <button className="text-white font-bold z-10 pointer-events-none">
+        <button type="submit" className="text-white font-bold z-10">
           {isLoading && (
             <svg
               aria-hidden="false"
