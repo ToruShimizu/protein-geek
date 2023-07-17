@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: { proteinId: string } }
 
   return (
     <main className="grid gap-16 md:gap-20">
-      <section className="grid md:grid-cols-2 gap-8">
+      <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
         <div>
           <img src={protein.src} alt={protein.name} />
         </div>
@@ -95,10 +95,12 @@ export default async function Page({ params }: { params: { proteinId: string } }
           </AccordionItem>
         </Accordion>
 
-        <div className="grid gap-6">
-          <LinkButton href="/">公式サイト</LinkButton>
-          <LinkButton href="/">amazon</LinkButton>
-          <LinkButton href="/">yahoo</LinkButton>
+        <div>
+          <div className="grid gap-6">
+            <LinkButton href="/">公式サイト</LinkButton>
+            <LinkButton href="/">amazon</LinkButton>
+            <LinkButton href="/">yahoo</LinkButton>
+          </div>
         </div>
       </section>
       <section className="grid gap-8">
