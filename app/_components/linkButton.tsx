@@ -1,6 +1,8 @@
 "use client"
 import Link from "next/link"
 
+import styles from "../_styles/animation.module.css"
+
 type Props = {
   href: string
   children: React.ReactNode
@@ -8,8 +10,10 @@ type Props = {
 
 export default function LinkButton({ href, children }: Props) {
   return (
-    <div className="b h-16 w-full grid items-center relative mx-auto px-8">
-      <div className="i h-16 w-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 items-center shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+    <div className="b h-16 w-full max-w-lg grid items-center relative mx-auto px-8">
+      <div
+        className={`${styles.button} h-16 w-full max-w-lg bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 items-center shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 hover:opacity-75 transition duration-300 ease-out`}
+      ></div>
       <Link href={href} className="text-white font-bold z-10 pointer-events-none">
         <div className="flex items-center justify-center">
           <p className="ml-auto">{children}</p>
