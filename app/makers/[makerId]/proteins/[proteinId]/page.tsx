@@ -1,6 +1,7 @@
 import { proteinRepo } from "../../../../../repos/proteins"
 import Accordion from "../../../../_components/accordion"
 import AccordionItem from "../../../../_components/accordionItem"
+import LinkButton from "../../../../_components/linkButton"
 import Rate from "../../../../_components/rate"
 
 export default async function Page({ params }: { params: { proteinId: string } }) {
@@ -68,6 +69,12 @@ export default async function Page({ params }: { params: { proteinId: string } }
             成分
           </AccordionItem>
         </Accordion>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          <LinkButton href="/">公式サイト</LinkButton>
+          <LinkButton href="/">amazon</LinkButton>
+          <LinkButton href="/">yahoo</LinkButton>
+        </div>
       </section>
     </main>
   )
