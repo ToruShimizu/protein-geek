@@ -4,6 +4,7 @@ import AccordionItem from "../../../../_components/accordionItem"
 import LinkButton from "../../../../_components/linkButton"
 import Rate from "../../../../_components/rate"
 import ReviewCards from "../../../../_components/reviewCards"
+import ReviewForm from "../../../../_components/reviewForm"
 
 const DUMMY_REVIEWS = [
   {
@@ -101,6 +102,7 @@ export default async function Page({ params }: { params: { proteinId: string } }
         </div>
       </section>
       <section className="grid gap-8">
+        <ReviewForm />
         <ReviewCards flavor={protein.flavor} reviews={DUMMY_REVIEWS} />
       </section>
     </main>
