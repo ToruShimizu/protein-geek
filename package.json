@@ -20,7 +20,8 @@
     "lint-staged": "^13.0.3",
     "next": "13.4.10",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tw-elements": "^1.0.0-beta2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^4.0.1",
