@@ -19,22 +19,15 @@ query MakerById($id: BigInt!) {
         id
         name
         src
-      }
-    }
-  }
-}
-
-# 任意のメーカーに紐づくプロテイン一覧を取得
-query ProteinByMakerId($id: BigInt!) {
-  proteinsCollection(filter: { maker_id: { eq: $id } }) {
-    edges {
-      node {
-        id
-        name
-        capacity
-        flavor
-        price
-        src
+        proteinsCollection {
+          edges {
+            node {
+              id
+              name
+              src
+            }
+          }
+        }
       }
     }
   }
@@ -47,10 +40,32 @@ query ProteinById($id: BigInt!) {
       node {
         id
         name
-        capacity
-        flavor
-        price
         src
+        flavorsCollection {
+          edges {
+            node {
+              id
+              name
+              src
+              sellers {
+                amazon
+                rakuten
+                yahoo
+                official
+                id
+              }
+              productsCollection {
+                edges {
+                  node {
+                    id
+                    capacity
+                    price
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
