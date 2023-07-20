@@ -31,7 +31,9 @@ const DUMMY_REVIEWS = [
 ]
 export default async function Page({ params }: { params: { proteinId: string } }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const protein = await proteinRepo.fetchById(Number(params.proteinId))
+  const { protein, flavors, seller, products } = await proteinRepo.fetchById(
+    Number(params.proteinId),
+  )
 
   return (
     <main className="grid gap-16 md:gap-20">
@@ -62,27 +64,34 @@ export default async function Page({ params }: { params: { proteinId: string } }
               className="border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
               defaultValue="いちご"
             >
-              <option value="いちご">いちご</option>
-              <option value="チョコレート">チョコレート</option>
-              <option value="バナナ">バナナ</option>
+              {flavors &&
+                flavors.map(({ name, id }) => (
+                  <option key={id} value="いちご">
+                    {name}
+                  </option>
+                ))}
             </select>
           </div>
           <div>
             {/* TODO: 容量の選択 */}
             <h3 className="font-bold text-sm md:text-base">サイズ</h3>
             <ul className="grid grid-cols-2 gap-4">
-              <li className=" p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
-                容量
-              </li>
-              <li className="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
-                容量
-              </li>
-              <li className="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
-                容量
-              </li>
+              {products &&
+                products.map((product) => (
+                  <>
+                    {product && (
+                      <li
+                        key={product.id}
+                        className=" p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer"
+                      >
+                        {product.capacity}
+                      </li>
+                    )}
+                  </>
+                ))}
             </ul>
           </div>
-          <p className="mb-3 font-bold text-lg lg:text-2xl xl:text-3xl">¥{protein.price}</p>
+          <p className="mb-3 font-bold text-lg lg:text-2xl xl:text-3xl">¥料金</p>
         </div>
         <Accordion id="protein-accordion">
           <AccordionItem title="概要" id="overview">
@@ -107,7 +116,7 @@ export default async function Page({ params }: { params: { proteinId: string } }
       <section className="grid gap-8">
         <div>
           <h2 className="text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4">
-            {protein.flavor}味のレビュー
+            選択された味のレビュー
           </h2>
           <hr className="border-1" />
         </div>

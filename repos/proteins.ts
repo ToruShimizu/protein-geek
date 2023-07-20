@@ -1,8 +1,6 @@
 import { getClient } from "../api/apollo/client"
 import {
-  ProteinByMakerIdDocument,
-  ProteinByMakerIdQuery,
-  ProteinByMakerIdQueryVariables,
+  ProteinByIdDocument,
   ProteinByIdQuery,
   ProteinByIdQueryVariables,
 } from "../api/graphql/generated/graphql"
@@ -11,24 +9,6 @@ const client = getClient()
 
 export const proteinRepo = {
   /**
-   * 任意のメーカーに紐づくプロテイン一覧を取得する
-   */
-  fetchByMakerId: async (id: number) => {
-    const {
-      data: { proteinsCollection },
-      error,
-    } = await client.query<ProteinByMakerIdQuery, ProteinByMakerIdQueryVariables>({
-      query: ProteinByMakerIdDocument,
-      variables: { id },
-    })
-    if (error) throw error
-
-    const proteins = proteinsCollection?.edges
-    if (!proteins) throw new Error("Protein not found")
-
-    return proteins
-  },
-  /**
    * 任意のプロテインを1件取得する
    */
   fetchById: async (id: number) => {
@@ -36,7 +16,7 @@ export const proteinRepo = {
       data: { proteinsCollection },
       error,
     } = await client.query<ProteinByIdQuery, ProteinByIdQueryVariables>({
-      query: ProteinByMakerIdDocument,
+      query: ProteinByIdDocument,
       variables: { id },
     })
     if (error) throw error
@@ -44,6 +24,12 @@ export const proteinRepo = {
     const protein = proteinsCollection?.edges?.[0].node
     if (!protein) throw new Error("Protein not found")
 
-    return protein
+    const flavors = protein?.flavorsCollection?.edges?.map((edge) => edge?.node)
+    const seller = flavors?.[0]?.sellers
+    const products = flavors?.flatMap(
+      (flavor) => flavor?.productsCollection?.edges?.map((edge) => edge?.node),
+    )
+
+    return { protein, flavors, seller, products }
   },
 }
