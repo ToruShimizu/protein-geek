@@ -36,7 +36,7 @@ export const makerRepo = {
 
     const node = makersCollection?.edges?.[0]?.node
     if (!node) throw new Error("Maker not found")
-
-    return node
+    const proteins = node?.proteinsCollection?.edges?.map((edge) => edge?.node)
+    return { maker: node, proteins }
   },
 }
