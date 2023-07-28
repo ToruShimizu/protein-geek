@@ -25,10 +25,12 @@ export const proteinRepo = {
     if (!protein) throw new Error("Protein not found")
 
     const flavors = protein?.flavorsCollection?.edges?.map((edge) => edge?.node)
-    const seller = flavors?.[0]?.sellers
+    const seller = flavors?.[0]?.sellersCollection?.edges?.[0]?.node
     const products = flavors?.flatMap(
       (flavor) => flavor?.productsCollection?.edges?.map((edge) => edge?.node),
     )
+
+    if (!flavors || !seller || !products) throw new Error("not found")
 
     return { protein, flavors, seller, products }
   },

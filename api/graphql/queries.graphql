@@ -25,6 +25,7 @@ query MakerById($id: BigInt!) {
               id
               name
               src
+              maker_id
             }
           }
         }
@@ -46,13 +47,16 @@ query ProteinById($id: BigInt!) {
             node {
               id
               name
-              src
-              sellers {
-                amazon
-                rakuten
-                yahoo
-                official
-                id
+              sellersCollection {
+                edges {
+                  node {
+                    id
+                    amazon
+                    rakuten
+                    yahoo
+                    official
+                  }
+                }
               }
               productsCollection {
                 edges {

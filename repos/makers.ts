@@ -5,6 +5,7 @@ import {
   MakersDocument,
   MakerByIdQuery,
   MakerByIdQueryVariables,
+  MakerByIdDocument,
 } from "../api/graphql/generated/graphql"
 
 const client = getClient()
@@ -29,7 +30,7 @@ export const makerRepo = {
       data: { makersCollection },
       error,
     } = await client.query<MakerByIdQuery, MakerByIdQueryVariables>({
-      query: MakersDocument,
+      query: MakerByIdDocument,
       variables: { id },
     })
     if (error) throw error
