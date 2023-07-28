@@ -1,3 +1,4 @@
+import { Sellers } from "../../../../../api/graphql/generated/graphql"
 import { proteinRepo } from "../../../../../repos/proteins"
 import Accordion from "../../../../_components/accordion"
 import AccordionItem from "../../../../_components/accordionItem"
@@ -29,17 +30,28 @@ const DUMMY_REVIEWS = [
     title: "普通",
   },
 ]
+
+const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
+type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
+
 export default async function Page({ params }: { params: { proteinId: string } }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { protein, flavors, seller, products } = await proteinRepo.fetchById(
     Number(params.proteinId),
   )
 
+  const shopKeys = Object.keys(seller).filter(
+    (key) => !["id", "__typename"].includes(key),
+  ) as ShopKey[]
+
   return (
     <main className="grid gap-16 md:gap-20">
       <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
         <div>
-          <img src={protein.src} alt={protein.name} />
+          <img
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_STATIC_URL}${protein.src}`}
+            alt={protein.name}
+          />
         </div>
         <div className="grid gap-2">
           <div>
@@ -91,7 +103,7 @@ export default async function Page({ params }: { params: { proteinId: string } }
                 ))}
             </ul>
           </div>
-          <p className="mb-3 font-bold text-lg lg:text-2xl xl:text-3xl">¥料金</p>
+          <p className="mb-3 font-bold text-lg lg:text-2xl">¥料金</p>
         </div>
         <Accordion id="protein-accordion">
           <AccordionItem title="概要" id="overview">
@@ -107,9 +119,18 @@ export default async function Page({ params }: { params: { proteinId: string } }
 
         <div>
           <div className="grid gap-6">
-            <LinkButton href="/">公式サイト</LinkButton>
-            <LinkButton href="/">amazon</LinkButton>
-            <LinkButton href="/">yahoo</LinkButton>
+            {shopKeys.map((key) => {
+              const url = seller[key]
+              return (
+                <>
+                  {url && (
+                    <LinkButton href={url} key={key}>
+                      {key}
+                    </LinkButton>
+                  )}
+                </>
+              )
+            })}
           </div>
         </div>
       </section>
