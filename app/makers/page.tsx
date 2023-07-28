@@ -1,5 +1,6 @@
-import Link from "next/link"
 import { makerRepo } from "../../repos/makers"
+import MakerList from "./_components/makerList"
+import { Suspense } from "react"
 
 export default async function Page() {
   const makers = await makerRepo.fetch()
@@ -8,23 +9,9 @@ export default async function Page() {
     <main>
       <section>
         <h2 className="text-3xl font-bold pb-6">メーカー一覧</h2>
-        <ul className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-6">
-          {makers.map((maker) => (
-            <li key={maker.id} className="grid gap-1 md:gap-2">
-              <Link href={`/makers/${maker.id}`}>
-                <div className="grid gap-2 group">
-                  {maker.src && (
-                    <div className="relative">
-                      <img src={maker.src} alt="プロテインメーカー" />
-                      <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
-                    </div>
-                  )}
-                  <p className="text-sm md:text-lg">{maker.name}</p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Suspense fallback={<div>...loading</div>}>
+          <MakerList makers={makers} />
+        </Suspense>
       </section>
     </main>
   )
