@@ -1,9 +1,9 @@
 "use client"
 
-import { ProteinIdResponse } from "../../../../../../types/responses"
+import { Flavor } from "../../../../../../types/responses"
 
 type Props = {
-  flavors: ProteinIdResponse["flavors"]
+  flavors: Flavor[]
   onChange: (value: string) => void
 }
 

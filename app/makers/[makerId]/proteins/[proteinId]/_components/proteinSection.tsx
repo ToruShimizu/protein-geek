@@ -8,16 +8,16 @@ import LinkButton from "../../../../../_components/linkButton"
 import { Sellers } from "../../../../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../../../../modules/utils"
 import { Fragment, useCallback } from "react"
-import { ProteinIdResponse } from "../../../../../../types/responses"
+import { Flavor, Seller, Protein, Product } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
 import { flavorAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
 
 type Props = {
-  flavors: ProteinIdResponse["flavors"]
-  products: ProteinIdResponse["products"]
-  protein: ProteinIdResponse["protein"]
-  seller: ProteinIdResponse["seller"]
+  flavors: Flavor[]
+  products: Product[]
+  protein: Protein
+  seller: Seller
 }
 const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
 type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>

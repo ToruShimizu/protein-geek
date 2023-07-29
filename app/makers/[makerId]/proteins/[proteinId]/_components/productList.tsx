@@ -1,9 +1,9 @@
 "use client"
 
-import { ProteinIdResponse } from "../../../../../../types/responses"
+import { Product } from "../../../../../../types/responses"
 
 type Props = {
-  products: ProteinIdResponse["products"]
+  products: Product[]
 }
 
 export default function ProductList({ products }: Props) {
