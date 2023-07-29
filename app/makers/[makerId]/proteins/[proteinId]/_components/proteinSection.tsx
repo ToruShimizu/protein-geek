@@ -10,7 +10,8 @@ import { createStaticUrl } from "../../../../../../modules/utils"
 import { Fragment, useCallback } from "react"
 import { ProteinIdResponse } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
-import { flavorAtom } from "../../../../../../stores/flavorAtom"
+import { flavorAtom } from "../../../../../../stores/proteinAtom"
+import ProductList from "./productList"
 
 type Props = {
   flavors: ProteinIdResponse["flavors"]
@@ -62,16 +63,7 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
         <div>
           {/* TODO: 容量の選択 */}
           <h3 className="font-bold text-sm md:text-base">サイズ</h3>
-          <ul className="grid grid-cols-2 gap-4">
-            {products.map((product) => (
-              <li
-                key={product.id}
-                className="  p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer"
-              >
-                {product.capacity}
-              </li>
-            ))}
-          </ul>
+          <ProductList products={products} />
         </div>
         <p className="mb-3 font-bold text-lg lg:text-2xl">¥料金</p>
       </div>
