@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Proteins } from "../../../../api/graphql/generated/graphql"
 import Rate from "../../../_components/rate"
 import { createStaticUrl } from "../../../../modules/utils"
+import { staticUrl } from "../../../../_constants/urls"
 
 type Props = {
   proteins: Pick<Proteins, "__typename" | "id" | "name" | "src" | "maker_id">[]
@@ -19,7 +20,7 @@ export default function ProteinList({ proteins }: Props) {
                 <div className="relative">
                   <img
                     src={createStaticUrl({
-                      baseUrl: process.env.NEXT_PUBLIC_SUPABASE_STATIC_URL,
+                      baseUrl: staticUrl,
                       src,
                     })}
                     alt={name}

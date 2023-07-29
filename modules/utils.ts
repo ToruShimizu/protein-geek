@@ -6,5 +6,5 @@
  */
 export const createStaticUrl = ({ baseUrl, src }: { baseUrl?: string; src: string }) => {
   if (!baseUrl) return ""
-  return `${baseUrl}${src}`
+  return new URL(src, baseUrl).href
 }
