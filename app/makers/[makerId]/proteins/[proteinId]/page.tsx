@@ -1,7 +1,5 @@
 import { proteinRepo } from "../../../../../repos/proteins"
-import ReviewCards from "../../../../_components/reviewCards"
-import ReviewForm from "../../../../_components/reviewForm"
-import ProteinSection from "./_components/proteinSection"
+import ProteinContainer from "./_components/proteinContainer"
 
 const DUMMY_REVIEWS = [
   {
@@ -34,17 +32,13 @@ export default async function Page({ params }: { params: { proteinId: string } }
 
   return (
     <main className="grid gap-16 md:gap-20">
-      <ProteinSection flavors={flavors} products={products} protein={protein} seller={seller} />
-      <section className="grid gap-8">
-        <div>
-          <h2 className="text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4">
-            選択された味のレビュー
-          </h2>
-          <hr className="border-1" />
-        </div>
-        <ReviewForm />
-        <ReviewCards reviews={DUMMY_REVIEWS} />
-      </section>
+      <ProteinContainer
+        protein={protein}
+        flavors={flavors}
+        seller={seller}
+        products={products}
+        reviews={DUMMY_REVIEWS}
+      />
     </main>
   )
 }
