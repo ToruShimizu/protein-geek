@@ -1,5 +1,5 @@
 "use client"
-import { useSetAtom } from "jotai"
+import { useAtom } from "jotai"
 import Rate from "../../../../../_components/rate"
 import SelectOption from "./selectOption"
 import Accordion from "../../../../../_components/accordion"
@@ -7,7 +7,7 @@ import AccordionItem from "../../../../../_components/accordionItem"
 import LinkButton from "../../../../../_components/linkButton"
 import { Sellers } from "../../../../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../../../../modules/utils"
-import { Fragment, useCallback } from "react"
+import { Fragment, useCallback, useEffect } from "react"
 import { Flavor, Seller, Protein, Product } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
 import { flavorAtom } from "../../../../../../stores/proteinAtom"
@@ -23,7 +23,7 @@ const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
 type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
 
 export default function ProteinSection({ flavors, products, protein, seller }: Props) {
-  const setFlavor = useSetAtom(flavorAtom)
+  const [flavor, setFlavor] = useAtom(flavorAtom)
 
   const shopKeys = Object.keys(seller).filter(
     (key) => !["id", "__typename"].includes(key),
@@ -35,6 +35,11 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
     },
     [setFlavor],
   )
+
+  useEffect(() => {
+    setFlavor(flavors[0].name)
+  }, [])
+
   return (
     <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
       <div>
