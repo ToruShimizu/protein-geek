@@ -1,6 +1,5 @@
 import { proteinRepo } from "../../../../../repos/proteins"
-import ProteinSection from "./_components/proteinSection"
-import ReviewSection from "./_components/reviewSection"
+import ProteinContainer from "./_components/proteinContainer"
 
 const DUMMY_REVIEWS = [
   {
@@ -33,8 +32,13 @@ export default async function Page({ params }: { params: { proteinId: string } }
 
   return (
     <main className="grid gap-16 md:gap-20">
-      <ProteinSection flavors={flavors} products={products} protein={protein} seller={seller} />
-      <ReviewSection reviews={DUMMY_REVIEWS} />
+      <ProteinContainer
+        protein={protein}
+        flavors={flavors}
+        seller={seller}
+        products={products}
+        reviews={DUMMY_REVIEWS}
+      />
     </main>
   )
 }
