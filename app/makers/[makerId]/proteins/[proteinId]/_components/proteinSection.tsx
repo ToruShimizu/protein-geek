@@ -1,0 +1,96 @@
+"use client"
+import Rate from "../../../../../_components/rate"
+import SelectOption from "./selectOption"
+import Accordion from "../../../../../_components/accordion"
+import AccordionItem from "../../../../../_components/accordionItem"
+import LinkButton from "../../../../../_components/linkButton"
+import { Sellers } from "../../../../../../api/graphql/generated/graphql"
+import { createStaticUrl } from "../../../../../../modules/utils"
+import { Fragment } from "react"
+import { ProteinIdResponse } from "../../../../../../types/responses"
+import { staticUrl } from "../../../../../../_constants/urls"
+
+type Props = {
+  flavors: ProteinIdResponse["flavors"]
+  products: ProteinIdResponse["products"]
+  protein: ProteinIdResponse["protein"]
+  seller: ProteinIdResponse["seller"]
+}
+const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
+type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
+
+export default function ProteinSection({ flavors, products, protein, seller }: Props) {
+  const shopKeys = Object.keys(seller).filter(
+    (key) => !["id", "__typename"].includes(key),
+  ) as ShopKey[]
+
+  return (
+    <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
+      <div>
+        <img
+          src={createStaticUrl({
+            baseUrl: staticUrl,
+            src: protein.src,
+          })}
+          alt={protein.name}
+        />
+      </div>
+      <div className="grid gap-2">
+        <div>
+          <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 md:mb-4">
+            {protein.name}
+          </h2>
+          <Rate rate={3} count={50}></Rate>
+        </div>
+        <ul>
+          <li>特徴1</li>
+          <li>特徴2</li>
+          <li>特徴3</li>
+        </ul>
+        <hr className="border-1" />
+        <SelectOption flavors={flavors} />
+        <div>
+          {/* TODO: 容量の選択 */}
+          <h3 className="font-bold text-sm md:text-base">サイズ</h3>
+          <ul className="grid grid-cols-2 gap-4">
+            {products.map((product) => (
+              <li
+                key={product.id}
+                className="  p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer"
+              >
+                {product.capacity}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="mb-3 font-bold text-lg lg:text-2xl">¥料金</p>
+      </div>
+      <Accordion id="protein-accordion">
+        <AccordionItem title="概要" id="overview">
+          概要
+        </AccordionItem>
+        <AccordionItem title="使い方" id="usage">
+          使い方
+        </AccordionItem>
+        <AccordionItem title="成分" id="component">
+          成分
+        </AccordionItem>
+      </Accordion>
+
+      <ul className="grid gap-6">
+        {shopKeys.map((key) => {
+          const url = seller[key]
+          return (
+            <Fragment key={key}>
+              {url && (
+                <li key={key}>
+                  <LinkButton href={url}>{key}</LinkButton>
+                </li>
+              )}
+            </Fragment>
+          )
+        })}
+      </ul>
+    </section>
+  )
+}

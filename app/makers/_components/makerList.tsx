@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { Makers } from "../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../modules/utils"
+import { staticUrl } from "../../../_constants/urls"
 
 type Props = {
   makers: Pick<Makers, "__typename" | "id" | "name" | "src">[]
@@ -18,7 +19,7 @@ export default function MakerList({ makers }: Props) {
                 <div className="relative">
                   <img
                     src={createStaticUrl({
-                      baseUrl: process.env.NEXT_PUBLIC_SUPABASE_STATIC_URL,
+                      baseUrl: staticUrl,
                       src,
                     })}
                     alt={name}
