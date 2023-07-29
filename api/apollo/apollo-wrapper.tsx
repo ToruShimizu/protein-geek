@@ -7,14 +7,10 @@ import {
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr"
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "../supabase"
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:54321/graphql/v1"
-        : `${SUPABASE_URL}/graphql/v1?apikey=${SUPABASE_ANON_KEY}`,
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
   })
 
   return new NextSSRApolloClient({

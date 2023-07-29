@@ -1,4 +1,5 @@
 "use client"
+import { useSetAtom } from "jotai"
 import Rate from "../../../../../_components/rate"
 import SelectOption from "./selectOption"
 import Accordion from "../../../../../_components/accordion"
@@ -6,9 +7,10 @@ import AccordionItem from "../../../../../_components/accordionItem"
 import LinkButton from "../../../../../_components/linkButton"
 import { Sellers } from "../../../../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../../../../modules/utils"
-import { Fragment } from "react"
+import { Fragment, useCallback } from "react"
 import { ProteinIdResponse } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
+import { flavorAtom } from "../../../../../../stores/flavorAtom"
 
 type Props = {
   flavors: ProteinIdResponse["flavors"]
@@ -20,10 +22,18 @@ const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
 type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
 
 export default function ProteinSection({ flavors, products, protein, seller }: Props) {
+  const setFlavor = useSetAtom(flavorAtom)
+
   const shopKeys = Object.keys(seller).filter(
     (key) => !["id", "__typename"].includes(key),
   ) as ShopKey[]
 
+  const onChange = useCallback(
+    (value: string) => {
+      setFlavor(value)
+    },
+    [setFlavor],
+  )
   return (
     <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
       <div>
@@ -48,7 +58,7 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
           <li>特徴3</li>
         </ul>
         <hr className="border-1" />
-        <SelectOption flavors={flavors} />
+        <SelectOption flavors={flavors} onChange={onChange} />
         <div>
           {/* TODO: 容量の選択 */}
           <h3 className="font-bold text-sm md:text-base">サイズ</h3>
