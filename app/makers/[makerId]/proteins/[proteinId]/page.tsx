@@ -26,19 +26,11 @@ const DUMMY_REVIEWS = [
 ]
 
 export default async function Page({ params }: { params: { proteinId: string } }) {
-  const { protein, flavors, seller, products } = await proteinRepo.fetchById(
-    Number(params.proteinId),
-  )
+  const { protein } = await proteinRepo.fetchById(Number(params.proteinId))
 
   return (
     <main className="grid gap-16 md:gap-20">
-      <ProteinContainer
-        protein={protein}
-        flavors={flavors}
-        seller={seller}
-        products={products}
-        reviews={DUMMY_REVIEWS}
-      />
+      <ProteinContainer protein={protein} reviews={DUMMY_REVIEWS} />
     </main>
   )
 }

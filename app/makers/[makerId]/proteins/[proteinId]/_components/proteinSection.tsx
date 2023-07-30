@@ -1,39 +1,61 @@
 "use client"
-import { useSetAtom } from "jotai"
+import { useAtom } from "jotai"
 import Rate from "../../../../../_components/rate"
 import SelectOption from "./selectOption"
 import Accordion from "../../../../../_components/accordion"
 import AccordionItem from "../../../../../_components/accordionItem"
 import LinkButton from "../../../../../_components/linkButton"
-import { Sellers } from "../../../../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../../../../modules/utils"
-import { Fragment, useCallback } from "react"
-import { ProteinIdResponse } from "../../../../../../types/responses"
+import { Fragment, useCallback, useEffect, useMemo } from "react"
+import { Flavor, Product, Protein } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
-import { flavorAtom } from "../../../../../../stores/flavorAtom"
+import { flavorAtom, productAtom } from "../../../../../../stores/proteinAtom"
+import ProductList from "./productList"
 
 type Props = {
-  flavors: ProteinIdResponse["flavors"]
-  products: ProteinIdResponse["products"]
-  protein: ProteinIdResponse["protein"]
-  seller: ProteinIdResponse["seller"]
+  protein: Protein
 }
 const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
-type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
+type ShopKey = Extract<
+  keyof Pick<Flavor["seller"], "amazon" | "official" | "rakuten" | "yahoo">,
+  (typeof SHOP_KEYS)[number]
+>
 
-export default function ProteinSection({ flavors, products, protein, seller }: Props) {
-  const setFlavor = useSetAtom(flavorAtom)
+export default function ProteinSection({ protein }: Props) {
+  const [flavor, setFlavor] = useAtom(flavorAtom)
+  const [product, setProduct] = useAtom(productAtom)
 
-  const shopKeys = Object.keys(seller).filter(
-    (key) => !["id", "__typename"].includes(key),
+  const shopKeys = useMemo(
+    () => Object.keys(flavor.seller).filter((key) => SHOP_KEYS.includes(key as ShopKey)),
+    [flavor.seller],
   ) as ShopKey[]
 
+  const price = useMemo(() => product.price, [product.price])
+
   const onChange = useCallback(
-    (value: string) => {
-      setFlavor(value)
+    (id: string) => {
+      const selectedFlavor = protein.flavors.find((flavor) => flavor.id === id)
+
+      if (selectedFlavor) {
+        setFlavor(selectedFlavor)
+        setProduct(selectedFlavor.products[0])
+      }
     },
     [setFlavor],
   )
+
+  const onClick = useCallback(
+    (product: Product) => {
+      setProduct(product)
+    },
+    [setProduct],
+  )
+
+  useEffect(() => {
+    setFlavor(protein.flavors[0])
+    setProduct(protein.flavors[0].products[0])
+  }, [])
+
   return (
     <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
       <div>
@@ -58,22 +80,12 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
           <li>特徴3</li>
         </ul>
         <hr className="border-1" />
-        <SelectOption flavors={flavors} onChange={onChange} />
+        <SelectOption flavors={protein.flavors} onChange={onChange} />
         <div>
-          {/* TODO: 容量の選択 */}
           <h3 className="font-bold text-sm md:text-base">サイズ</h3>
-          <ul className="grid grid-cols-2 gap-4">
-            {products.map((product) => (
-              <li
-                key={product.id}
-                className="  p-2 bg-white border border-gray-200 rounded-lg shadow cursor-pointer"
-              >
-                {product.capacity}
-              </li>
-            ))}
-          </ul>
+          <ProductList products={flavor.products} selectedProduct={product} onClick={onClick} />
         </div>
-        <p className="mb-3 font-bold text-lg lg:text-2xl">¥料金</p>
+        <p className="mb-3 font-bold text-lg lg:text-2xl">¥ {price}</p>
       </div>
       <Accordion id="protein-accordion">
         <AccordionItem title="概要" id="overview">
@@ -89,7 +101,7 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
 
       <ul className="grid gap-6">
         {shopKeys.map((key) => {
-          const url = seller[key]
+          const url = flavor.seller[key]
           return (
             <Fragment key={key}>
               {url && (

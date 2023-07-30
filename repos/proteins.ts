@@ -25,13 +25,33 @@ export const proteinRepo = {
     if (!protein) throw new Error("Protein not found")
 
     const flavors = protein?.flavorsCollection?.edges?.map((edge) => edge?.node)
-    const seller = flavors?.[0]?.sellersCollection?.edges?.[0]?.node
+    const sellers = flavors
+      ?.map((flavor) => flavor?.sellersCollection?.edges?.map((edge) => edge?.node))
+      .flatMap((seller) => seller ?? [])
     const products = flavors
-      ?.map((flavor) => flavor?.productsCollection?.edges?.[0]?.node)
+      ?.map((flavor) => flavor?.productsCollection?.edges?.map((edge) => edge?.node))
       .flatMap((product) => product ?? [])
 
-    if (!flavors || !seller || !products) throw new Error("not found")
+    if (!flavors || !sellers || !products) throw new Error("not found")
 
-    return { protein, flavors, seller, products }
+    const combinedFlavors = flavors?.map((flavor) => {
+      const filteredProducts = products.filter((seller) => seller.flavor_id === flavor.id)
+      return {
+        id: flavor.id,
+        name: flavor.name,
+        src: flavor.src,
+        seller: sellers.find((seller) => seller.flavor_id === flavor.id)!,
+        products: [...filteredProducts].sort((a, b) => b.capacity.localeCompare(a.capacity)),
+      }
+    })
+
+    return {
+      protein: {
+        id: protein.id,
+        name: protein.name,
+        src: protein.src,
+        flavors: combinedFlavors,
+      },
+    }
   },
 }

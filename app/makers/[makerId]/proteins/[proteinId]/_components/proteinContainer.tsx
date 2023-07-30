@@ -1,15 +1,12 @@
 "use client"
 import { useAtomValue } from "jotai"
 
-import { ProteinIdResponse } from "../../../../../../types/responses"
+import { Flavor, Protein } from "../../../../../../types/responses"
 import ProteinSection from "./proteinSection"
 import ReviewSection from "./reviewSection"
-import { flavorAtom } from "../../../../../../stores/flavorAtom"
+import { flavorAtom } from "../../../../../../stores/proteinAtom"
 type Props = {
-  flavors: ProteinIdResponse["flavors"]
-  products: ProteinIdResponse["products"]
-  protein: ProteinIdResponse["protein"]
-  seller: ProteinIdResponse["seller"]
+  protein: Protein
   reviews: {
     id: number
     description: string
@@ -18,12 +15,12 @@ type Props = {
     title: string
   }[]
 }
-export default function ProteinContainer({ flavors, products, protein, seller, reviews }: Props) {
+export default function ProteinContainer({ protein, reviews }: Props) {
   const flavor = useAtomValue(flavorAtom)
 
   return (
     <>
-      <ProteinSection flavors={flavors} products={products} protein={protein} seller={seller} />
+      <ProteinSection protein={protein} />
       <ReviewSection reviews={reviews} />
     </>
   )
