@@ -5,36 +5,55 @@ import SelectOption from "./selectOption"
 import Accordion from "../../../../../_components/accordion"
 import AccordionItem from "../../../../../_components/accordionItem"
 import LinkButton from "../../../../../_components/linkButton"
-import { Sellers } from "../../../../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../../../../modules/utils"
-import { Fragment, useCallback, useEffect } from "react"
-import { Protein } from "../../../../../../types/responses"
+import { Fragment, useCallback, useEffect, useMemo } from "react"
+import { Flavor, Product, Protein } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
-import { flavorAtom } from "../../../../../../stores/proteinAtom"
+import { flavorAtom, productAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
 
 type Props = {
   protein: Protein
 }
 const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
-type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
+type ShopKey = Extract<
+  keyof Pick<Flavor["seller"], "amazon" | "official" | "rakuten" | "yahoo">,
+  (typeof SHOP_KEYS)[number]
+>
 
 export default function ProteinSection({ protein }: Props) {
   const [flavor, setFlavor] = useAtom(flavorAtom)
+  const [product, setProduct] = useAtom(productAtom)
 
-  const shopKeys = Object.keys(flavor.seller).filter(
-    (key) => !["id", "__typename"].includes(key),
+  const shopKeys = useMemo(
+    () => Object.keys(flavor.seller).filter((key) => SHOP_KEYS.includes(key as ShopKey)),
+    [flavor.seller],
   ) as ShopKey[]
 
+  const price = useMemo(() => product.price, [product.price])
+
   const onChange = useCallback(
-    (value: string) => {
-      setFlavor(value)
+    (id: string) => {
+      const selectedFlavor = protein.flavors.find((flavor) => flavor.id === id)
+
+      if (selectedFlavor) {
+        setFlavor(selectedFlavor)
+        setProduct(selectedFlavor.products[0])
+      }
     },
     [setFlavor],
   )
 
+  const onClick = useCallback(
+    (product: Product) => {
+      setProduct(product)
+    },
+    [setProduct],
+  )
+
   useEffect(() => {
-    setFlavor(protein.flavors[0].name)
+    setFlavor(protein.flavors[0])
+    setProduct(protein.flavors[0].products[0])
   }, [])
 
   return (
@@ -63,11 +82,10 @@ export default function ProteinSection({ protein }: Props) {
         <hr className="border-1" />
         <SelectOption flavors={protein.flavors} onChange={onChange} />
         <div>
-          {/* TODO: 容量の選択 */}
           <h3 className="font-bold text-sm md:text-base">サイズ</h3>
-          <ProductList products={flavor.products} />
+          <ProductList products={flavor.products} selectedProduct={product} onClick={onClick} />
         </div>
-        <p className="mb-3 font-bold text-lg lg:text-2xl">¥料金</p>
+        <p className="mb-3 font-bold text-lg lg:text-2xl">¥ {price}</p>
       </div>
       <Accordion id="protein-accordion">
         <AccordionItem title="概要" id="overview">

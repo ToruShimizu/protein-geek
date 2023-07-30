@@ -4,7 +4,7 @@ import { Flavor } from "../../../../../../types/responses"
 
 type Props = {
   flavors: Flavor[]
-  onChange: (value: string) => void
+  onChange: (id: string) => void
 }
 
 export default function SelectOption({ flavors, onChange }: Props) {
@@ -16,11 +16,11 @@ export default function SelectOption({ flavors, onChange }: Props) {
       <select
         id="flavors"
         className="border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-sm md:text-base"
-        defaultValue={flavors[0].name}
+        defaultValue={flavors[0].id}
         onChange={(e) => onChange(e.target.value)}
       >
         {flavors.map(({ name, id }) => (
-          <option key={id} value={name}>
+          <option key={id} value={id}>
             {name}
           </option>
         ))}
