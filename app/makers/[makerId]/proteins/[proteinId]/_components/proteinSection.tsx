@@ -8,24 +8,21 @@ import LinkButton from "../../../../../_components/linkButton"
 import { Sellers } from "../../../../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../../../../modules/utils"
 import { Fragment, useCallback, useEffect } from "react"
-import { Flavor, Seller, Protein, Product } from "../../../../../../types/responses"
+import { Protein } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
 import { flavorAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
 
 type Props = {
-  flavors: Flavor[]
-  products: Product[]
   protein: Protein
-  seller: Seller
 }
 const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
 type ShopKey = Extract<keyof Sellers, (typeof SHOP_KEYS)[number]>
 
-export default function ProteinSection({ flavors, products, protein, seller }: Props) {
+export default function ProteinSection({ protein }: Props) {
   const [flavor, setFlavor] = useAtom(flavorAtom)
 
-  const shopKeys = Object.keys(seller).filter(
+  const shopKeys = Object.keys(flavor.seller).filter(
     (key) => !["id", "__typename"].includes(key),
   ) as ShopKey[]
 
@@ -37,7 +34,7 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
   )
 
   useEffect(() => {
-    setFlavor(flavors[0].name)
+    setFlavor(protein.flavors[0].name)
   }, [])
 
   return (
@@ -64,11 +61,11 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
           <li>特徴3</li>
         </ul>
         <hr className="border-1" />
-        <SelectOption flavors={flavors} onChange={onChange} />
+        <SelectOption flavors={protein.flavors} onChange={onChange} />
         <div>
           {/* TODO: 容量の選択 */}
           <h3 className="font-bold text-sm md:text-base">サイズ</h3>
-          <ProductList products={products} />
+          <ProductList products={flavor.products} />
         </div>
         <p className="mb-3 font-bold text-lg lg:text-2xl">¥料金</p>
       </div>
@@ -86,7 +83,7 @@ export default function ProteinSection({ flavors, products, protein, seller }: P
 
       <ul className="grid gap-6">
         {shopKeys.map((key) => {
-          const url = seller[key]
+          const url = flavor.seller[key]
           return (
             <Fragment key={key}>
               {url && (

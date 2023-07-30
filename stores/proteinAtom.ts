@@ -1,7 +1,17 @@
 import { atom } from "jotai"
-import { Product } from "../types/responses"
+import { Product, Flavor } from "../types/responses"
 
-export const flavorAtom = atom<string>("")
+export const flavorAtom = atom<Flavor>({
+  id: 0,
+  name: "",
+  src: "",
+  products: [],
+  seller: {
+    id: 0,
+    official: "",
+    flavor_id: 0,
+  },
+})
 
 export const productAtom = atom<Product>({
   __typename: "products",
