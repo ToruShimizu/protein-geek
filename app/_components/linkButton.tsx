@@ -9,17 +9,11 @@ type Props = {
 
 export default function LinkButton({ href, children }: Props) {
   return (
-    <div className="b h-16 w-full  grid items-center relative mx-auto px-8">
+    <a href={href} target="_blank" rel="noreferrer" className="text-white font-bold">
       <div
-        className={`${styles.button} h-16 w-full  bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 items-center shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 hover:opacity-75 transition duration-300 ease-out`}
-      ></div>
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        className="text-white font-bold z-10 pointer-events-none"
+        className={`${styles.button} h-16 px-8 w-full grid bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 items-center shadow-2xl cursor-pointer overflow-hidden transform hover:scale-x-110 hover:scale-y-105 hover:opacity-75 transition duration-300 ease-out`}
       >
-        <div className="flex items-center justify-center ">
+        <div className="flex items-center">
           <p className="ml-auto">{children}</p>
           <svg
             className="h-3 w-3 svg-inline--fa fa-chevron-right fa-w-8 fa-9x ml-auto"
@@ -36,7 +30,7 @@ export default function LinkButton({ href, children }: Props) {
             />
           </svg>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   )
 }
