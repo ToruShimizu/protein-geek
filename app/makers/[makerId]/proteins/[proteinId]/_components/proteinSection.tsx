@@ -88,7 +88,7 @@ export default function ProteinSection({ protein }: Props) {
           </h2>
           <Rate rate={3} count={50}></Rate>
         </div>
-        <FeatureList features={DUMMY_FEATURES} />
+        <FeatureList features={protein.features} />
         <hr className="border-1" />
         <SelectOption flavors={protein.flavors} onChange={onChange} />
         <div>
