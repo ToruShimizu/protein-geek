@@ -24,7 +24,7 @@ export default function AccordionItem({ id, title, children }: Props) {
           aria-expanded="false"
         >
           {title}
-          <span className="-mr-1 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none ">
+          <span className="ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -43,7 +43,7 @@ export default function AccordionItem({ id, title, children }: Props) {
         className="!visible hidden border-0"
         data-te-collapse-item
       >
-        <div className="px-2 py-4">{children}</div>
+        <div className="px-2 py-4 whitespace-pre-wrap">{children}</div>
       </div>
     </div>
   )
