@@ -907,7 +907,7 @@ export type Nutrients = Node & {
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
-  quentity: Scalars['String']['output'];
+  quantity: Scalars['String']['output'];
 };
 
 export type NutrientsConnection = {
@@ -936,14 +936,14 @@ export type NutrientsFilter = {
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
-  quentity?: InputMaybe<StringFilter>;
+  quantity?: InputMaybe<StringFilter>;
 };
 
 export type NutrientsInsertInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   fact_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  quentity?: InputMaybe<Scalars['String']['input']>;
+  quantity?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NutrientsInsertResponse = {
@@ -959,14 +959,14 @@ export type NutrientsOrderBy = {
   fact_id?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
-  quentity?: InputMaybe<OrderByDirection>;
+  quantity?: InputMaybe<OrderByDirection>;
 };
 
 export type NutrientsUpdateInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   fact_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  quentity?: InputMaybe<Scalars['String']['input']>;
+  quantity?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NutrientsUpdateResponse = {
@@ -1315,6 +1315,13 @@ export type ProteinByIdQueryVariables = Exact<{
 
 export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id?: any | null } }> } | null } }> } | null } }> } | null };
 
+export type FactsByProteinIdQueryVariables = Exact<{
+  id: Scalars['BigInt']['input'];
+}>;
+
+
+export type FactsByProteinIdQuery = { __typename?: 'Query', factsCollection?: { __typename?: 'factsConnection', edges: Array<{ __typename?: 'factsEdge', node: { __typename?: 'facts', id: any, summary: string, usage: string, nutrientsCollection?: { __typename?: 'nutrientsConnection', edges: Array<{ __typename?: 'nutrientsEdge', node: { __typename?: 'nutrients', id: any, name: string, quantity: string } }> } | null } }> } | null };
+
 
 export const MakersDocument = gql`
     query Makers {
@@ -1487,3 +1494,53 @@ export function useProteinByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type ProteinByIdQueryHookResult = ReturnType<typeof useProteinByIdQuery>;
 export type ProteinByIdLazyQueryHookResult = ReturnType<typeof useProteinByIdLazyQuery>;
 export type ProteinByIdQueryResult = Apollo.QueryResult<ProteinByIdQuery, ProteinByIdQueryVariables>;
+export const FactsByProteinIdDocument = gql`
+    query FactsByProteinId($id: BigInt!) {
+  factsCollection(filter: {protein_id: {eq: $id}}) {
+    edges {
+      node {
+        id
+        summary
+        usage
+        nutrientsCollection {
+          edges {
+            node {
+              id
+              name
+              quantity
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFactsByProteinIdQuery__
+ *
+ * To run a query within a React component, call `useFactsByProteinIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFactsByProteinIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFactsByProteinIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFactsByProteinIdQuery(baseOptions: Apollo.QueryHookOptions<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>(FactsByProteinIdDocument, options);
+      }
+export function useFactsByProteinIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>(FactsByProteinIdDocument, options);
+        }
+export type FactsByProteinIdQueryHookResult = ReturnType<typeof useFactsByProteinIdQuery>;
+export type FactsByProteinIdLazyQueryHookResult = ReturnType<typeof useFactsByProteinIdLazyQuery>;
+export type FactsByProteinIdQueryResult = Apollo.QueryResult<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>;
