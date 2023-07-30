@@ -42,6 +42,14 @@ query ProteinById($id: BigInt!) {
         id
         name
         src
+        featuresCollection {
+          edges {
+            node {
+              id
+              description
+            }
+          }
+        }
         flavorsCollection {
           edges {
             node {
