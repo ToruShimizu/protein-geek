@@ -42,6 +42,14 @@ query ProteinById($id: BigInt!) {
         id
         name
         src
+        featuresCollection {
+          edges {
+            node {
+              id
+              description
+            }
+          }
+        }
         flavorsCollection {
           edges {
             node {
@@ -70,6 +78,28 @@ query ProteinById($id: BigInt!) {
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# プロテインに紐づく概要や栄養素などの情報を取得
+query FactsByProteinId($id: BigInt!) {
+  factsCollection(filter: { protein_id: { eq: $id } }) {
+    edges {
+      node {
+        id
+        summary
+        usage
+        nutrientsCollection {
+          edges {
+            node {
+              id
+              name
+              quantity
             }
           }
         }

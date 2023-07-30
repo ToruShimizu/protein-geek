@@ -1,15 +1,17 @@
 "use client"
 
+import { Feature } from "../../../../../../types/responses"
+
 type Props = {
-  features: any[]
+  features: Feature[]
 }
 export default function FeatureList({ features }: Props) {
   return (
     <ul>
       {features.map((feature) => (
-        <li key={feature}>
+        <li key={feature.id}>
           <span className="font-bold">・</span>
-          {feature}
+          {feature.description}
         </li>
       ))}
     </ul>

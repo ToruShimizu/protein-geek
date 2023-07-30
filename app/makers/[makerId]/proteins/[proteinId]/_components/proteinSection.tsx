@@ -2,8 +2,6 @@
 import { useAtom } from "jotai"
 import Rate from "../../../../../_components/rate"
 import SelectOption from "./selectOption"
-import Accordion from "../../../../../_components/accordion"
-import AccordionItem from "../../../../../_components/accordionItem"
 import LinkButton from "../../../../../_components/linkButton"
 import { convertKey, createStaticUrl } from "../../../../../../modules/utils"
 import { Fragment, useCallback, useEffect, useMemo } from "react"
@@ -11,24 +9,8 @@ import { Product, Protein, ShopKey } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
 import { flavorAtom, productAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
-import NutrientTable from "./nutrientTable"
 import FeatureList from "./featureList"
-
-const DUMMY_FEATURES = ["1食あたりタンパク質を21g含有", "BCAAを4.5g含有", "低糖類"]
-
-const DUMMY_FACT = {
-  summary:
-    "1食あたりタンパク質を21g含有。毎日のタンパク質摂取に最高品質のプロテインをどうぞ。乳牛の生乳から必要な成分を精製蒸留した後に乾燥。\nチョコレート、バニラ、ストロベリークリームをはじめとした60種類以上のフレーバーからお選びください。",
-  usage:
-    "トレーニングの30分前後を目安に、水または牛乳に大さじ1杯（25g）を加えてお飲みいただくのがおすすめです。",
-  nutrients: [
-    { name: "エネルギー", value: "103kcal" },
-    { name: "脂質", value: "1.9g" },
-    { name: "炭水化物", value: "1.0g" },
-    { name: "タンパク質", value: "21g" },
-    { name: "脂質", value: "1.9g" },
-  ],
-}
+import FactContainer from "../_containers/factContainer"
 
 type Props = {
   protein: Protein
@@ -88,7 +70,7 @@ export default function ProteinSection({ protein }: Props) {
           </h2>
           <Rate rate={3} count={50}></Rate>
         </div>
-        <FeatureList features={DUMMY_FEATURES} />
+        <FeatureList features={protein.features} />
         <hr className="border-1" />
         <SelectOption flavors={protein.flavors} onChange={onChange} />
         <div>
@@ -97,17 +79,7 @@ export default function ProteinSection({ protein }: Props) {
         </div>
         <p className="mb-3 font-bold text-lg lg:text-2xl">¥ {price}</p>
       </div>
-      <Accordion id="protein-accordion">
-        <AccordionItem title="概要" id="overview">
-          {DUMMY_FACT.summary}
-        </AccordionItem>
-        <AccordionItem title="使い方" id="usage">
-          {DUMMY_FACT.usage}
-        </AccordionItem>
-        <AccordionItem title="成分" id="component">
-          <NutrientTable nutrients={DUMMY_FACT.nutrients} />
-        </AccordionItem>
-      </Accordion>
+      <FactContainer proteinId={protein.id} />
 
       <div>
         <ul className="grid gap-6">

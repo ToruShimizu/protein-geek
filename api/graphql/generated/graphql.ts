@@ -117,36 +117,68 @@ export type IntFilter = {
 /** The root type for creating and mutating data */
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Deletes zero or more records from the `facts` collection */
+  deleteFromfactsCollection: FactsDeleteResponse;
+  /** Deletes zero or more records from the `features` collection */
+  deleteFromfeaturesCollection: FeaturesDeleteResponse;
   /** Deletes zero or more records from the `flavors` collection */
   deleteFromflavorsCollection: FlavorsDeleteResponse;
   /** Deletes zero or more records from the `makers` collection */
   deleteFrommakersCollection: MakersDeleteResponse;
+  /** Deletes zero or more records from the `nutrients` collection */
+  deleteFromnutrientsCollection: NutrientsDeleteResponse;
   /** Deletes zero or more records from the `products` collection */
   deleteFromproductsCollection: ProductsDeleteResponse;
   /** Deletes zero or more records from the `proteins` collection */
   deleteFromproteinsCollection: ProteinsDeleteResponse;
   /** Deletes zero or more records from the `sellers` collection */
   deleteFromsellersCollection: SellersDeleteResponse;
+  /** Adds one or more `facts` records to the collection */
+  insertIntofactsCollection?: Maybe<FactsInsertResponse>;
+  /** Adds one or more `features` records to the collection */
+  insertIntofeaturesCollection?: Maybe<FeaturesInsertResponse>;
   /** Adds one or more `flavors` records to the collection */
   insertIntoflavorsCollection?: Maybe<FlavorsInsertResponse>;
   /** Adds one or more `makers` records to the collection */
   insertIntomakersCollection?: Maybe<MakersInsertResponse>;
+  /** Adds one or more `nutrients` records to the collection */
+  insertIntonutrientsCollection?: Maybe<NutrientsInsertResponse>;
   /** Adds one or more `products` records to the collection */
   insertIntoproductsCollection?: Maybe<ProductsInsertResponse>;
   /** Adds one or more `proteins` records to the collection */
   insertIntoproteinsCollection?: Maybe<ProteinsInsertResponse>;
   /** Adds one or more `sellers` records to the collection */
   insertIntosellersCollection?: Maybe<SellersInsertResponse>;
+  /** Updates zero or more records in the `facts` collection */
+  updatefactsCollection: FactsUpdateResponse;
+  /** Updates zero or more records in the `features` collection */
+  updatefeaturesCollection: FeaturesUpdateResponse;
   /** Updates zero or more records in the `flavors` collection */
   updateflavorsCollection: FlavorsUpdateResponse;
   /** Updates zero or more records in the `makers` collection */
   updatemakersCollection: MakersUpdateResponse;
+  /** Updates zero or more records in the `nutrients` collection */
+  updatenutrientsCollection: NutrientsUpdateResponse;
   /** Updates zero or more records in the `products` collection */
   updateproductsCollection: ProductsUpdateResponse;
   /** Updates zero or more records in the `proteins` collection */
   updateproteinsCollection: ProteinsUpdateResponse;
   /** Updates zero or more records in the `sellers` collection */
   updatesellersCollection: SellersUpdateResponse;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromfactsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<FactsFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromfeaturesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<FeaturesFilter>;
 };
 
 
@@ -161,6 +193,13 @@ export type MutationDeleteFromflavorsCollectionArgs = {
 export type MutationDeleteFrommakersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<MakersFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromnutrientsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<NutrientsFilter>;
 };
 
 
@@ -186,6 +225,18 @@ export type MutationDeleteFromsellersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntofactsCollectionArgs = {
+  objects: Array<FactsInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntofeaturesCollectionArgs = {
+  objects: Array<FeaturesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntoflavorsCollectionArgs = {
   objects: Array<FlavorsInsertInput>;
 };
@@ -194,6 +245,12 @@ export type MutationInsertIntoflavorsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntomakersCollectionArgs = {
   objects: Array<MakersInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntonutrientsCollectionArgs = {
+  objects: Array<NutrientsInsertInput>;
 };
 
 
@@ -216,6 +273,22 @@ export type MutationInsertIntosellersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationUpdatefactsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<FactsFilter>;
+  set: FactsUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatefeaturesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<FeaturesFilter>;
+  set: FeaturesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationUpdateflavorsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<FlavorsFilter>;
@@ -228,6 +301,14 @@ export type MutationUpdatemakersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<MakersFilter>;
   set: MakersUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatenutrientsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<NutrientsFilter>;
+  set: NutrientsUpdateInput;
 };
 
 
@@ -288,18 +369,46 @@ export type PageInfo = {
 /** The root type for querying data */
 export type Query = {
   __typename?: 'Query';
+  /** A pagable collection of type `facts` */
+  factsCollection?: Maybe<FactsConnection>;
+  /** A pagable collection of type `features` */
+  featuresCollection?: Maybe<FeaturesConnection>;
   /** A pagable collection of type `flavors` */
   flavorsCollection?: Maybe<FlavorsConnection>;
   /** A pagable collection of type `makers` */
   makersCollection?: Maybe<MakersConnection>;
   /** Retrieve a record by its `ID` */
   node?: Maybe<Node>;
+  /** A pagable collection of type `nutrients` */
+  nutrientsCollection?: Maybe<NutrientsConnection>;
   /** A pagable collection of type `products` */
   productsCollection?: Maybe<ProductsConnection>;
   /** A pagable collection of type `proteins` */
   proteinsCollection?: Maybe<ProteinsConnection>;
   /** A pagable collection of type `sellers` */
   sellersCollection?: Maybe<SellersConnection>;
+};
+
+
+/** The root type for querying data */
+export type QueryFactsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FactsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FactsOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryFeaturesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FeaturesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FeaturesOrderBy>>;
 };
 
 
@@ -328,6 +437,17 @@ export type QueryMakersCollectionArgs = {
 /** The root type for querying data */
 export type QueryNodeArgs = {
   nodeId: Scalars['ID']['input'];
+};
+
+
+/** The root type for querying data */
+export type QueryNutrientsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<NutrientsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<NutrientsOrderBy>>;
 };
 
 
@@ -398,6 +518,170 @@ export type UuidFilter = {
   in?: InputMaybe<Array<Scalars['UUID']['input']>>;
   is?: InputMaybe<FilterIs>;
   neq?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+export type Facts = Node & {
+  __typename?: 'facts';
+  created_at?: Maybe<Scalars['Datetime']['output']>;
+  id: Scalars['BigInt']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  nutrientsCollection?: Maybe<NutrientsConnection>;
+  protein_id: Scalars['BigInt']['output'];
+  proteins: Proteins;
+  summary: Scalars['String']['output'];
+  usage: Scalars['String']['output'];
+};
+
+
+export type FactsNutrientsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<NutrientsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<NutrientsOrderBy>>;
+};
+
+export type FactsConnection = {
+  __typename?: 'factsConnection';
+  edges: Array<FactsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type FactsDeleteResponse = {
+  __typename?: 'factsDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Facts>;
+};
+
+export type FactsEdge = {
+  __typename?: 'factsEdge';
+  cursor: Scalars['String']['output'];
+  node: Facts;
+};
+
+export type FactsFilter = {
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  protein_id?: InputMaybe<BigIntFilter>;
+  summary?: InputMaybe<StringFilter>;
+  usage?: InputMaybe<StringFilter>;
+};
+
+export type FactsInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  usage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FactsInsertResponse = {
+  __typename?: 'factsInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Facts>;
+};
+
+export type FactsOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  protein_id?: InputMaybe<OrderByDirection>;
+  summary?: InputMaybe<OrderByDirection>;
+  usage?: InputMaybe<OrderByDirection>;
+};
+
+export type FactsUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  usage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FactsUpdateResponse = {
+  __typename?: 'factsUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Facts>;
+};
+
+export type Features = Node & {
+  __typename?: 'features';
+  created_at?: Maybe<Scalars['Datetime']['output']>;
+  description: Scalars['String']['output'];
+  id: Scalars['BigInt']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  protein_id: Scalars['BigInt']['output'];
+  proteins: Proteins;
+};
+
+export type FeaturesConnection = {
+  __typename?: 'featuresConnection';
+  edges: Array<FeaturesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type FeaturesDeleteResponse = {
+  __typename?: 'featuresDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Features>;
+};
+
+export type FeaturesEdge = {
+  __typename?: 'featuresEdge';
+  cursor: Scalars['String']['output'];
+  node: Features;
+};
+
+export type FeaturesFilter = {
+  created_at?: InputMaybe<DatetimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  protein_id?: InputMaybe<BigIntFilter>;
+};
+
+export type FeaturesInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+};
+
+export type FeaturesInsertResponse = {
+  __typename?: 'featuresInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Features>;
+};
+
+export type FeaturesOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  description?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  protein_id?: InputMaybe<OrderByDirection>;
+};
+
+export type FeaturesUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+};
+
+export type FeaturesUpdateResponse = {
+  __typename?: 'featuresUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Features>;
 };
 
 export type Flavors = Node & {
@@ -614,6 +898,85 @@ export type MakersUpdateResponse = {
   records: Array<Makers>;
 };
 
+export type Nutrients = Node & {
+  __typename?: 'nutrients';
+  created_at?: Maybe<Scalars['Datetime']['output']>;
+  fact_id: Scalars['BigInt']['output'];
+  facts: Facts;
+  id: Scalars['BigInt']['output'];
+  name: Scalars['String']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  quantity: Scalars['String']['output'];
+};
+
+export type NutrientsConnection = {
+  __typename?: 'nutrientsConnection';
+  edges: Array<NutrientsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type NutrientsDeleteResponse = {
+  __typename?: 'nutrientsDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Nutrients>;
+};
+
+export type NutrientsEdge = {
+  __typename?: 'nutrientsEdge';
+  cursor: Scalars['String']['output'];
+  node: Nutrients;
+};
+
+export type NutrientsFilter = {
+  created_at?: InputMaybe<DatetimeFilter>;
+  fact_id?: InputMaybe<BigIntFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  quantity?: InputMaybe<StringFilter>;
+};
+
+export type NutrientsInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  fact_id?: InputMaybe<Scalars['BigInt']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  quantity?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NutrientsInsertResponse = {
+  __typename?: 'nutrientsInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Nutrients>;
+};
+
+export type NutrientsOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  fact_id?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+  quantity?: InputMaybe<OrderByDirection>;
+};
+
+export type NutrientsUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  fact_id?: InputMaybe<Scalars['BigInt']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  quantity?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NutrientsUpdateResponse = {
+  __typename?: 'nutrientsUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Nutrients>;
+};
+
 export type Products = Node & {
   __typename?: 'products';
   capacity: Scalars['String']['output'];
@@ -707,6 +1070,8 @@ export type ProductsUpdateResponse = {
 export type Proteins = Node & {
   __typename?: 'proteins';
   created_at?: Maybe<Scalars['Datetime']['output']>;
+  factsCollection?: Maybe<FactsConnection>;
+  featuresCollection?: Maybe<FeaturesConnection>;
   flavor_id?: Maybe<Scalars['BigInt']['output']>;
   flavors?: Maybe<Flavors>;
   flavorsCollection?: Maybe<FlavorsConnection>;
@@ -718,6 +1083,26 @@ export type Proteins = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   src: Scalars['String']['output'];
+};
+
+
+export type ProteinsFactsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FactsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FactsOrderBy>>;
+};
+
+
+export type ProteinsFeaturesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FeaturesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FeaturesOrderBy>>;
 };
 
 
@@ -928,7 +1313,14 @@ export type ProteinByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id?: any | null } }> } | null } }> } | null } }> } | null };
+export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id?: any | null } }> } | null } }> } | null } }> } | null };
+
+export type FactsByProteinIdQueryVariables = Exact<{
+  id: Scalars['BigInt']['input'];
+}>;
+
+
+export type FactsByProteinIdQuery = { __typename?: 'Query', factsCollection?: { __typename?: 'factsConnection', edges: Array<{ __typename?: 'factsEdge', node: { __typename?: 'facts', id: any, summary: string, usage: string, nutrientsCollection?: { __typename?: 'nutrientsConnection', edges: Array<{ __typename?: 'nutrientsEdge', node: { __typename?: 'nutrients', id: any, name: string, quantity: string } }> } | null } }> } | null };
 
 
 export const MakersDocument = gql`
@@ -1030,6 +1422,14 @@ export const ProteinByIdDocument = gql`
         id
         name
         src
+        featuresCollection {
+          edges {
+            node {
+              id
+              description
+            }
+          }
+        }
         flavorsCollection {
           edges {
             node {
@@ -1094,3 +1494,53 @@ export function useProteinByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type ProteinByIdQueryHookResult = ReturnType<typeof useProteinByIdQuery>;
 export type ProteinByIdLazyQueryHookResult = ReturnType<typeof useProteinByIdLazyQuery>;
 export type ProteinByIdQueryResult = Apollo.QueryResult<ProteinByIdQuery, ProteinByIdQueryVariables>;
+export const FactsByProteinIdDocument = gql`
+    query FactsByProteinId($id: BigInt!) {
+  factsCollection(filter: {protein_id: {eq: $id}}) {
+    edges {
+      node {
+        id
+        summary
+        usage
+        nutrientsCollection {
+          edges {
+            node {
+              id
+              name
+              quantity
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFactsByProteinIdQuery__
+ *
+ * To run a query within a React component, call `useFactsByProteinIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFactsByProteinIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFactsByProteinIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFactsByProteinIdQuery(baseOptions: Apollo.QueryHookOptions<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>(FactsByProteinIdDocument, options);
+      }
+export function useFactsByProteinIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>(FactsByProteinIdDocument, options);
+        }
+export type FactsByProteinIdQueryHookResult = ReturnType<typeof useFactsByProteinIdQuery>;
+export type FactsByProteinIdLazyQueryHookResult = ReturnType<typeof useFactsByProteinIdLazyQuery>;
+export type FactsByProteinIdQueryResult = Apollo.QueryResult<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>;

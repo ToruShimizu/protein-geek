@@ -1,7 +1,8 @@
 "use client"
+import { Nutrient } from "../../../../../../types/responses"
 
 type Props = {
-  nutrients: any[]
+  nutrients?: Nutrient[]
 }
 
 export default function NutrientTable({ nutrients }: Props) {
@@ -14,10 +15,10 @@ export default function NutrientTable({ nutrients }: Props) {
         </tr>
       </thead>
       <tbody>
-        {nutrients.map((nutrient, index) => (
+        {nutrients?.map((nutrient, index) => (
           <tr key={index} className="bg-white border-b">
             <td className="px-6 py-4 font-semibold text-gray-700">{nutrient.name}</td>
-            <td className="px-6 py-4 text-gray-500">{nutrient.value}</td>
+            <td className="px-6 py-4 text-gray-500">{nutrient.quantity}</td>
           </tr>
         ))}
       </tbody>

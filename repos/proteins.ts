@@ -24,6 +24,8 @@ export const proteinRepo = {
     const protein = proteinsCollection?.edges?.[0].node
     if (!protein) throw new Error("Protein not found")
 
+    const features = protein?.featuresCollection?.edges?.map((edge) => edge?.node)
+
     const flavors = protein?.flavorsCollection?.edges?.map((edge) => edge?.node)
     const sellers = flavors
       ?.map((flavor) => flavor?.sellersCollection?.edges?.map((edge) => edge?.node))
@@ -32,7 +34,7 @@ export const proteinRepo = {
       ?.map((flavor) => flavor?.productsCollection?.edges?.map((edge) => edge?.node))
       .flatMap((product) => product ?? [])
 
-    if (!flavors || !sellers || !products) throw new Error("not found")
+    if (!features || !flavors || !sellers || !products) throw new Error("not found")
 
     const combinedFlavors = flavors?.map((flavor) => {
       const filteredProducts = products.filter((seller) => seller.flavor_id === flavor.id)
@@ -51,6 +53,7 @@ export const proteinRepo = {
         name: protein.name,
         src: protein.src,
         flavors: combinedFlavors,
+        features,
       },
     }
   },
