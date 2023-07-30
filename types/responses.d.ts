@@ -1,9 +1,14 @@
+import { clientFactRepo } from "../repos/facts"
 import { proteinRepo } from "../repos/proteins"
 import { UnWrapArray } from "./utils"
 
 export type ProteinIdResponse = Awaited<ReturnType<typeof proteinRepo.fetchById>>
+export type FactByProteinIdResponse = ReturnType<typeof clientFactRepo.fetchByProteinId>
 export type Protein = ProteinIdResponse["protein"]
+export type Fact = FactByProteinIdResponse["fact"]
+export type Nutrient = UnWrapArray<Fact["nutrients"]>
 export type Feature = UnWrapArray<Protein["features"]>
+export type Fact = ProteinIdResponse["fact"]
 export type Flavor = UnWrapArray<Protein["flavors"]>
 export type Product = UnWrapArray<Flavor["products"]>
 export type Seller = Flavor["seller"]
