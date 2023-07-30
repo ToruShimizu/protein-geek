@@ -95,20 +95,22 @@ export default function ProteinSection({ protein }: Props) {
         </AccordionItem>
       </Accordion>
 
-      <ul className="grid gap-6">
-        {shopKeys.map((key) => {
-          const url = flavor.seller[key]
-          return (
-            <Fragment key={key}>
-              {url && (
-                <li key={key}>
-                  <LinkButton href={url}>{convertKey(key)}</LinkButton>
-                </li>
-              )}
-            </Fragment>
-          )
-        })}
-      </ul>
+      <div>
+        <ul className="grid gap-6">
+          {shopKeys.map((key) => {
+            const url = flavor.seller[key]
+            return (
+              <Fragment key={key}>
+                {url && (
+                  <li key={key}>
+                    <LinkButton href={url}>{convertKey(key)}</LinkButton>
+                  </li>
+                )}
+              </Fragment>
+            )
+          })}
+        </ul>
+      </div>
     </section>
   )
 }
