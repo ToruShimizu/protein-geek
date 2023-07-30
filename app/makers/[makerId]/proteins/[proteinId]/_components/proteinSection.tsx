@@ -5,9 +5,9 @@ import SelectOption from "./selectOption"
 import Accordion from "../../../../../_components/accordion"
 import AccordionItem from "../../../../../_components/accordionItem"
 import LinkButton from "../../../../../_components/linkButton"
-import { createStaticUrl } from "../../../../../../modules/utils"
+import { convertKey, createStaticUrl } from "../../../../../../modules/utils"
 import { Fragment, useCallback, useEffect, useMemo } from "react"
-import { Flavor, Product, Protein } from "../../../../../../types/responses"
+import { Product, Protein, ShopKey } from "../../../../../../types/responses"
 import { staticUrl } from "../../../../../../_constants/urls"
 import { flavorAtom, productAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
@@ -15,11 +15,7 @@ import ProductList from "./productList"
 type Props = {
   protein: Protein
 }
-const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as const
-type ShopKey = Extract<
-  keyof Pick<Flavor["seller"], "amazon" | "official" | "rakuten" | "yahoo">,
-  (typeof SHOP_KEYS)[number]
->
+const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as ShopKey[]
 
 export default function ProteinSection({ protein }: Props) {
   const [flavor, setFlavor] = useAtom(flavorAtom)
@@ -106,7 +102,7 @@ export default function ProteinSection({ protein }: Props) {
             <Fragment key={key}>
               {url && (
                 <li key={key}>
-                  <LinkButton href={url}>{key}</LinkButton>
+                  <LinkButton href={url}>{convertKey(key)}</LinkButton>
                 </li>
               )}
             </Fragment>
