@@ -4,14 +4,25 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "../_styles/animation.module.css"
 import { ReviewFormSchemaType, reviewFormSchema } from "../../modules/validateSchema"
+import { clientReviewRepo } from "../../repos/reviews"
+import {
+  ReviewsInsertInput,
+  useInsertIntoReviewsCollectionMutation,
+} from "../../api/graphql/generated/graphql"
 
-export default function ReviewForm() {
+type Props = {
+  flavorId: number
+}
+
+export default function ReviewForm({ flavorId }: Props) {
+  const [insertIntoReviewsCollectionMutation] = useInsertIntoReviewsCollectionMutation()
   const {
     register,
     handleSubmit,
     formState: { errors },
     clearErrors,
     setValue,
+    reset,
   } = useForm<ReviewFormSchemaType>({
     resolver: zodResolver(reviewFormSchema),
   })
@@ -25,9 +36,20 @@ export default function ReviewForm() {
     clearErrors("rate")
   }
 
+  const onSubmit = async (input: Omit<ReviewsInsertInput, "flavor_id" | "create_at">) => {
+    try {
+      const review = await clientReviewRepo.create(
+        { ...input, flavor_id: flavorId },
+        insertIntoReviewsCollectionMutation,
+      )
+      reset()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
-    // TODO: submit時にpostする
-    <form className="w-full lg:w-2/4" onSubmit={handleSubmit((d) => console.log(d))}>
+    <form className="w-full lg:w-2/4" onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6 grid gap-4">
         <div className="grid gap-1">
           <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 ">

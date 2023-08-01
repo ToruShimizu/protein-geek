@@ -4,18 +4,14 @@ import {
 } from "../api/graphql/generated/graphql"
 
 export const clientReviewRepo = {
-  create: async (input: ReviewsInsertInput) => {
-    const [insertIntoReviewsCollectionMutation] = useInsertIntoReviewsCollectionMutation({
-      variables: { objects: input },
-    })
+  create: async (
+    input: ReviewsInsertInput,
+    func: ReturnType<typeof useInsertIntoReviewsCollectionMutation>[0],
+  ) => {
+    const { data } = await func({ variables: { objects: input } })
+    const review = data?.insertIntoreviewsCollection?.records?.[0]
+    if (!review) throw new Error("Review not created")
 
-    const { data, errors } = await insertIntoReviewsCollectionMutation({
-      variables: { objects: input },
-    })
-    if (errors) throw errors[0].message
-
-    const review = data?.insertIntoreviewsCollection?.records[0]
-    if (!review) throw "Review not created"
     return review
   },
 }

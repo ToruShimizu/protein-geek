@@ -1,5 +1,4 @@
 "use client"
-
 import ReviewCards from "../../../../../_components/reviewCards"
 import ReviewForm from "../../../../../_components/reviewForm"
 
@@ -11,8 +10,9 @@ type Props = {
     rate: number
     title: string
   }[]
+  flavorId: number
 }
-export default function SelectOption({ reviews }: Props) {
+export default function ReviewSection({ reviews, flavorId }: Props) {
   return (
     <section className="grid gap-8">
       <div>
@@ -21,7 +21,7 @@ export default function SelectOption({ reviews }: Props) {
         </h2>
         <hr className="border-1" />
       </div>
-      <ReviewForm />
+      <ReviewForm flavorId={flavorId} />
       <ReviewCards reviews={reviews} />
     </section>
   )

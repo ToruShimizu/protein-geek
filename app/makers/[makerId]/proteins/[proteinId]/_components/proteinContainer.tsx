@@ -21,7 +21,7 @@ export default function ProteinContainer({ protein, reviews }: Props) {
   return (
     <>
       <ProteinSection protein={protein} />
-      <ReviewSection reviews={reviews} />
+      <ReviewSection reviews={reviews} flavorId={flavor.id} />
     </>
   )
 }
