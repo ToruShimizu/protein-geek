@@ -1,0 +1,12 @@
+mutation InsertIntoReviewsCollection($objects: [reviewsInsertInput!]!) {
+  insertIntoreviewsCollection(objects: $objects) {
+    affectedCount
+    records {
+      description
+      id
+      name
+      rate
+      title
+    }
+  }
+}
