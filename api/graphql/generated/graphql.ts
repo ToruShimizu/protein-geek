@@ -131,6 +131,8 @@ export type Mutation = {
   deleteFromproductsCollection: ProductsDeleteResponse;
   /** Deletes zero or more records from the `proteins` collection */
   deleteFromproteinsCollection: ProteinsDeleteResponse;
+  /** Deletes zero or more records from the `reviews` collection */
+  deleteFromreviewsCollection: ReviewsDeleteResponse;
   /** Deletes zero or more records from the `sellers` collection */
   deleteFromsellersCollection: SellersDeleteResponse;
   /** Adds one or more `facts` records to the collection */
@@ -147,6 +149,8 @@ export type Mutation = {
   insertIntoproductsCollection?: Maybe<ProductsInsertResponse>;
   /** Adds one or more `proteins` records to the collection */
   insertIntoproteinsCollection?: Maybe<ProteinsInsertResponse>;
+  /** Adds one or more `reviews` records to the collection */
+  insertIntoreviewsCollection?: Maybe<ReviewsInsertResponse>;
   /** Adds one or more `sellers` records to the collection */
   insertIntosellersCollection?: Maybe<SellersInsertResponse>;
   /** Updates zero or more records in the `facts` collection */
@@ -163,6 +167,8 @@ export type Mutation = {
   updateproductsCollection: ProductsUpdateResponse;
   /** Updates zero or more records in the `proteins` collection */
   updateproteinsCollection: ProteinsUpdateResponse;
+  /** Updates zero or more records in the `reviews` collection */
+  updatereviewsCollection: ReviewsUpdateResponse;
   /** Updates zero or more records in the `sellers` collection */
   updatesellersCollection: SellersUpdateResponse;
 };
@@ -218,6 +224,13 @@ export type MutationDeleteFromproteinsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationDeleteFromreviewsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<ReviewsFilter>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationDeleteFromsellersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<SellersFilter>;
@@ -263,6 +276,12 @@ export type MutationInsertIntoproductsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntoproteinsCollectionArgs = {
   objects: Array<ProteinsInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntoreviewsCollectionArgs = {
+  objects: Array<ReviewsInsertInput>;
 };
 
 
@@ -329,6 +348,14 @@ export type MutationUpdateproteinsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationUpdatereviewsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<ReviewsFilter>;
+  set: ReviewsUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationUpdatesellersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<SellersFilter>;
@@ -385,6 +412,8 @@ export type Query = {
   productsCollection?: Maybe<ProductsConnection>;
   /** A pagable collection of type `proteins` */
   proteinsCollection?: Maybe<ProteinsConnection>;
+  /** A pagable collection of type `reviews` */
+  reviewsCollection?: Maybe<ReviewsConnection>;
   /** A pagable collection of type `sellers` */
   sellersCollection?: Maybe<SellersConnection>;
 };
@@ -470,6 +499,17 @@ export type QueryProteinsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ProteinsOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryReviewsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ReviewsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ReviewsOrderBy>>;
 };
 
 
@@ -697,6 +737,7 @@ export type Flavors = Node & {
   protein_id: Scalars['BigInt']['output'];
   proteins: Proteins;
   proteinsCollection?: Maybe<ProteinsConnection>;
+  reviewsCollection?: Maybe<ReviewsConnection>;
   seller_id?: Maybe<Scalars['BigInt']['output']>;
   sellers?: Maybe<Sellers>;
   sellersCollection?: Maybe<SellersConnection>;
@@ -721,6 +762,16 @@ export type FlavorsProteinsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ProteinsOrderBy>>;
+};
+
+
+export type FlavorsReviewsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ReviewsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ReviewsOrderBy>>;
 };
 
 
@@ -1196,6 +1247,95 @@ export type ProteinsUpdateResponse = {
   records: Array<Proteins>;
 };
 
+export type Reviews = Node & {
+  __typename?: 'reviews';
+  created_at?: Maybe<Scalars['Datetime']['output']>;
+  description: Scalars['String']['output'];
+  flavor_id: Scalars['BigInt']['output'];
+  flavors: Flavors;
+  id: Scalars['BigInt']['output'];
+  name: Scalars['String']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  rate: Scalars['BigInt']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type ReviewsConnection = {
+  __typename?: 'reviewsConnection';
+  edges: Array<ReviewsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type ReviewsDeleteResponse = {
+  __typename?: 'reviewsDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Reviews>;
+};
+
+export type ReviewsEdge = {
+  __typename?: 'reviewsEdge';
+  cursor: Scalars['String']['output'];
+  node: Reviews;
+};
+
+export type ReviewsFilter = {
+  created_at?: InputMaybe<DatetimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  flavor_id?: InputMaybe<BigIntFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  rate?: InputMaybe<BigIntFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type ReviewsInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  rate?: InputMaybe<Scalars['BigInt']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReviewsInsertResponse = {
+  __typename?: 'reviewsInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Reviews>;
+};
+
+export type ReviewsOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  description?: InputMaybe<OrderByDirection>;
+  flavor_id?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+  rate?: InputMaybe<OrderByDirection>;
+  title?: InputMaybe<OrderByDirection>;
+};
+
+export type ReviewsUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  rate?: InputMaybe<Scalars['BigInt']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReviewsUpdateResponse = {
+  __typename?: 'reviewsUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Reviews>;
+};
+
 export type Sellers = Node & {
   __typename?: 'sellers';
   amazon?: Maybe<Scalars['String']['output']>;
@@ -1296,6 +1436,13 @@ export type SellersUpdateResponse = {
   records: Array<Sellers>;
 };
 
+export type InsertIntoReviewsCollectionMutationVariables = Exact<{
+  objects: Array<ReviewsInsertInput> | ReviewsInsertInput;
+}>;
+
+
+export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string }> } | null };
+
 export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1323,6 +1470,46 @@ export type FactsByProteinIdQueryVariables = Exact<{
 export type FactsByProteinIdQuery = { __typename?: 'Query', factsCollection?: { __typename?: 'factsConnection', edges: Array<{ __typename?: 'factsEdge', node: { __typename?: 'facts', id: any, summary: string, usage: string, nutrientsCollection?: { __typename?: 'nutrientsConnection', edges: Array<{ __typename?: 'nutrientsEdge', node: { __typename?: 'nutrients', id: any, name: string, quantity: string } }> } | null } }> } | null };
 
 
+export const InsertIntoReviewsCollectionDocument = gql`
+    mutation InsertIntoReviewsCollection($objects: [reviewsInsertInput!]!) {
+  insertIntoreviewsCollection(objects: $objects) {
+    affectedCount
+    records {
+      description
+      id
+      name
+      rate
+      title
+    }
+  }
+}
+    `;
+export type InsertIntoReviewsCollectionMutationFn = Apollo.MutationFunction<InsertIntoReviewsCollectionMutation, InsertIntoReviewsCollectionMutationVariables>;
+
+/**
+ * __useInsertIntoReviewsCollectionMutation__
+ *
+ * To run a mutation, you first call `useInsertIntoReviewsCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertIntoReviewsCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertIntoReviewsCollectionMutation, { data, loading, error }] = useInsertIntoReviewsCollectionMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useInsertIntoReviewsCollectionMutation(baseOptions?: Apollo.MutationHookOptions<InsertIntoReviewsCollectionMutation, InsertIntoReviewsCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertIntoReviewsCollectionMutation, InsertIntoReviewsCollectionMutationVariables>(InsertIntoReviewsCollectionDocument, options);
+      }
+export type InsertIntoReviewsCollectionMutationHookResult = ReturnType<typeof useInsertIntoReviewsCollectionMutation>;
+export type InsertIntoReviewsCollectionMutationResult = Apollo.MutationResult<InsertIntoReviewsCollectionMutation>;
+export type InsertIntoReviewsCollectionMutationOptions = Apollo.BaseMutationOptions<InsertIntoReviewsCollectionMutation, InsertIntoReviewsCollectionMutationVariables>;
 export const MakersDocument = gql`
     query Makers {
   makersCollection {
