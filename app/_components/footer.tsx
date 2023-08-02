@@ -9,7 +9,7 @@ export default function Footer() {
       >
         © 2023&nbsp;
         <Link href="/" className={`hover:underline ${chokokutai.className}`}>
-          Protein The Star
+          プロテインザスター
         </Link>
         . All Rights Reserved.
       </span>

@@ -8,7 +8,7 @@ export default function Header() {
         <h1
           className={`justify-center flex font-extrabold text-xl md:text-3xl ${chokokutai.className}`}
         >
-          <Link href="/">Protein The Star</Link>
+          <Link href="/">プロテインザスター</Link>
         </h1>
       </header>
       <hr className="border-1" />
