@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "../_styles/animation.module.css"
 import { ReviewFormSchemaType, reviewFormSchema } from "../../modules/validateSchema"
-import { clientReviewRepo } from "../../repos/reviews"
 import {
   ReviewsInsertInput,
   useInsertIntoReviewsCollectionMutation,
 } from "../../api/graphql/generated/graphql"
+import { clientReviewRepo } from "../../repos/client/reviews"
 
 type Props = {
   flavorId: number
