@@ -1469,6 +1469,13 @@ export type FactsByProteinIdQueryVariables = Exact<{
 
 export type FactsByProteinIdQuery = { __typename?: 'Query', factsCollection?: { __typename?: 'factsConnection', edges: Array<{ __typename?: 'factsEdge', node: { __typename?: 'facts', id: any, summary: string, usage: string, nutrientsCollection?: { __typename?: 'nutrientsConnection', edges: Array<{ __typename?: 'nutrientsEdge', node: { __typename?: 'nutrients', id: any, name: string, quantity: string } }> } | null } }> } | null };
 
+export type ReviewsCollectionQueryVariables = Exact<{
+  ids?: InputMaybe<Array<Scalars['BigInt']['input']> | Scalars['BigInt']['input']>;
+}>;
+
+
+export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, rate: any, description: string, flavor_id: any } }> } | null };
+
 
 export const InsertIntoReviewsCollectionDocument = gql`
     mutation InsertIntoReviewsCollection($objects: [reviewsInsertInput!]!) {
@@ -1731,3 +1738,47 @@ export function useFactsByProteinIdLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type FactsByProteinIdQueryHookResult = ReturnType<typeof useFactsByProteinIdQuery>;
 export type FactsByProteinIdLazyQueryHookResult = ReturnType<typeof useFactsByProteinIdLazyQuery>;
 export type FactsByProteinIdQueryResult = Apollo.QueryResult<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>;
+export const ReviewsCollectionDocument = gql`
+    query ReviewsCollection($ids: [BigInt!]) {
+  reviewsCollection(filter: {flavor_id: {in: $ids}}) {
+    edges {
+      node {
+        id
+        name
+        title
+        rate
+        description
+        flavor_id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useReviewsCollectionQuery__
+ *
+ * To run a query within a React component, call `useReviewsCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useReviewsCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReviewsCollectionQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useReviewsCollectionQuery(baseOptions?: Apollo.QueryHookOptions<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>(ReviewsCollectionDocument, options);
+      }
+export function useReviewsCollectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>(ReviewsCollectionDocument, options);
+        }
+export type ReviewsCollectionQueryHookResult = ReturnType<typeof useReviewsCollectionQuery>;
+export type ReviewsCollectionLazyQueryHookResult = ReturnType<typeof useReviewsCollectionLazyQuery>;
+export type ReviewsCollectionQueryResult = Apollo.QueryResult<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>;
