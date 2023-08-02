@@ -4,6 +4,7 @@ import { Proteins } from "../../../../api/graphql/generated/graphql"
 import Rate from "../../../_components/rate"
 import { createStaticUrl } from "../../../../modules/utils"
 import { staticUrl } from "../../../../_constants/urls"
+import { montSerrat } from "../../../_styles/fonts"
 
 type Props = {
   proteins: Pick<Proteins, "__typename" | "id" | "name" | "src" | "maker_id">[]
@@ -29,7 +30,9 @@ export default function ProteinList({ proteins }: Props) {
                 </div>
               )}
               <div className="grid gap-1">
-                <p className="text-xs lg:text-sm font-bold text-gray-400">{name}</p>
+                <p className={`text-xs lg:text-sm font-bold text-gray-400 ${montSerrat.className}`}>
+                  {name}
+                </p>
                 {/* TODO: 数値入れ替え */}
                 <Rate rate={2} count={50} />
               </div>

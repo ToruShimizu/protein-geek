@@ -3,6 +3,7 @@ import { useMemo } from "react"
 import { Flavor, Review } from "../../../../../../types/responses"
 import ReviewCards from "../../../../../_components/reviewCards"
 import ReviewForm from "../../../../../_components/reviewForm"
+import { notoSansJp } from "../../../../../_styles/fonts"
 
 type Props = {
   flavor: Flavor
@@ -16,7 +17,9 @@ export default function ReviewSection({ flavor, reviews }: Props) {
   return (
     <section className="grid gap-8">
       <div>
-        <h2 className="text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4">
+        <h2
+          className={`text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4 ${notoSansJp.className}`}
+        >
           {flavor.name}のレビュー
         </h2>
         <hr className="border-1" />
