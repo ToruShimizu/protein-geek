@@ -11,6 +11,7 @@ import {
 import { useAtom } from "jotai"
 import { reviewsAtom } from "../../stores/proteinAtom"
 import { clientReviewRepo } from "../../repos/client/reviews"
+import { notoSansJp } from "../_styles/fonts"
 
 type Props = {
   flavorId: number
@@ -53,7 +54,7 @@ export default function ReviewForm({ flavorId }: Props) {
   }
 
   return (
-    <form className="w-full lg:w-2/4" onSubmit={handleSubmit(onSubmit)}>
+    <form className={`w-full lg:w-2/4 ${notoSansJp.className}`} onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6 grid gap-4">
         <div className="grid gap-1">
           <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 ">

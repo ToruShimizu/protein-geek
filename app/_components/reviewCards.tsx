@@ -1,4 +1,5 @@
 import { Review } from "../../types/responses"
+import { notoSansJp } from "../_styles/fonts"
 import Rate from "./rate"
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 
 export default function ReviewCards({ reviews }: Props) {
   return (
-    <div className="grid gap-4">
+    <div className={`grid gap-4 ${notoSansJp.className}`}>
       {reviews &&
         reviews.map((review) => (
           <div key={review.id} className="grid gap-1 p-4 border border-gray-200 rounded-lg shadow">

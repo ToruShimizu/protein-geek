@@ -1,11 +1,14 @@
 import Link from "next/link"
+import { chokokutai, montSerrat } from "../_styles/fonts"
 
 export default function Footer() {
   return (
     <footer className="fixed bottom-0 w-full bg-gray-50 p-4">
-      <span className="block text-xs md:text-sm text-gray-500 text-center">
+      <span
+        className={`block text-xs md:text-sm text-gray-500 text-center ${montSerrat.className} `}
+      >
         © 2023&nbsp;
-        <Link href="/" className="hover:underline">
+        <Link href="/" className={`hover:underline ${chokokutai.className}`}>
           Protein The Star
         </Link>
         . All Rights Reserved.
