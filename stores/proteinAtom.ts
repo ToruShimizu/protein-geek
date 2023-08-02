@@ -1,5 +1,5 @@
 import { atom } from "jotai"
-import { Product, Flavor } from "../types/responses"
+import { Product, Flavor, Review } from "../types/responses"
 
 export const flavorAtom = atom<Flavor>({
   id: 0,
@@ -19,3 +19,5 @@ export const productAtom = atom<Product>({
   price: "",
   capacity: "",
 })
+
+export const reviewsAtom = atom<Review[]>([])
