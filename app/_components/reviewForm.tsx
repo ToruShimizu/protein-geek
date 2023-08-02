@@ -8,6 +8,8 @@ import {
   ReviewsInsertInput,
   useInsertIntoReviewsCollectionMutation,
 } from "../../api/graphql/generated/graphql"
+import { useAtom } from "jotai"
+import { reviewsAtom } from "../../stores/proteinAtom"
 import { clientReviewRepo } from "../../repos/client/reviews"
 
 type Props = {
@@ -15,6 +17,7 @@ type Props = {
 }
 
 export default function ReviewForm({ flavorId }: Props) {
+  const [reviews, setReviews] = useAtom(reviewsAtom)
   const [insertIntoReviewsCollectionMutation] = useInsertIntoReviewsCollectionMutation()
   const {
     register,
@@ -42,6 +45,7 @@ export default function ReviewForm({ flavorId }: Props) {
         { ...input, flavor_id: flavorId },
         insertIntoReviewsCollectionMutation,
       )
+      setReviews([review, ...reviews])
       reset()
     } catch (e) {
       console.log(e)
