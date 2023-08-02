@@ -1441,7 +1441,7 @@ export type InsertIntoReviewsCollectionMutationVariables = Exact<{
 }>;
 
 
-export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string }> } | null };
+export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string, flavor_id: any }> } | null };
 
 export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1487,6 +1487,7 @@ export const InsertIntoReviewsCollectionDocument = gql`
       name
       rate
       title
+      flavor_id
     }
   }
 }
