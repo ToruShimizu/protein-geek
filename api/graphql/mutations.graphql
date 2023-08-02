@@ -7,6 +7,7 @@ mutation InsertIntoReviewsCollection($objects: [reviewsInsertInput!]!) {
       name
       rate
       title
+      flavor_id
     }
   }
 }

@@ -1,4 +1,4 @@
-import { clientFactRepo } from "../../../../../../repos/facts"
+import { clientFactRepo } from "../../../../../../repos/client/facts"
 import Accordion from "../../../../../_components/accordion"
 import AccordionItem from "../../../../../_components/accordionItem"
 import NutrientTable from "../_components/nutrientTable"

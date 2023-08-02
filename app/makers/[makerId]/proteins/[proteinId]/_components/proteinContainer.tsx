@@ -1,30 +1,29 @@
 "use client"
-import { useAtomValue } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 
-import { Protein } from "../../../../../../types/responses"
+import { Protein, Review } from "../../../../../../types/responses"
 import ProteinSection from "./proteinSection"
 import ReviewSection from "./reviewSection"
-import { flavorAtom } from "../../../../../../stores/proteinAtom"
-import { clientReviewRepo } from "../../../../../../repos/reviews"
+import { flavorAtom, reviewsAtom } from "../../../../../../stores/proteinAtom"
+import { useEffect } from "react"
 type Props = {
   protein: Protein
-  reviews: {
-    id: number
-    description: string
-    name: string
-    rate: number
-    title: string
-  }[]
+  reviews?: Review[]
 }
-export default function ProteinContainer({ protein }: Props) {
+export default function ProteinContainer({ protein, reviews }: Props) {
   const flavor = useAtomValue(flavorAtom)
-  const flavorIds = protein.flavors.map((flavor) => flavor.id)
-  const reviews = clientReviewRepo.fetchByFlavorIds(flavorIds)
+
+  const [displayedReviews, setDisplayedReviews] = useAtom(reviewsAtom)
+  useEffect(() => {
+    if (reviews) {
+      setDisplayedReviews(reviews)
+    }
+  }, [])
 
   return (
     <>
       <ProteinSection protein={protein} />
-      <ReviewSection reviews={reviews} flavor={flavor} />
+      <ReviewSection reviews={displayedReviews} flavor={flavor} />
     </>
   )
 }

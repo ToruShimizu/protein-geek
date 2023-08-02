@@ -4,17 +4,20 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "../_styles/animation.module.css"
 import { ReviewFormSchemaType, reviewFormSchema } from "../../modules/validateSchema"
-import { clientReviewRepo } from "../../repos/reviews"
 import {
   ReviewsInsertInput,
   useInsertIntoReviewsCollectionMutation,
 } from "../../api/graphql/generated/graphql"
+import { useAtom } from "jotai"
+import { reviewsAtom } from "../../stores/proteinAtom"
+import { clientReviewRepo } from "../../repos/client/reviews"
 
 type Props = {
   flavorId: number
 }
 
 export default function ReviewForm({ flavorId }: Props) {
+  const [reviews, setReviews] = useAtom(reviewsAtom)
   const [insertIntoReviewsCollectionMutation] = useInsertIntoReviewsCollectionMutation()
   const {
     register,
@@ -42,6 +45,7 @@ export default function ReviewForm({ flavorId }: Props) {
         { ...input, flavor_id: flavorId },
         insertIntoReviewsCollectionMutation,
       )
+      setReviews([review, ...reviews])
       reset()
     } catch (e) {
       console.log(e)
