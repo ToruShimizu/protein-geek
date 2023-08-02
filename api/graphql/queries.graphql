@@ -107,3 +107,18 @@ query FactsByProteinId($id: BigInt!) {
     }
   }
 }
+# フレーバーに紐づくレビューを取得
+query ReviewsCollection($ids: [BigInt!]) {
+  reviewsCollection(filter: { flavor_id: { in: $ids } }) {
+    edges {
+      node {
+        id
+        name
+        title
+        rate
+        description
+        flavor_id
+      }
+    }
+  }
+}
