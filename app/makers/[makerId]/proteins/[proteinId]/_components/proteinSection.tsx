@@ -11,6 +11,7 @@ import { flavorAtom, productAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
 import FeatureList from "./featureList"
 import FactContainer from "../_containers/factContainer"
+import { varelaRound, notoSansJp, montSerrat } from "../../../../../_styles/fonts"
 
 type Props = {
   protein: Protein
@@ -65,7 +66,9 @@ export default function ProteinSection({ protein }: Props) {
       </div>
       <div className="grid gap-2">
         <div>
-          <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 md:mb-4">
+          <h2
+            className={`text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 md:mb-4 ${montSerrat.className}`}
+          >
             {protein.name}
           </h2>
           <Rate rate={3} count={50}></Rate>
@@ -74,10 +77,10 @@ export default function ProteinSection({ protein }: Props) {
         <hr className="border-1" />
         <SelectOption flavors={protein.flavors} onChange={onChange} />
         <div>
-          <h3 className="font-bold text-sm md:text-base">サイズ</h3>
+          <h3 className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>サイズ</h3>
           <ProductList products={flavor.products} selectedProduct={product} onClick={onClick} />
         </div>
-        <p className="mb-3 font-bold text-lg lg:text-2xl">¥ {price}</p>
+        <p className={`mb-3 font-bold text-lg lg:text-2xl ${montSerrat.className}`}>¥ {price}</p>
       </div>
       <FactContainer proteinId={protein.id} />
 

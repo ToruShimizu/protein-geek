@@ -1,6 +1,7 @@
 "use client"
 
 import styles from "../_styles/animation.module.css"
+import { montSerrat } from "../_styles/fonts"
 
 type Props = {
   href: string
@@ -14,7 +15,7 @@ export default function LinkButton({ href, children }: Props) {
         className={`${styles.button} h-16 px-8 w-full grid bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 items-center shadow-2xl cursor-pointer overflow-hidden transform hover:scale-x-110 hover:scale-y-105 hover:opacity-75 transition duration-300 ease-out`}
       >
         <div className="flex items-center">
-          <p className="ml-auto">{children}</p>
+          <p className={`ml-auto ${montSerrat.className}`}>{children}</p>
           <svg
             className="h-3 w-3 svg-inline--fa fa-chevron-right fa-w-8 fa-9x ml-auto"
             aria-hidden="true"

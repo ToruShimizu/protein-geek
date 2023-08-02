@@ -1,5 +1,7 @@
 "use client"
 
+import { varelaRound } from "../_styles/fonts"
+
 type Rate = {
   rate: number
   count?: number
@@ -28,7 +30,9 @@ export default function Rate({ rate, count }: Rate) {
           )
         })}
       </ul>
-      {count !== undefined && <p className="text-sm text-slate-600">({count})</p>}
+      {count !== undefined && (
+        <p className={`text-sm text-slate-600 ${varelaRound.className}`}>({count})</p>
+      )}
     </div>
   )
 }

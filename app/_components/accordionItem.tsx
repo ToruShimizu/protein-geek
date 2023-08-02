@@ -1,6 +1,7 @@
 "use client"
 import { Collapse, initTE } from "tw-elements"
 import { useEffect } from "react"
+import { notoSansJp } from "../_styles/fonts"
 
 type Props = {
   id: string
@@ -16,7 +17,7 @@ export default function AccordionItem({ id, title, children }: Props) {
     <div className="rounded-none border border-l-0 border-r-0 border-t-0 border-neutral-200 bg-white ">
       <h2 className="mb-0 font-bold text-lg" id={`accordion-heading-${id}`}>
         <button
-          className="group relative flex w-full items-center rounded-none border-0 bg-white px-2 py-4 text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none "
+          className={`group relative flex w-full items-center rounded-none border-0 bg-white px-2 py-4 text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none ${notoSansJp.className}`}
           type="button"
           data-te-collapse-init
           data-te-collapse-collapsed
@@ -43,7 +44,7 @@ export default function AccordionItem({ id, title, children }: Props) {
         className="!visible hidden border-0"
         data-te-collapse-item
       >
-        <div className="px-2 py-4 whitespace-pre-wrap">{children}</div>
+        <div className={`px-2 py-4 whitespace-pre-wrap ${notoSansJp.className}`}>{children}</div>
       </div>
     </div>
   )
