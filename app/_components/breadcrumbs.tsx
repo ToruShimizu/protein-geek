@@ -3,6 +3,7 @@ import Link from "next/link"
 
 type Breadcrumb = {
   name: string
+  icon?: JSX.Element
   href?: string
 }
 
@@ -14,7 +15,7 @@ export default function Breadcrumbs({ lists }: Props) {
   return (
     <nav className="p-3 md:p-6" aria-label="Breadcrumb">
       <ol className="flex">
-        {lists.map(({ name, href }, index) => (
+        {lists.map(({ name, href, icon }, index) => (
           <>
             {index !== 0 && (
               <div className="flex items-center">
@@ -42,11 +43,11 @@ export default function Breadcrumbs({ lists }: Props) {
                   href={href}
                   className="inline-flex items-center text-sm md:text-base font-medium  text-gray-400 hover:underline"
                 >
-                  {name}
+                  {icon ?? name}
                 </Link>
               ) : (
                 <span className="text-sm md:text-base font-medium  md:ml-2 text-gray-400">
-                  {name}
+                  {icon ?? name}
                 </span>
               )}
             </li>
