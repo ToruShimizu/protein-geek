@@ -1,7 +1,7 @@
 "use client"
 import { Collapse, initTE } from "tw-elements"
 import { useEffect } from "react"
-import { notoSansJp } from "../../_styles/fonts"
+import { notoSansJp } from "@/app/_styles/fonts"
 
 type Props = {
   id: string

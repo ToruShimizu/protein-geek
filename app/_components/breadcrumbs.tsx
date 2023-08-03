@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { montSerrat } from "../_styles/fonts"
+import { montSerrat } from "@/app/_styles/fonts"
 
 export type Breadcrumb = {
   name: string

@@ -1,6 +1,6 @@
 "use client"
 
-import { varelaRound } from "../_styles/fonts"
+import { varelaRound } from "@/app/_styles/fonts"
 
 type Rate = {
   rate: number
