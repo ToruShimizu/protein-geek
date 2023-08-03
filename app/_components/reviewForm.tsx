@@ -150,7 +150,7 @@ export default function ReviewForm({ flavorId }: Props) {
       <div className="grid">
         <button type="submit" className="text-white font-bold">
           <div
-            className={`${styles.button} h-12 px-8 w-full grid bg-gradient-to-br from-teal-400 via-teal-500 to-teal-600 items-center shadow-2xl cursor-pointer overflow-hidden transform hover:scale-x-110 hover:scale-y-105 hover:opacity-75 transition duration-300 ease-out`}
+            className={`${styles.button} h-12 px-8 w-full grid bg-gradient-to-br from-teal-400 via-teal-500 to-teal-600 items-center shadow-2xl cursor-pointer overflow-hidden transform hover:opacity-75 transition duration-300 ease-out`}
           >
             {isLoading && (
               <svg
