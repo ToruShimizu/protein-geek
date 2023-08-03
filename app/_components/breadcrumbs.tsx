@@ -16,7 +16,7 @@ export default function Breadcrumbs({ lists }: Props) {
   const baseTextStyle = `text-sm md:text-base font-medium text-gray-700 
   text-gray-700 ${montSerrat.className}`
   return (
-    <nav className="p-3 md:p-6 overflow-x-auto" aria-label="Breadcrumb">
+    <nav className="py-2 overflow-x-auto" aria-label="Breadcrumb">
       <ol className="grid auto-cols-max grid-flow-col gap-1">
         {lists.map(({ name, href, icon }, index) => (
           <li key={name} className="grid auto-cols-max grid-flow-col items-center">
