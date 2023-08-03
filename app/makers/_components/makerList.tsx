@@ -1,11 +1,11 @@
 "use client"
+import List from "@/app/_components/lists/list"
+import UnorderedList from "@/app/_components/lists/unorderedList"
+import { montSerrat } from "@/app/_styles/fonts"
+import { staticUrl } from "_constants/urls"
+import { Makers } from "api/graphql/generated/graphql"
+import { createStaticUrl } from "modules/utils"
 import Link from "next/link"
-import { Makers } from "../../../api/graphql/generated/graphql"
-import { createStaticUrl } from "../../../modules/utils"
-import { staticUrl } from "../../../_constants/urls"
-import { montSerrat } from "../../_styles/fonts"
-import UnorderedList from "../../_components/lists/unorderedList"
-import List from "../../_components/lists/list"
 
 type Props = {
   makers: Pick<Makers, "__typename" | "id" | "name" | "src">[]

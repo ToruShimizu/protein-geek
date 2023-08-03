@@ -1,7 +1,7 @@
 "use client"
 
-import { Flavor } from "../../../../../../types/responses"
-import { notoSansJp } from "../../../../../_styles/fonts"
+import { notoSansJp } from "@/app/_styles/fonts"
+import { Flavor } from "types/responses"
 
 type Props = {
   flavors: Flavor[]

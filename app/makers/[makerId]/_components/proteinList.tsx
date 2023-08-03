@@ -1,12 +1,12 @@
 "use client"
+import List from "@/app/_components/lists/list"
+import UnorderedList from "@/app/_components/lists/unorderedList"
+import Rate from "@/app/_components/rate"
+import { montSerrat } from "@/app/_styles/fonts"
+import { staticUrl } from "_constants/urls"
+import { Proteins } from "api/graphql/generated/graphql"
+import { createStaticUrl } from "modules/utils"
 import Link from "next/link"
-import { Proteins } from "../../../../api/graphql/generated/graphql"
-import Rate from "../../../_components/rate"
-import { createStaticUrl } from "../../../../modules/utils"
-import { staticUrl } from "../../../../_constants/urls"
-import { montSerrat } from "../../../_styles/fonts"
-import UnorderedList from "../../../_components/lists/unorderedList"
-import List from "../../../_components/lists/list"
 
 type Props = {
   proteins: Pick<Proteins, "__typename" | "id" | "name" | "src" | "maker_id">[]

@@ -1,9 +1,9 @@
-import { makerRepo } from "../../repos/makers"
-import HomeIcon from "../_components/icons/homeIcon"
-import MainContainer from "../_components/mainContainer"
-import PageTitle from "../_components/pageTitle"
-import MakerList from "./_components/makerList"
 import { Suspense } from "react"
+import { makerRepo } from "repos/makers"
+import HomeIcon from "@/app/_components/icons/homeIcon"
+import MainContainer from "@/app/_components/mainContainer"
+import PageTitle from "@/app/_components/pageTitle"
+import MakerList from "@/app/makers/_components/makerList"
 
 export default async function Page() {
   const makers = await makerRepo.fetch()

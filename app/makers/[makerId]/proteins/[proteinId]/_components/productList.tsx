@@ -1,7 +1,7 @@
 "use client"
 
-import { Product } from "../../../../../../types/responses"
-import { varelaRound } from "../../../../../_styles/fonts"
+import { varelaRound } from "@/app/_styles/fonts"
+import { Product } from "types/responses"
 
 type Props = {
   products: Product[]

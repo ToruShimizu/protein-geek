@@ -1,8 +1,8 @@
-import { makerRepo } from "../../../../../repos/makers"
-import { proteinRepo } from "../../../../../repos/proteins"
-import { reviewRepo } from "../../../../../repos/reviews"
-import HomeIcon from "../../../../_components/icons/homeIcon"
-import MainContainer from "../../../../_components/mainContainer"
+import HomeIcon from "@/app/_components/icons/homeIcon"
+import MainContainer from "@/app/_components/mainContainer"
+import { makerRepo } from "repos/makers"
+import { proteinRepo } from "repos/proteins"
+import { reviewRepo } from "repos/reviews"
 import ProteinContainer from "./_components/proteinContainer"
 
 export default async function Page({ params }: { params: { makerId: string; proteinId: string } }) {

@@ -1,11 +1,12 @@
 "use client"
-import { useAtom, useAtomValue } from "jotai"
 
-import { Protein, Review } from "../../../../../../types/responses"
+import { useAtomValue, useAtom } from "jotai"
+import { useEffect } from "react"
+import { flavorAtom, reviewsAtom } from "stores/proteinAtom"
+import { Protein, Review } from "types/responses"
 import ProteinSection from "./proteinSection"
 import ReviewSection from "./reviewSection"
-import { flavorAtom, reviewsAtom } from "../../../../../../stores/proteinAtom"
-import { useEffect } from "react"
+
 type Props = {
   protein: Protein
   reviews?: Review[]
