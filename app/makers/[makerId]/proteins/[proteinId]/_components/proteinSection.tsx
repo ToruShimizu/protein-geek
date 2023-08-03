@@ -12,6 +12,7 @@ import ProductList from "./productList"
 import FeatureList from "./featureList"
 import FactContainer from "../_containers/factContainer"
 import { varelaRound, notoSansJp, montSerrat } from "../../../../../_styles/fonts"
+import PageTitle from "../../../../../_components/pageTitle"
 
 type Props = {
   protein: Protein
@@ -66,11 +67,7 @@ export default function ProteinSection({ protein }: Props) {
       </div>
       <div className="grid gap-2">
         <div>
-          <h2
-            className={`text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 md:mb-4 ${montSerrat.className}`}
-          >
-            {protein.name}
-          </h2>
+          <PageTitle> {protein.name}</PageTitle>
           <Rate rate={3} count={50}></Rate>
         </div>
         <FeatureList features={protein.features} />
