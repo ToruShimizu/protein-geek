@@ -1,9 +1,9 @@
-import Header from "./_components/header"
-import Footer from "./_components/footer"
-import { ApolloWrapper } from "../api/apollo/apollo-wrapper"
+import Header from "@/app/_components/header"
+import Footer from "@/app/_components/footer"
 
-import "./_styles/reset.css"
-import "./_styles/globals.css"
+import "@/app/_styles/reset.css"
+import "@/app/_styles/globals.css"
+import { ApolloWrapper } from "api/apollo/apollo-wrapper"
 
 export const metadata = {
   title: "Next.js",

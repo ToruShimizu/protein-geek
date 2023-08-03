@@ -1,4 +1,4 @@
-import Breadcrumbs, { Breadcrumb } from "./breadcrumbs"
+import Breadcrumbs, { Breadcrumb } from "@/app/_components/breadcrumbs"
 
 type Props = {
   lists: Breadcrumb[]

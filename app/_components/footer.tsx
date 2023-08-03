@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { reggaeOne, montSerrat } from "../_styles/fonts"
+import { reggaeOne, montSerrat } from "@/app/_styles/fonts"
 
 export default function Footer() {
   return (

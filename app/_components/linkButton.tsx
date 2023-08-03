@@ -1,7 +1,7 @@
 "use client"
 
-import styles from "../_styles/animation.module.css"
-import { montSerrat } from "../_styles/fonts"
+import styles from "@/app/_styles/animation.module.css"
+import { montSerrat } from "@/app/_styles/fonts"
 
 type Props = {
   href: string

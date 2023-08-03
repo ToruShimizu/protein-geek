@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { reggaeOne } from "../_styles/fonts"
+import { reggaeOne } from "@/app/_styles/fonts"
 
 export default function Header() {
   return (

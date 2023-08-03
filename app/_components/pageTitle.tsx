@@ -1,4 +1,4 @@
-import { montSerrat } from "../_styles/fonts"
+import { montSerrat } from "@/app/_styles/fonts"
 
 type Props = {
   children: React.ReactNode
