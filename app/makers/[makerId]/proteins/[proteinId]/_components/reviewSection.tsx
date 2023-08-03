@@ -1,9 +1,9 @@
 "use client"
 import { useMemo } from "react"
 import { Flavor, Review } from "../../../../../../types/responses"
-import ReviewCards from "../../../../../_components/reviewCards"
-import ReviewForm from "../../../../../_components/reviewForm"
 import { notoSansJp } from "../../../../../_styles/fonts"
+import ReviewCards from "./reviewCards"
+import ReviewForm from "../_templates/reviewForm"
 
 type Props = {
   flavor: Flavor
