@@ -1,6 +1,7 @@
 "use client"
-import { Nutrient } from "../../../../../../types/responses"
-import { notoSansJp, varelaRound } from "../../../../../_styles/fonts"
+
+import { notoSansJp, varelaRound } from "@/app/_styles/fonts"
+import { Nutrient } from "types/responses"
 
 type Props = {
   nutrients?: Nutrient[]

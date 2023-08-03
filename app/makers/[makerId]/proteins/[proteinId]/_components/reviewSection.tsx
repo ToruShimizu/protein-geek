@@ -1,9 +1,9 @@
 "use client"
+import { notoSansJp } from "@/app/_styles/fonts"
 import { useMemo } from "react"
-import { Flavor, Review } from "../../../../../../types/responses"
-import { notoSansJp } from "../../../../../_styles/fonts"
-import ReviewCards from "./reviewCards"
+import { Flavor, Review } from "types/responses"
 import ReviewForm from "../_templates/reviewForm"
+import ReviewCards from "./reviewCards"
 
 type Props = {
   flavor: Flavor

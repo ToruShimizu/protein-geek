@@ -10,7 +10,6 @@ export type Protein = ProteinIdResponse["protein"]
 export type Fact = FactByProteinIdResponse["fact"]
 export type Nutrient = UnWrapArray<Fact["nutrients"]>
 export type Feature = UnWrapArray<Protein["features"]>
-export type Fact = ProteinIdResponse["fact"]
 export type Flavor = UnWrapArray<Protein["flavors"]>
 export type Product = UnWrapArray<Flavor["products"]>
 export type Seller = Flavor["seller"]

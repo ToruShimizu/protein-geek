@@ -3,7 +3,7 @@ import {
   FactsByProteinIdDocument,
   FactsByProteinIdQuery,
   FactsByProteinIdQueryVariables,
-} from "../../api/graphql/generated/graphql"
+} from "api/graphql/generated/graphql"
 
 export const clientFactRepo = {
   /**
