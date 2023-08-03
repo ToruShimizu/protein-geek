@@ -10,8 +10,8 @@ import { staticUrl } from "../../../../../../_constants/urls"
 import { flavorAtom, productAtom } from "../../../../../../stores/proteinAtom"
 import ProductList from "./productList"
 import FeatureList from "./featureList"
-import FactContainer from "../_containers/factContainer"
-import { varelaRound, notoSansJp, montSerrat } from "../../../../../_styles/fonts"
+import FactContainer from "../_templates/factContainer"
+import { notoSansJp, montSerrat } from "../../../../../_styles/fonts"
 import PageTitle from "../../../../../_components/pageTitle"
 
 type Props = {

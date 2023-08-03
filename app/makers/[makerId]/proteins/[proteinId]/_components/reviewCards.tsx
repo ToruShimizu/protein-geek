@@ -1,6 +1,6 @@
-import { Review } from "../../types/responses"
-import { notoSansJp } from "../_styles/fonts"
-import Rate from "./rate"
+import { Review } from "../../../../../../types/responses"
+import Rate from "../../../../../_components/rate"
+import { notoSansJp } from "../../../../../_styles/fonts"
 
 type Props = {
   reviews?: Review[]

@@ -1,17 +1,16 @@
-"use client"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useAtom } from "jotai"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import styles from "../_styles/animation.module.css"
-import { ReviewFormSchemaType, reviewFormSchema } from "../../modules/validateSchema"
 import {
-  ReviewsInsertInput,
   useInsertIntoReviewsCollectionMutation,
-} from "../../api/graphql/generated/graphql"
-import { useAtom } from "jotai"
-import { reviewsAtom } from "../../stores/proteinAtom"
-import { clientReviewRepo } from "../../repos/client/reviews"
-import { notoSansJp } from "../_styles/fonts"
+  ReviewsInsertInput,
+} from "../../../../../../api/graphql/generated/graphql"
+import { ReviewFormSchemaType, reviewFormSchema } from "../../../../../../modules/validateSchema"
+import { clientReviewRepo } from "../../../../../../repos/client/reviews"
+import { reviewsAtom } from "../../../../../../stores/proteinAtom"
+import { notoSansJp } from "../../../../../_styles/fonts"
+import styles from "../../../../../_styles/animation.module.css"
 
 type Props = {
   flavorId: number

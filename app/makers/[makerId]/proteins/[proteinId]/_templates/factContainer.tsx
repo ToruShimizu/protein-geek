@@ -1,6 +1,7 @@
 import { clientFactRepo } from "../../../../../../repos/client/facts"
-import Accordion from "../../../../../_components/accordion"
-import AccordionItem from "../../../../../_components/accordionItem"
+import Accordion from "../../../../../_components/accodions/accordion"
+import AccordionItem from "../../../../../_components/accodions/accordionItem"
+
 import NutrientTable from "../_components/nutrientTable"
 
 type Props = {
