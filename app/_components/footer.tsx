@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { chokokutai, montSerrat } from "../_styles/fonts"
+import { reggaeOne, montSerrat } from "../_styles/fonts"
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
         className={`block text-xs md:text-sm text-gray-500 text-center ${montSerrat.className} `}
       >
         © 2023&nbsp;
-        <Link href="/" className={`hover:underline ${chokokutai.className}`}>
+        <Link href="/" className={`hover:underline ${reggaeOne.className}`}>
           プロテインザスター
         </Link>
         . All Rights Reserved.
