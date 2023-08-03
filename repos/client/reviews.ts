@@ -1,7 +1,7 @@
 import {
   ReviewsInsertInput,
   useInsertIntoReviewsCollectionMutation,
-} from "../../api/graphql/generated/graphql"
+} from "api/graphql/generated/graphql"
 
 export const clientReviewRepo = {
   create: async (
