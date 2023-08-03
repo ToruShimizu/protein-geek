@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { montSerrat } from "../_styles/fonts"
 
-type Breadcrumb = {
+export type Breadcrumb = {
   name: string
   icon?: JSX.Element
   href?: string

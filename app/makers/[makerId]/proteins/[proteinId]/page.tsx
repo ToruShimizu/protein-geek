@@ -1,8 +1,8 @@
 import { makerRepo } from "../../../../../repos/makers"
 import { proteinRepo } from "../../../../../repos/proteins"
 import { reviewRepo } from "../../../../../repos/reviews"
-import Breadcrumbs from "../../../../_components/breadcrumbs"
 import HomeIcon from "../../../../_components/icons/homeIcon"
+import MainContainer from "../../../../_components/mainContainer"
 import ProteinContainer from "./_components/proteinContainer"
 
 export default async function Page({ params }: { params: { makerId: string; proteinId: string } }) {
@@ -15,16 +15,15 @@ export default async function Page({ params }: { params: { makerId: string; prot
   const reviews = await reviewRepo.fetchByFlavorIds(flavorIds)
 
   return (
-    <main className="grid gap-16 md:gap-20">
-      <Breadcrumbs
-        lists={[
-          { name: "top", icon: <HomeIcon />, href: "/" },
-          { name: "メーカー一覧", href: "/makers" },
-          { name: maker.name, href: `/makers/${maker.id}` },
-          { name: protein.name },
-        ]}
-      />
+    <MainContainer
+      lists={[
+        { name: "top", icon: <HomeIcon />, href: "/" },
+        { name: "メーカー一覧", href: "/makers" },
+        { name: maker.name, href: `/makers/${maker.id}` },
+        { name: protein.name },
+      ]}
+    >
       <ProteinContainer protein={protein} reviews={reviews} />
-    </main>
+    </MainContainer>
   )
 }

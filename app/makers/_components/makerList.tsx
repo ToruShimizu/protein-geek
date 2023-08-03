@@ -4,6 +4,8 @@ import { Makers } from "../../../api/graphql/generated/graphql"
 import { createStaticUrl } from "../../../modules/utils"
 import { staticUrl } from "../../../_constants/urls"
 import { montSerrat } from "../../_styles/fonts"
+import UnorderedList from "../../_components/lists/unorderedList"
+import List from "../../_components/lists/list"
 
 type Props = {
   makers: Pick<Makers, "__typename" | "id" | "name" | "src">[]
@@ -11,9 +13,9 @@ type Props = {
 
 export default function MakerList({ makers }: Props) {
   return (
-    <ul className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-6">
+    <UnorderedList>
       {makers.map(({ id, src, name }) => (
-        <li key={id} className="grid gap-1 md:gap-2">
+        <List key={id}>
           <Link href={`/makers/${id}`}>
             <div className="grid gap-2 group">
               {src && (
@@ -31,8 +33,8 @@ export default function MakerList({ makers }: Props) {
               <p className={`text-sm md:text-lg ${montSerrat.className}`}>{name}</p>
             </div>
           </Link>
-        </li>
+        </List>
       ))}
-    </ul>
+    </UnorderedList>
   )
 }
