@@ -5,6 +5,8 @@ import Rate from "../../../_components/rate"
 import { createStaticUrl } from "../../../../modules/utils"
 import { staticUrl } from "../../../../_constants/urls"
 import { montSerrat } from "../../../_styles/fonts"
+import UnorderedList from "../../../_components/lists/unorderedList"
+import List from "../../../_components/lists/list"
 
 type Props = {
   proteins: Pick<Proteins, "__typename" | "id" | "name" | "src" | "maker_id">[]
@@ -12,9 +14,9 @@ type Props = {
 
 export default function ProteinList({ proteins }: Props) {
   return (
-    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+    <UnorderedList>
       {proteins.map(({ id, src, name, maker_id }) => (
-        <li key={id} className="grid gap-1 md:gap-2">
+        <List key={id}>
           <Link href={`/makers/${maker_id}/proteins/${id}`}>
             <div className="grid gap-2 group">
               {src && (
@@ -38,8 +40,8 @@ export default function ProteinList({ proteins }: Props) {
               </div>
             </div>
           </Link>
-        </li>
+        </List>
       ))}
-    </ul>
+    </UnorderedList>
   )
 }
