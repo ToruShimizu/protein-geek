@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
-    "@apollo/experimental-nextjs-app-support": "^0.4.1",
+    "@apollo/experimental-nextjs-app-support": "^0.4.2",
     "@hookform/resolvers": "^3.3.1",
     "@next/font": "^13.4.19",
     "@supabase/supabase-js": "^2.31.0",
