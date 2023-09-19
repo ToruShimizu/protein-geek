@@ -5,6 +5,8 @@ import { proteinRepo } from "repos/proteins"
 import { reviewRepo } from "repos/reviews"
 import ProteinContainer from "./_components/proteinContainer"
 
+export const revalidate = 0
+
 export default async function Page({ params }: { params: { makerId: string; proteinId: string } }) {
   const [{ protein }, { maker }] = await Promise.all([
     proteinRepo.fetchById(Number(params.proteinId)),
