@@ -1,4 +1,4 @@
-import { Montserrat, Noto_Sans_JP, Varela_Round, Reggae_One } from "@next/font/google"
+import { Montserrat, Noto_Sans_JP, Varela_Round, Reggae_One } from "next/font/google"
 
 /**
  * サイト名
