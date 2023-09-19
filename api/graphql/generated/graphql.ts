@@ -1475,14 +1475,14 @@ export type MakerByIdQueryVariables = Exact<{
 }>;
 
 
-export type MakerByIdQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src: string, proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, maker_id?: any | null } }> } | null } }> } | null };
+export type MakerByIdQuery = { __typename?: 'Query', makersCollection?: { __typename?: 'makersConnection', edges: Array<{ __typename?: 'makersEdge', node: { __typename?: 'makers', id: any, name: string, src: string, proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, maker_id?: any | null, reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, rate: any } }> } | null } }> } | null } }> } | null };
 
 export type ProteinByIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
 }>;
 
 
-export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id?: any | null } }> } | null } }> } | null } }> } | null };
+export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id?: any | null } }> } | null } }> } | null, reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, favorite?: string | null, rate: any, description: string, protein_id: any } }> } | null } }> } | null };
 
 export type FactsByProteinIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
@@ -1595,6 +1595,14 @@ export const MakerByIdDocument = gql`
               name
               src
               maker_id
+              reviewsCollection {
+                edges {
+                  node {
+                    id
+                    rate
+                  }
+                }
+              }
             }
           }
         }
@@ -1675,6 +1683,19 @@ export const ProteinByIdDocument = gql`
                   }
                 }
               }
+            }
+          }
+        }
+        reviewsCollection {
+          edges {
+            node {
+              id
+              name
+              title
+              favorite
+              rate
+              description
+              protein_id
             }
           }
         }

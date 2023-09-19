@@ -1,11 +1,14 @@
+import { makerRepo } from "repos/makers"
 import { clientFactRepo } from "../repos/client/facts"
 import { proteinRepo } from "../repos/proteins"
 import { reviewRepo } from "../repos/reviews"
 import { UnWrapArray } from "./utils"
 
+export type MakerIdResponse = Awaited<ReturnType<typeof makerRepo.fetchById>>
 export type ProteinIdResponse = Awaited<ReturnType<typeof proteinRepo.fetchById>>
 export type ReviewByFlavorIdResponse = Awaited<ReturnType<typeof reviewRepo.fetchByFlavorIds>>
 export type FactByProteinIdResponse = ReturnType<typeof clientFactRepo.fetchByProteinId>
+export type ProteinByMakerIdResponse = UnWrapArray<MakerIdResponse["proteins"]>
 export type Protein = ProteinIdResponse["protein"]
 export type Fact = FactByProteinIdResponse["fact"]
 export type Nutrient = UnWrapArray<Fact["nutrients"]>
