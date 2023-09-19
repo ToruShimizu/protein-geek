@@ -43,7 +43,9 @@ export default function ProteinList({ proteins }: Props) {
                 <p className={`text-xs lg:text-sm font-bold text-gray-400 ${montSerrat.className}`}>
                   {name}
                 </p>
-                <Rate rate={calculateRateAverage(reviews)} count={reviews.length} />
+                {reviews.length > 0 && (
+                  <Rate rate={calculateRateAverage(reviews)} count={reviews.length} />
+                )}
               </div>
             </div>
           </Link>
