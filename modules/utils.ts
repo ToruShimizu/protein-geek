@@ -1,4 +1,4 @@
-import { ShopKey } from "../types/responses"
+import { Review, ShopKey } from "../types/responses"
 
 /**
  * @description 画像のURLを生成する
@@ -27,4 +27,15 @@ export const convertKey = (key: ShopKey) => {
     case "official":
       return "公式サイト"
   }
+}
+
+/**
+ * @description rateの平均を計算する
+ * @param reviews レビュー一覧
+ * @return rateの平均
+ */
+export const calculateRateAverage = (reviews: Review[] | Pick<Review, "id" | "rate">[]) => {
+  const rateSum = reviews.reduce((sum, review) => sum + Number(review.rate), 0)
+
+  return Math.round(rateSum / reviews.length)
 }
