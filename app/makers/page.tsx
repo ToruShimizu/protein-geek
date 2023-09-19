@@ -1,4 +1,3 @@
-import { Suspense } from "react"
 import { makerRepo } from "repos/makers"
 import HomeIcon from "@/app/_components/icons/homeIcon"
 import MainContainer from "@/app/_components/mainContainer"
@@ -16,9 +15,7 @@ export default async function Page() {
     >
       <section>
         <PageTitle>メーカー一覧</PageTitle>
-        <Suspense fallback={<div>...loading</div>}>
-          <MakerList makers={makers} />
-        </Suspense>
+        <MakerList makers={makers} />
       </section>
     </MainContainer>
   )
