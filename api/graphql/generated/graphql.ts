@@ -737,7 +737,6 @@ export type Flavors = Node & {
   protein_id: Scalars['BigInt']['output'];
   proteins: Proteins;
   proteinsCollection?: Maybe<ProteinsConnection>;
-  reviewsCollection?: Maybe<ReviewsConnection>;
   seller_id?: Maybe<Scalars['BigInt']['output']>;
   sellers?: Maybe<Sellers>;
   sellersCollection?: Maybe<SellersConnection>;
@@ -762,16 +761,6 @@ export type FlavorsProteinsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ProteinsOrderBy>>;
-};
-
-
-export type FlavorsReviewsCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<ReviewsFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<ReviewsOrderBy>>;
 };
 
 
@@ -1133,6 +1122,9 @@ export type Proteins = Node & {
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  review_id?: Maybe<Scalars['BigInt']['output']>;
+  reviews?: Maybe<Reviews>;
+  reviewsCollection?: Maybe<ReviewsConnection>;
   src: Scalars['String']['output'];
 };
 
@@ -1176,6 +1168,16 @@ export type ProteinsMakersCollectionArgs = {
   orderBy?: InputMaybe<Array<MakersOrderBy>>;
 };
 
+
+export type ProteinsReviewsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ReviewsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ReviewsOrderBy>>;
+};
+
 export type ProteinsConnection = {
   __typename?: 'proteinsConnection';
   edges: Array<ProteinsEdge>;
@@ -1203,6 +1205,7 @@ export type ProteinsFilter = {
   maker_id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  review_id?: InputMaybe<BigIntFilter>;
   src?: InputMaybe<StringFilter>;
 };
 
@@ -1211,6 +1214,7 @@ export type ProteinsInsertInput = {
   flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
   maker_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  review_id?: InputMaybe<Scalars['BigInt']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1228,6 +1232,7 @@ export type ProteinsOrderBy = {
   id?: InputMaybe<OrderByDirection>;
   maker_id?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
+  review_id?: InputMaybe<OrderByDirection>;
   src?: InputMaybe<OrderByDirection>;
 };
 
@@ -1236,6 +1241,7 @@ export type ProteinsUpdateInput = {
   flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
   maker_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  review_id?: InputMaybe<Scalars['BigInt']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1251,14 +1257,26 @@ export type Reviews = Node & {
   __typename?: 'reviews';
   created_at?: Maybe<Scalars['Datetime']['output']>;
   description: Scalars['String']['output'];
-  flavor_id: Scalars['BigInt']['output'];
-  flavors: Flavors;
+  favorite?: Maybe<Scalars['String']['output']>;
   id: Scalars['BigInt']['output'];
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
-  rate: Scalars['BigInt']['output'];
+  protein_id: Scalars['BigInt']['output'];
+  proteins: Proteins;
+  proteinsCollection?: Maybe<ProteinsConnection>;
+  rate: Scalars['BigFloat']['output'];
   title: Scalars['String']['output'];
+};
+
+
+export type ReviewsProteinsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ProteinsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ProteinsOrderBy>>;
 };
 
 export type ReviewsConnection = {
@@ -1284,20 +1302,22 @@ export type ReviewsEdge = {
 export type ReviewsFilter = {
   created_at?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
-  flavor_id?: InputMaybe<BigIntFilter>;
+  favorite?: InputMaybe<StringFilter>;
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
-  rate?: InputMaybe<BigIntFilter>;
+  protein_id?: InputMaybe<BigIntFilter>;
+  rate?: InputMaybe<BigFloatFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
 export type ReviewsInsertInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
+  favorite?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  rate?: InputMaybe<Scalars['BigInt']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+  rate?: InputMaybe<Scalars['BigFloat']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1312,9 +1332,10 @@ export type ReviewsInsertResponse = {
 export type ReviewsOrderBy = {
   created_at?: InputMaybe<OrderByDirection>;
   description?: InputMaybe<OrderByDirection>;
-  flavor_id?: InputMaybe<OrderByDirection>;
+  favorite?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
+  protein_id?: InputMaybe<OrderByDirection>;
   rate?: InputMaybe<OrderByDirection>;
   title?: InputMaybe<OrderByDirection>;
 };
@@ -1322,9 +1343,10 @@ export type ReviewsOrderBy = {
 export type ReviewsUpdateInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
+  favorite?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  rate?: InputMaybe<Scalars['BigInt']['input']>;
+  protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+  rate?: InputMaybe<Scalars['BigFloat']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1441,7 +1463,7 @@ export type InsertIntoReviewsCollectionMutationVariables = Exact<{
 }>;
 
 
-export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string, flavor_id: any }> } | null };
+export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string, protein_id: any }> } | null };
 
 export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1474,7 +1496,7 @@ export type ReviewsCollectionQueryVariables = Exact<{
 }>;
 
 
-export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, rate: any, description: string, flavor_id: any } }> } | null };
+export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, rate: any, description: string, protein_id: any } }> } | null };
 
 
 export const InsertIntoReviewsCollectionDocument = gql`
@@ -1487,7 +1509,7 @@ export const InsertIntoReviewsCollectionDocument = gql`
       name
       rate
       title
-      flavor_id
+      protein_id
     }
   }
 }
@@ -1741,7 +1763,7 @@ export type FactsByProteinIdLazyQueryHookResult = ReturnType<typeof useFactsByPr
 export type FactsByProteinIdQueryResult = Apollo.QueryResult<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>;
 export const ReviewsCollectionDocument = gql`
     query ReviewsCollection($ids: [BigInt!]) {
-  reviewsCollection(filter: {flavor_id: {in: $ids}}) {
+  reviewsCollection(filter: {protein_id: {in: $ids}}) {
     edges {
       node {
         id
@@ -1749,7 +1771,7 @@ export const ReviewsCollectionDocument = gql`
         title
         rate
         description
-        flavor_id
+        protein_id
       }
     }
   }
