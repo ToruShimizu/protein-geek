@@ -11,12 +11,13 @@ import { useForm } from "react-hook-form"
 import { clientReviewRepo } from "repos/client/reviews"
 import { reviewsAtom } from "stores/proteinAtom"
 import styles from "@/app/_styles/animation.module.css"
+import { Protein } from "types/responses"
 
 type Props = {
-  flavorId: number
+  protein: Protein
 }
 
-export default function ReviewForm({ flavorId }: Props) {
+export default function ReviewForm({ protein }: Props) {
   const [reviews, setReviews] = useAtom(reviewsAtom)
   const [insertIntoReviewsCollectionMutation] = useInsertIntoReviewsCollectionMutation()
   const {
@@ -39,14 +40,15 @@ export default function ReviewForm({ flavorId }: Props) {
     clearErrors("rate")
   }
 
-  const onSubmit = async (input: Omit<ReviewsInsertInput, "flavor_id" | "create_at">) => {
+  const onSubmit = async (input: Omit<ReviewsInsertInput, "protein_id" | "create_at">) => {
     try {
       const review = await clientReviewRepo.create(
-        { ...input, flavor_id: flavorId },
+        { ...input, protein_id: protein.id, rate: String(input.rate) },
         insertIntoReviewsCollectionMutation,
       )
       setReviews([review, ...reviews])
       reset()
+      setRate(0)
     } catch (e) {
       console.log(e)
     }

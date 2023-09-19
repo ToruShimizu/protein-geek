@@ -1,31 +1,26 @@
 "use client"
 import { notoSansJp } from "@/app/_styles/fonts"
-import { useMemo } from "react"
-import { Flavor, Review } from "types/responses"
+import { Protein, Review } from "types/responses"
 import ReviewForm from "../_templates/reviewForm"
 import ReviewCards from "./reviewCards"
 
 type Props = {
-  flavor: Flavor
+  protein: Protein
   reviews?: Review[]
 }
-export default function ReviewSection({ flavor, reviews }: Props) {
-  const filteredReviews = useMemo(
-    () => reviews?.filter((review) => review.flavor_id === flavor.id),
-    [reviews, flavor],
-  )
+export default function ReviewSection({ protein, reviews }: Props) {
   return (
     <section className="grid gap-8">
       <div>
         <h2
           className={`text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4 ${notoSansJp.className}`}
         >
-          {flavor.name}のレビュー
+          {protein.name}のレビュー
         </h2>
         <hr className="border-1" />
       </div>
-      <ReviewForm flavorId={flavor.id} />
-      <ReviewCards reviews={filteredReviews} />
+      <ReviewForm protein={protein} />
+      <ReviewCards reviews={reviews} />
     </section>
   )
 }
