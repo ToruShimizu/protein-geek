@@ -75,7 +75,9 @@ export default function ProteinSection({ protein }: Props) {
       <div className="grid gap-2">
         <div>
           <PageTitle> {protein.name}</PageTitle>
-          <Rate rate={average} count={protein.reviews.length}></Rate>
+          {protein.reviews.length > 0 && (
+            <Rate rate={average} count={protein.reviews.length}></Rate>
+          )}
         </div>
         <FeatureList features={protein.features} />
         <hr className="border-1" />
