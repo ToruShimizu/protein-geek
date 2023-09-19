@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useAtom } from "jotai"
 import LinkButton from "@/app/_components/linkButton"
 import PageTitle from "@/app/_components/pageTitle"
@@ -59,12 +60,16 @@ export default function ProteinSection({ protein }: Props) {
   return (
     <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
       <div>
-        <img
+        <Image
+          width={0}
+          height={0}
+          sizes="100vw"
           src={createStaticUrl({
             baseUrl: staticUrl,
             src: protein.src,
           })}
           alt={protein.name}
+          style={{ width: "100%", height: "100%" }}
         />
       </div>
       <div className="grid gap-2">
