@@ -1,5 +1,4 @@
 "use client"
-import { Collapse, initTE } from "tw-elements"
 import { useEffect } from "react"
 
 type Props = {
@@ -9,7 +8,11 @@ type Props = {
 
 export default function Accordion({ id, children }: Props) {
   useEffect(() => {
-    initTE({ Collapse })
+    const init = async () => {
+      const { Collapse, initTE } = await import("tw-elements")
+      initTE({ Collapse })
+    }
+    init()
   }, [])
   return <div id={id}>{children}</div>
 }
