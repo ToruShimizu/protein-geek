@@ -26,6 +26,14 @@ query MakerById($id: BigInt!) {
               name
               src
               maker_id
+              reviewsCollection {
+                edges {
+                  node {
+                    id
+                    rate
+                  }
+                }
+              }
             }
           }
         }
@@ -78,6 +86,19 @@ query ProteinById($id: BigInt!) {
                   }
                 }
               }
+            }
+          }
+        }
+        reviewsCollection {
+          edges {
+            node {
+              id
+              name
+              title
+              favorite
+              rate
+              description
+              protein_id
             }
           }
         }

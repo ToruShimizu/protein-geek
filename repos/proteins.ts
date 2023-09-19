@@ -25,7 +25,7 @@ export const proteinRepo = {
     if (!protein) throw new Error("Protein not found")
 
     const features = protein?.featuresCollection?.edges?.map((edge) => edge?.node)
-
+    const reviews = protein?.reviewsCollection?.edges?.map((edge) => edge?.node)
     const flavors = protein?.flavorsCollection?.edges?.map((edge) => edge?.node)
     const sellers = flavors
       ?.map((flavor) => flavor?.sellersCollection?.edges?.map((edge) => edge?.node))
@@ -54,6 +54,7 @@ export const proteinRepo = {
         src: protein.src,
         flavors: combinedFlavors,
         features,
+        reviews: reviews ?? [],
       },
     }
   },

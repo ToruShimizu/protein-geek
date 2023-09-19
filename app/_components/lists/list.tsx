@@ -3,10 +3,6 @@ type Props = {
   children: React.ReactNode
 }
 
-export default function List({ key, children }: Props) {
-  return (
-    <li key={key} className="grid gap-1 md:gap-2">
-      {children}
-    </li>
-  )
+export default function List({ children }: Props) {
+  return <li className="grid gap-1 md:gap-2">{children}</li>
 }
