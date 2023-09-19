@@ -7,11 +7,11 @@ import {
 
 const client = getClient()
 export const reviewRepo = {
-  fetchByFlavorIds: async (ids: number[]) => {
+  fetchByProteinId: async (id: number) => {
     const { data, error } = await client.query<
       ReviewsCollectionQuery,
       ReviewsCollectionQueryVariables
-    >({ query: ReviewsCollectionDocument, variables: { ids } })
+    >({ query: ReviewsCollectionDocument, variables: { id } })
     if (error) throw error
 
     const reviews = data?.reviewsCollection?.edges?.map((edge) => edge?.node)

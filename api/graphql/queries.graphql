@@ -128,9 +128,9 @@ query FactsByProteinId($id: BigInt!) {
     }
   }
 }
-# フレーバーに紐づくレビューを取得
-query ReviewsCollection($ids: [BigInt!]) {
-  reviewsCollection(filter: { protein_id: { in: $ids } }) {
+# プロテインに紐づくレビューを取得
+query ReviewsCollection($id: BigInt!) {
+  reviewsCollection(filter: { protein_id: { eq: $id } }) {
     edges {
       node {
         id
