@@ -6,7 +6,7 @@ import PageTitle from "@/app/_components/pageTitle"
 import Rate from "@/app/_components/rate"
 import { notoSansJp, montSerrat } from "@/app/_styles/fonts"
 import { staticUrl } from "_constants/urls"
-import { createStaticUrl, convertKey } from "modules/utils"
+import { createStaticUrl, convertKey, calculateRateAverage } from "modules/utils"
 import { useMemo, useCallback, useEffect, Fragment } from "react"
 import { flavorAtom, productAtom } from "stores/proteinAtom"
 import { Protein, ShopKey, Product } from "types/responses"
@@ -30,6 +30,7 @@ export default function ProteinSection({ protein }: Props) {
   ) as ShopKey[]
 
   const price = useMemo(() => product.price, [product.price])
+  const average = calculateRateAverage(protein.reviews)
 
   const onChange = useCallback(
     (id: string) => {
@@ -69,7 +70,7 @@ export default function ProteinSection({ protein }: Props) {
       <div className="grid gap-2">
         <div>
           <PageTitle> {protein.name}</PageTitle>
-          <Rate rate={3} count={50}></Rate>
+          <Rate rate={average} count={protein.reviews.length}></Rate>
         </div>
         <FeatureList features={protein.features} />
         <hr className="border-1" />

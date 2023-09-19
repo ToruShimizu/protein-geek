@@ -4,18 +4,21 @@ import UnorderedList from "@/app/_components/lists/unorderedList"
 import Rate from "@/app/_components/rate"
 import { montSerrat } from "@/app/_styles/fonts"
 import { staticUrl } from "_constants/urls"
-import { Proteins } from "api/graphql/generated/graphql"
-import { createStaticUrl } from "modules/utils"
+import { calculateRateAverage, createStaticUrl } from "modules/utils"
 import Link from "next/link"
+import { ProteinByMakerIdResponse } from "types/responses"
 
 type Props = {
-  proteins: Pick<Proteins, "__typename" | "id" | "name" | "src" | "maker_id">[]
+  proteins: Pick<
+    ProteinByMakerIdResponse,
+    "__typename" | "id" | "name" | "src" | "maker_id" | "reviews"
+  >[]
 }
 
 export default function ProteinList({ proteins }: Props) {
   return (
     <UnorderedList>
-      {proteins.map(({ id, src, name, maker_id }) => (
+      {proteins.map(({ id, src, name, maker_id, reviews }) => (
         <List key={id}>
           <Link href={`/makers/${maker_id}/proteins/${id}`}>
             <div className="grid gap-2 group">
@@ -35,8 +38,7 @@ export default function ProteinList({ proteins }: Props) {
                 <p className={`text-xs lg:text-sm font-bold text-gray-400 ${montSerrat.className}`}>
                   {name}
                 </p>
-                {/* TODO: 数値入れ替え */}
-                <Rate rate={2} count={50} />
+                <Rate rate={calculateRateAverage(reviews)} count={reviews.length} />
               </div>
             </div>
           </Link>
