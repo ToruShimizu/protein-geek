@@ -18,6 +18,7 @@ export const productAtom = atom<Product>({
   id: 0,
   price: "",
   capacity: "",
+  flavor_id: 0,
 })
 
 export const reviewsAtom = atom<Review[]>([])

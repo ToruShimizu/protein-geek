@@ -732,7 +732,6 @@ export type Flavors = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   product_id?: Maybe<Scalars['BigInt']['output']>;
-  products?: Maybe<Products>;
   productsCollection?: Maybe<ProductsConnection>;
   protein_id: Scalars['BigInt']['output'];
   proteins: Proteins;
@@ -1020,24 +1019,13 @@ export type NutrientsUpdateResponse = {
 export type Products = Node & {
   __typename?: 'products';
   capacity: Scalars['String']['output'];
-  created_at?: Maybe<Scalars['Datetime']['output']>;
-  flavor_id?: Maybe<Scalars['BigInt']['output']>;
-  flavors?: Maybe<Flavors>;
-  flavorsCollection?: Maybe<FlavorsConnection>;
+  created_at: Scalars['Datetime']['output'];
+  flavor_id: Scalars['BigInt']['output'];
+  flavors: Flavors;
   id: Scalars['BigInt']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   price: Scalars['String']['output'];
-};
-
-
-export type ProductsFlavorsCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<FlavorsFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<FlavorsOrderBy>>;
 };
 
 export type ProductsConnection = {
@@ -1482,7 +1470,7 @@ export type ProteinByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id?: any | null } }> } | null } }> } | null, reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, favorite?: string | null, rate: any, description: string, protein_id: any } }> } | null } }> } | null };
+export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id: any } }> } | null } }> } | null, reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, favorite?: string | null, rate: any, description: string, protein_id: any } }> } | null } }> } | null };
 
 export type FactsByProteinIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
@@ -1492,7 +1480,7 @@ export type FactsByProteinIdQueryVariables = Exact<{
 export type FactsByProteinIdQuery = { __typename?: 'Query', factsCollection?: { __typename?: 'factsConnection', edges: Array<{ __typename?: 'factsEdge', node: { __typename?: 'facts', id: any, summary: string, usage: string, nutrientsCollection?: { __typename?: 'nutrientsConnection', edges: Array<{ __typename?: 'nutrientsEdge', node: { __typename?: 'nutrients', id: any, name: string, quantity: string } }> } | null } }> } | null };
 
 export type ReviewsCollectionQueryVariables = Exact<{
-  ids?: InputMaybe<Array<Scalars['BigInt']['input']> | Scalars['BigInt']['input']>;
+  id: Scalars['BigInt']['input'];
 }>;
 
 
@@ -1783,8 +1771,8 @@ export type FactsByProteinIdQueryHookResult = ReturnType<typeof useFactsByProtei
 export type FactsByProteinIdLazyQueryHookResult = ReturnType<typeof useFactsByProteinIdLazyQuery>;
 export type FactsByProteinIdQueryResult = Apollo.QueryResult<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>;
 export const ReviewsCollectionDocument = gql`
-    query ReviewsCollection($ids: [BigInt!]) {
-  reviewsCollection(filter: {protein_id: {in: $ids}}) {
+    query ReviewsCollection($id: BigInt!) {
+  reviewsCollection(filter: {protein_id: {eq: $id}}) {
     edges {
       node {
         id
@@ -1811,11 +1799,11 @@ export const ReviewsCollectionDocument = gql`
  * @example
  * const { data, loading, error } = useReviewsCollectionQuery({
  *   variables: {
- *      ids: // value for 'ids'
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useReviewsCollectionQuery(baseOptions?: Apollo.QueryHookOptions<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>) {
+export function useReviewsCollectionQuery(baseOptions: Apollo.QueryHookOptions<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>(ReviewsCollectionDocument, options);
       }

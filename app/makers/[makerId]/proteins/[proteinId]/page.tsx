@@ -11,8 +11,7 @@ export default async function Page({ params }: { params: { makerId: string; prot
     makerRepo.fetchById(Number(params.makerId)),
   ])
 
-  const flavorIds = protein.flavors.map((flavor) => flavor.id)
-  const reviews = await reviewRepo.fetchByFlavorIds(flavorIds)
+  const reviews = await reviewRepo.fetchByProteinId(Number(params.proteinId))
 
   return (
     <MainContainer
