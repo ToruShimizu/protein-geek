@@ -17,8 +17,6 @@ type Props = {
 }
 
 export default function ProteinList({ proteins }: Props) {
-  console.log(proteins[0].src)
-
   return (
     <UnorderedList>
       {proteins.map(({ id, src, name, maker_id, reviews }) => (
