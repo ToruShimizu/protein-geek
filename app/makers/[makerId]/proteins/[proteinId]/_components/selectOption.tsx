@@ -16,7 +16,7 @@ export default function SelectOption({ flavors, onChange }: Props) {
       </label>
       <select
         id="flavors"
-        className={`border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 text-sm md:text-base  ${notoSansJp.className}`}
+        className={`border border-gray-300 focus:border-gray-300 focus:outline-none rounded-lg block w-full p-2 text-sm md:text-base  ${notoSansJp.className}`}
         defaultValue={flavors[0].id}
         onChange={(e) => onChange(e.target.value)}
       >
