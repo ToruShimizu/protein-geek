@@ -14,7 +14,7 @@ export default function ProductList({ products, selectedProduct, onClick }: Prop
 
   const baseClassNames = `p-2 bg-white border border-gray-200 rounded-lg shadow  ${
     varelaRound.className
-  } ${products.length > 1 ? " hover:border-2 hover:border-blue-500 cursor-pointer " : ""}`
+  } ${products.length > 1 ? "hover:border-2 hover:border-blue-500 cursor-pointer" : ""}`
 
   return (
     <ul className="grid grid-cols-2 gap-4">
