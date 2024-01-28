@@ -81,7 +81,12 @@ export default function ProteinSection({ protein }: Props) {
         </div>
         <FeatureList features={protein.features} />
         <hr className="border-1" />
-        <SelectOption flavors={protein.flavors} onChange={onChange} />
+        <SelectOption
+          flavors={protein.flavors}
+          label="味"
+          defaultValue={protein.flavors[0].id}
+          onChange={onChange}
+        />
         <div>
           <h3 className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>サイズ</h3>
           <ProductList products={flavor.products} selectedProduct={product} onClick={onClick} />
