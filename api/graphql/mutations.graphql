@@ -8,6 +8,7 @@ mutation InsertIntoReviewsCollection($objects: [reviewsInsertInput!]!) {
       rate
       title
       protein_id
+      flavor_id
     }
   }
 }
