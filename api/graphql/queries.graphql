@@ -139,6 +139,7 @@ query ReviewsCollection($id: BigInt!) {
         rate
         description
         protein_id
+        flavor_id
       }
     }
   }

@@ -6,12 +6,13 @@ import {
 } from "api/graphql/generated/graphql"
 import { useAtom } from "jotai"
 import { ReviewFormSchemaType, reviewFormSchema } from "modules/validateSchema"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { useForm } from "react-hook-form"
 import { clientReviewRepo } from "repos/client/reviews"
 import { reviewsAtom } from "stores/proteinAtom"
 import styles from "@/app/_styles/animation.module.css"
 import { Protein } from "types/responses"
+import SelectOption from "../_components/selectOption"
 
 type Props = {
   protein: Protein
@@ -39,6 +40,17 @@ export default function ReviewForm({ protein }: Props) {
     setRate(value)
     clearErrors("rate")
   }
+
+  const onChange = useCallback(
+    (id: string) => {
+      const selectedFlavor = protein.flavors.find((flavor) => flavor.id === id)
+
+      if (selectedFlavor) {
+        setValue("flavor_id", id)
+      }
+    },
+    [setValue],
+  )
 
   const onSubmit = async (input: Omit<ReviewsInsertInput, "protein_id" | "create_at">) => {
     try {
@@ -89,6 +101,14 @@ export default function ReviewForm({ protein }: Props) {
             <p className="text-red-500 text-sm font-medium">{errors.title?.message}</p>
           )}
         </div>
+        <SelectOption
+          flavors={protein.flavors}
+          label="おすすめの味"
+          defaultValue={"0"}
+          onChange={onChange}
+          disabled
+        />
+
         <div>
           <label htmlFor="rate" className="block mb-2 text-sm font-bold text-gray-900 ">
             評価
