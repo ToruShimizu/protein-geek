@@ -18,7 +18,7 @@ export default function ReviewSection({ protein, reviews }: Props) {
         <hr className="border-1" />
       </div>
       <ReviewForm protein={protein} />
-      {reviews && reviews.length > 0 && <ReviewCards reviews={reviews} />}
+      {reviews && reviews.length > 0 && <ReviewCards flavors={protein.flavors} reviews={reviews} />}
     </section>
   )
 }

@@ -14,6 +14,7 @@ export const reviewFormSchema = z.object({
     .min(1, { message: "レビュー内容を入力してください" })
     .max(250, { message: "レビュー内容は50文字以内で入力してください" }),
   rate: z.number().positive({ message: "評価を選択してください" }),
+  flavor_id: z.string().optional(),
 })
 
 export type ReviewFormSchemaType = z.infer<typeof reviewFormSchema>

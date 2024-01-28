@@ -604,9 +604,15 @@ export type FactsEdge = {
 };
 
 export type FactsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<FactsFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   id?: InputMaybe<BigIntFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<FactsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<FactsFilter>>;
   protein_id?: InputMaybe<BigIntFilter>;
   summary?: InputMaybe<StringFilter>;
   usage?: InputMaybe<StringFilter>;
@@ -682,10 +688,16 @@ export type FeaturesEdge = {
 };
 
 export type FeaturesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<FeaturesFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<BigIntFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<FeaturesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<FeaturesFilter>>;
   protein_id?: InputMaybe<BigIntFilter>;
 };
 
@@ -736,6 +748,9 @@ export type Flavors = Node & {
   protein_id: Scalars['BigInt']['output'];
   proteins: Proteins;
   proteinsCollection?: Maybe<ProteinsConnection>;
+  review_id?: Maybe<Scalars['BigInt']['output']>;
+  reviews?: Maybe<Reviews>;
+  reviewsCollection?: Maybe<ReviewsConnection>;
   seller_id?: Maybe<Scalars['BigInt']['output']>;
   sellers?: Maybe<Sellers>;
   sellersCollection?: Maybe<SellersConnection>;
@@ -760,6 +775,16 @@ export type FlavorsProteinsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ProteinsOrderBy>>;
+};
+
+
+export type FlavorsReviewsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ReviewsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ReviewsOrderBy>>;
 };
 
 
@@ -793,12 +818,19 @@ export type FlavorsEdge = {
 };
 
 export type FlavorsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<FlavorsFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<FlavorsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<FlavorsFilter>>;
   product_id?: InputMaybe<BigIntFilter>;
   protein_id?: InputMaybe<BigIntFilter>;
+  review_id?: InputMaybe<BigIntFilter>;
   seller_id?: InputMaybe<BigIntFilter>;
   src?: InputMaybe<StringFilter>;
 };
@@ -808,6 +840,7 @@ export type FlavorsInsertInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   product_id?: InputMaybe<Scalars['BigInt']['input']>;
   protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+  review_id?: InputMaybe<Scalars['BigInt']['input']>;
   seller_id?: InputMaybe<Scalars['BigInt']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
 };
@@ -826,6 +859,7 @@ export type FlavorsOrderBy = {
   name?: InputMaybe<OrderByDirection>;
   product_id?: InputMaybe<OrderByDirection>;
   protein_id?: InputMaybe<OrderByDirection>;
+  review_id?: InputMaybe<OrderByDirection>;
   seller_id?: InputMaybe<OrderByDirection>;
   src?: InputMaybe<OrderByDirection>;
 };
@@ -835,6 +869,7 @@ export type FlavorsUpdateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   product_id?: InputMaybe<Scalars['BigInt']['input']>;
   protein_id?: InputMaybe<Scalars['BigInt']['input']>;
+  review_id?: InputMaybe<Scalars['BigInt']['input']>;
   seller_id?: InputMaybe<Scalars['BigInt']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
 };
@@ -891,10 +926,16 @@ export type MakersEdge = {
 };
 
 export type MakersFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<MakersFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<MakersFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<MakersFilter>>;
   protein_id?: InputMaybe<BigIntFilter>;
   src?: InputMaybe<StringFilter>;
 };
@@ -970,11 +1011,17 @@ export type NutrientsEdge = {
 };
 
 export type NutrientsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<NutrientsFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   fact_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<NutrientsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<NutrientsFilter>>;
   quantity?: InputMaybe<StringFilter>;
 };
 
@@ -1049,11 +1096,17 @@ export type ProductsEdge = {
 };
 
 export type ProductsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<ProductsFilter>>;
   capacity?: InputMaybe<StringFilter>;
   created_at?: InputMaybe<DatetimeFilter>;
   flavor_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<ProductsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<ProductsFilter>>;
   price?: InputMaybe<StringFilter>;
 };
 
@@ -1187,12 +1240,18 @@ export type ProteinsEdge = {
 };
 
 export type ProteinsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<ProteinsFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   flavor_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
   maker_id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<ProteinsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<ProteinsFilter>>;
   review_id?: InputMaybe<BigIntFilter>;
   src?: InputMaybe<StringFilter>;
 };
@@ -1246,6 +1305,9 @@ export type Reviews = Node & {
   created_at?: Maybe<Scalars['Datetime']['output']>;
   description: Scalars['String']['output'];
   favorite?: Maybe<Scalars['String']['output']>;
+  flavor_id?: Maybe<Scalars['BigInt']['output']>;
+  flavors?: Maybe<Flavors>;
+  flavorsCollection?: Maybe<FlavorsConnection>;
   id: Scalars['BigInt']['output'];
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
@@ -1255,6 +1317,16 @@ export type Reviews = Node & {
   proteinsCollection?: Maybe<ProteinsConnection>;
   rate: Scalars['BigFloat']['output'];
   title: Scalars['String']['output'];
+};
+
+
+export type ReviewsFlavorsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FlavorsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FlavorsOrderBy>>;
 };
 
 
@@ -1288,12 +1360,19 @@ export type ReviewsEdge = {
 };
 
 export type ReviewsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<ReviewsFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
   favorite?: InputMaybe<StringFilter>;
+  flavor_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<ReviewsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<ReviewsFilter>>;
   protein_id?: InputMaybe<BigIntFilter>;
   rate?: InputMaybe<BigFloatFilter>;
   title?: InputMaybe<StringFilter>;
@@ -1303,6 +1382,7 @@ export type ReviewsInsertInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   favorite?: InputMaybe<Scalars['String']['input']>;
+  flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   protein_id?: InputMaybe<Scalars['BigInt']['input']>;
   rate?: InputMaybe<Scalars['BigFloat']['input']>;
@@ -1321,6 +1401,7 @@ export type ReviewsOrderBy = {
   created_at?: InputMaybe<OrderByDirection>;
   description?: InputMaybe<OrderByDirection>;
   favorite?: InputMaybe<OrderByDirection>;
+  flavor_id?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
   protein_id?: InputMaybe<OrderByDirection>;
@@ -1332,6 +1413,7 @@ export type ReviewsUpdateInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   favorite?: InputMaybe<Scalars['String']['input']>;
+  flavor_id?: InputMaybe<Scalars['BigInt']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   protein_id?: InputMaybe<Scalars['BigInt']['input']>;
   rate?: InputMaybe<Scalars['BigFloat']['input']>;
@@ -1393,11 +1475,17 @@ export type SellersEdge = {
 
 export type SellersFilter = {
   amazon?: InputMaybe<StringFilter>;
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<SellersFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   flavor_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<SellersFilter>;
   official?: InputMaybe<StringFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<SellersFilter>>;
   rakuten?: InputMaybe<StringFilter>;
   yahoo?: InputMaybe<StringFilter>;
 };
@@ -1451,7 +1539,7 @@ export type InsertIntoReviewsCollectionMutationVariables = Exact<{
 }>;
 
 
-export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string, protein_id: any }> } | null };
+export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string, protein_id: any, flavor_id?: any | null }> } | null };
 
 export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1484,7 +1572,7 @@ export type ReviewsCollectionQueryVariables = Exact<{
 }>;
 
 
-export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, rate: any, description: string, protein_id: any } }> } | null };
+export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, rate: any, description: string, protein_id: any, flavor_id?: any | null } }> } | null };
 
 
 export const InsertIntoReviewsCollectionDocument = gql`
@@ -1498,6 +1586,7 @@ export const InsertIntoReviewsCollectionDocument = gql`
       rate
       title
       protein_id
+      flavor_id
     }
   }
 }
@@ -1781,6 +1870,7 @@ export const ReviewsCollectionDocument = gql`
         rate
         description
         protein_id
+        flavor_id
       }
     }
   }
