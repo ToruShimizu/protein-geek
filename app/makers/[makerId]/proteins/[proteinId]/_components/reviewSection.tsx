@@ -12,10 +12,8 @@ export default function ReviewSection({ protein, reviews }: Props) {
   return (
     <section className="grid gap-8">
       <div>
-        <h2
-          className={`text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-4 ${notoSansJp.className}`}
-        >
-          {protein.name}のレビュー
+        <h2 className={`text-xl lg:text-3xl font-bold mb-2 md:mb-4 ${notoSansJp.className}`}>
+          レビュー
         </h2>
         <hr className="border-1" />
       </div>

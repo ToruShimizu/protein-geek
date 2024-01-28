@@ -10,7 +10,7 @@ type Props = {
 
 export default function SelectOption({ flavors, onChange }: Props) {
   return (
-    <div>
+    <div className="grid gap-2">
       <label htmlFor="flavors" className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>
         フレーバー
       </label>

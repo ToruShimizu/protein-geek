@@ -82,7 +82,7 @@ export default function ProteinSection({ protein }: Props) {
         <FeatureList features={protein.features} />
         <hr className="border-1" />
         <SelectOption flavors={protein.flavors} onChange={onChange} />
-        <div>
+        <div className="grid gap-2">
           <h3 className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>サイズ</h3>
           <ProductList products={flavor.products} selectedProduct={product} onClick={onClick} />
         </div>
