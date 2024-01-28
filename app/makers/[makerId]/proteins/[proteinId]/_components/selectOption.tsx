@@ -19,7 +19,7 @@ export default function SelectOption({
   label,
 }: Props) {
   return (
-    <div>
+    <div className="grid gap-2">
       <label htmlFor="flavors" className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>
         {label}
       </label>

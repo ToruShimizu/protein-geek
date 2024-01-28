@@ -6,6 +6,6 @@ type Props = {
 
 export default function PageTitle({ children }: Props) {
   return (
-    <h2 className={`text-2xl md:text-3xl font-bold pb-6 ${montSerrat.className}`}>{children}</h2>
+    <h2 className={`text-xl lg:text-3xl font-bold pb-6 ${montSerrat.className}`}>{children}</h2>
   )
 }
