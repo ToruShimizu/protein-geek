@@ -1,9 +1,9 @@
-import { Montserrat, Noto_Sans_JP, Varela_Round, Reggae_One } from "next/font/google"
+import { Montserrat, Noto_Sans_JP, Varela_Round, Mochiy_Pop_One } from "next/font/google"
 
 /**
  * サイト名
  */
-export const reggaeOne = Reggae_One({ weight: "400", subsets: ["latin"], display: "swap" })
+export const mochiyPopOne = Mochiy_Pop_One({ weight: "400", subsets: ["latin"], display: "swap" })
 
 /**
  * 主に英語表記で使うが、数字を太字で表現したい場合は数字でも使う
