@@ -94,11 +94,12 @@ query ProteinById($id: BigInt!) {
             node {
               id
               name
-              title
               favorite
               rate
               description
               protein_id
+              flavor_id
+              tag_ids
             }
           }
         }
@@ -135,11 +136,23 @@ query ReviewsCollection($id: BigInt!) {
       node {
         id
         name
-        title
         rate
         description
         protein_id
         flavor_id
+        tag_ids
+      }
+    }
+  }
+}
+
+# プロテインに紐づくレビューを取得
+query TagsCollection {
+  tagsCollection {
+    edges {
+      node {
+        id
+        label
       }
     }
   }
