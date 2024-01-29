@@ -7,7 +7,7 @@ import "@/app/_styles/globals.css"
 import { ApolloWrapper } from "api/apollo/apollo-wrapper"
 
 export const metadata = {
-  title: "プロテインザスター",
+  title: "Share Protein",
   description:
     "プロテインを徹底的に評価するレビューサイト。様々なブランドや味のプロテインを紹介しており、プロテイン選びの参考になる情報が満載です",
 }

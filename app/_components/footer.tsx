@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { reggaeOne, montSerrat } from "@/app/_styles/fonts"
+import { mochiyPopOne, montSerrat } from "@/app/_styles/fonts"
 
 export default function Footer() {
   return (
@@ -8,8 +8,8 @@ export default function Footer() {
         className={`block text-xs md:text-sm text-gray-500 text-center ${montSerrat.className} `}
       >
         © 2023&nbsp;
-        <Link href="/" className={`hover:underline ${reggaeOne.className}`}>
-          プロテインザスター
+        <Link href="/" className={`hover:underline ${mochiyPopOne.className}`}>
+          リアルプロテイン
         </Link>
         . All Rights Reserved.
       </span>
