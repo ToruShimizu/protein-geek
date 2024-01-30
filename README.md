@@ -1,6 +1,6 @@
-<h1 align="center">[WIP] Welcome to リアルプロテイン 👋</h1>
+<h1 align="center">[WIP] Welcome to Protein Geek 👋</h1>
 
-リアルプロテインは様々なプロテイン製品に関する情報やユーザーのレビューを共有するプラットフォームです。
+Protein Geekは様々なプロテイン製品に関する情報やユーザーのレビューを共有するプラットフォームです。
 ユーザーはプロテイン製品に関する評価やコメントを投稿し、他のユーザーと情報を共有できます。
 
 https://protein-the-star.vercel.app/
