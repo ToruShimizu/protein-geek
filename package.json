@@ -25,7 +25,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
     "tw-elements": "^1.1.0",
-    "zod": "^3.22.2"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",
