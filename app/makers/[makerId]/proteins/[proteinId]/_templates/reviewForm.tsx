@@ -13,6 +13,7 @@ import { reviewsAtom } from "stores/proteinAtom"
 import styles from "@/app/_styles/animation.module.css"
 import { Protein } from "types/responses"
 import SelectOption from "../_components/selectOption"
+import { TAGS } from "_constants/reviews"
 
 type Props = {
   protein: Protein
@@ -28,6 +29,8 @@ export default function ReviewForm({ protein }: Props) {
     clearErrors,
     setValue,
     reset,
+    getValues,
+    watch,
   } = useForm<ReviewFormSchemaType>({
     resolver: zodResolver(reviewFormSchema),
   })
@@ -51,11 +54,32 @@ export default function ReviewForm({ protein }: Props) {
     },
     [setValue],
   )
+  const tagIds = watch("tag_ids") ?? []
+
+  const selectTag = useCallback(
+    (id: string) => {
+      if (tagIds.includes(id)) {
+        setValue(
+          "tag_ids",
+          tagIds.filter((tagId) => tagId !== id),
+        )
+        return
+      }
+
+      setValue("tag_ids", [...tagIds, id])
+    },
+    [setValue, getValues, tagIds],
+  )
 
   const onSubmit = async (input: Omit<ReviewsInsertInput, "protein_id" | "create_at">) => {
     try {
       const review = await clientReviewRepo.create(
-        { ...input, protein_id: protein.id, rate: String(input.rate) },
+        {
+          ...input,
+          protein_id: protein.id,
+          rate: String(input.rate),
+          tag_ids: input.tag_ids ?? [],
+        },
         insertIntoReviewsCollectionMutation,
       )
       setReviews([review, ...reviews])
@@ -72,6 +96,7 @@ export default function ReviewForm({ protein }: Props) {
         <div className="grid gap-1">
           <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 ">
             ニックネーム
+            <span className="ml-1 text-red-500">*</span>
           </label>
           <input
             id="name"
@@ -85,21 +110,28 @@ export default function ReviewForm({ protein }: Props) {
             <p className="text-red-500 text-sm font-medium">{errors.name?.message}</p>
           )}
         </div>
-        <div className="grid gap-1">
-          <label htmlFor="title" className="block text-sm font-bold text-gray-900 ">
-            タイトル
-          </label>
-          <input
-            id="title"
-            type="text"
-            className={`border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
-              errors.title?.message && "bg-red-50 border border-red-500 text-red-500"
-            }`}
-            {...register("title")}
-          />
-          {errors.title?.message && (
-            <p className="text-red-500 text-sm font-medium">{errors.title?.message}</p>
-          )}
+
+        <div className="grid gap-2 mb-4">
+          <p className="text-sm font-bold text-gray-900">タグ</p>
+          {TAGS.map((tag) => (
+            <div key={tag.id} className="flex items-center ">
+              <div onClick={() => selectTag(tag.id)}>
+                <input
+                  id="default-checkbox g-2"
+                  type="checkbox"
+                  value={tag.id}
+                  className="w-4 h-4 rounded"
+                  checked={tagIds.includes(tag.id)}
+                />
+                <label
+                  htmlFor="default-checkbox"
+                  className="ms-2 text-sm font-medium text-gray-90 hover:opacity-75 cursor-pointer"
+                >
+                  {tag.label}
+                </label>
+              </div>
+            </div>
+          ))}
         </div>
         <SelectOption
           flavors={protein.flavors}
@@ -112,6 +144,7 @@ export default function ReviewForm({ protein }: Props) {
         <div>
           <label htmlFor="rate" className="block mb-2 text-sm font-bold text-gray-900 ">
             評価
+            <span className="ml-1 text-red-500">*</span>
           </label>
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (
@@ -154,9 +187,10 @@ export default function ReviewForm({ protein }: Props) {
         </div>
         <div className="grid gap-1">
           <label htmlFor="description" className="block text-sm font-bold text-gray-900 ">
-            レビューの内容
+            コメント
+            <span className="ml-1 text-red-500">*</span>
           </label>
-          <input
+          <textarea
             id="description"
             className={`border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
               errors.description?.message && "bg-red-50 border border-red-500 text-red-500"

@@ -135,6 +135,8 @@ export type Mutation = {
   deleteFromreviewsCollection: ReviewsDeleteResponse;
   /** Deletes zero or more records from the `sellers` collection */
   deleteFromsellersCollection: SellersDeleteResponse;
+  /** Deletes zero or more records from the `tags` collection */
+  deleteFromtagsCollection: TagsDeleteResponse;
   /** Adds one or more `facts` records to the collection */
   insertIntofactsCollection?: Maybe<FactsInsertResponse>;
   /** Adds one or more `features` records to the collection */
@@ -153,6 +155,8 @@ export type Mutation = {
   insertIntoreviewsCollection?: Maybe<ReviewsInsertResponse>;
   /** Adds one or more `sellers` records to the collection */
   insertIntosellersCollection?: Maybe<SellersInsertResponse>;
+  /** Adds one or more `tags` records to the collection */
+  insertIntotagsCollection?: Maybe<TagsInsertResponse>;
   /** Updates zero or more records in the `facts` collection */
   updatefactsCollection: FactsUpdateResponse;
   /** Updates zero or more records in the `features` collection */
@@ -171,6 +175,8 @@ export type Mutation = {
   updatereviewsCollection: ReviewsUpdateResponse;
   /** Updates zero or more records in the `sellers` collection */
   updatesellersCollection: SellersUpdateResponse;
+  /** Updates zero or more records in the `tags` collection */
+  updatetagsCollection: TagsUpdateResponse;
 };
 
 
@@ -238,6 +244,13 @@ export type MutationDeleteFromsellersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationDeleteFromtagsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<TagsFilter>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntofactsCollectionArgs = {
   objects: Array<FactsInsertInput>;
 };
@@ -288,6 +301,12 @@ export type MutationInsertIntoreviewsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntosellersCollectionArgs = {
   objects: Array<SellersInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntotagsCollectionArgs = {
+  objects: Array<TagsInsertInput>;
 };
 
 
@@ -362,6 +381,14 @@ export type MutationUpdatesellersCollectionArgs = {
   set: SellersUpdateInput;
 };
 
+
+/** The root type for creating and mutating data */
+export type MutationUpdatetagsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<TagsFilter>;
+  set: TagsUpdateInput;
+};
+
 export type Node = {
   /** Retrieves a record by `ID` */
   nodeId: Scalars['ID']['output'];
@@ -416,6 +443,8 @@ export type Query = {
   reviewsCollection?: Maybe<ReviewsConnection>;
   /** A pagable collection of type `sellers` */
   sellersCollection?: Maybe<SellersConnection>;
+  /** A pagable collection of type `tags` */
+  tagsCollection?: Maybe<TagsConnection>;
 };
 
 
@@ -521,6 +550,17 @@ export type QuerySellersCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<SellersOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryTagsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<TagsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<TagsOrderBy>>;
 };
 
 /** Boolean expression comparing fields on type "String" */
@@ -1316,7 +1356,7 @@ export type Reviews = Node & {
   proteins: Proteins;
   proteinsCollection?: Maybe<ProteinsConnection>;
   rate: Scalars['BigFloat']['output'];
-  title: Scalars['String']['output'];
+  tag_ids: Array<Maybe<Scalars['BigFloat']['output']>>;
 };
 
 
@@ -1375,7 +1415,6 @@ export type ReviewsFilter = {
   or?: InputMaybe<Array<ReviewsFilter>>;
   protein_id?: InputMaybe<BigIntFilter>;
   rate?: InputMaybe<BigFloatFilter>;
-  title?: InputMaybe<StringFilter>;
 };
 
 export type ReviewsInsertInput = {
@@ -1386,7 +1425,7 @@ export type ReviewsInsertInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   protein_id?: InputMaybe<Scalars['BigInt']['input']>;
   rate?: InputMaybe<Scalars['BigFloat']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  tag_ids?: InputMaybe<Array<InputMaybe<Scalars['BigFloat']['input']>>>;
 };
 
 export type ReviewsInsertResponse = {
@@ -1406,7 +1445,6 @@ export type ReviewsOrderBy = {
   name?: InputMaybe<OrderByDirection>;
   protein_id?: InputMaybe<OrderByDirection>;
   rate?: InputMaybe<OrderByDirection>;
-  title?: InputMaybe<OrderByDirection>;
 };
 
 export type ReviewsUpdateInput = {
@@ -1417,7 +1455,7 @@ export type ReviewsUpdateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   protein_id?: InputMaybe<Scalars['BigInt']['input']>;
   rate?: InputMaybe<Scalars['BigFloat']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  tag_ids?: InputMaybe<Array<InputMaybe<Scalars['BigFloat']['input']>>>;
 };
 
 export type ReviewsUpdateResponse = {
@@ -1534,12 +1572,86 @@ export type SellersUpdateResponse = {
   records: Array<Sellers>;
 };
 
+export type Tags = Node & {
+  __typename?: 'tags';
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['BigInt']['output'];
+  label: Scalars['String']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+};
+
+export type TagsConnection = {
+  __typename?: 'tagsConnection';
+  edges: Array<TagsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type TagsDeleteResponse = {
+  __typename?: 'tagsDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Tags>;
+};
+
+export type TagsEdge = {
+  __typename?: 'tagsEdge';
+  cursor: Scalars['String']['output'];
+  node: Tags;
+};
+
+export type TagsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<TagsFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  label?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<TagsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<TagsFilter>>;
+};
+
+export type TagsInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TagsInsertResponse = {
+  __typename?: 'tagsInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Tags>;
+};
+
+export type TagsOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  label?: InputMaybe<OrderByDirection>;
+};
+
+export type TagsUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TagsUpdateResponse = {
+  __typename?: 'tagsUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Tags>;
+};
+
 export type InsertIntoReviewsCollectionMutationVariables = Exact<{
   objects: Array<ReviewsInsertInput> | ReviewsInsertInput;
 }>;
 
 
-export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, title: string, protein_id: any, flavor_id?: any | null }> } | null };
+export type InsertIntoReviewsCollectionMutation = { __typename?: 'Mutation', insertIntoreviewsCollection?: { __typename?: 'reviewsInsertResponse', affectedCount: number, records: Array<{ __typename?: 'reviews', description: string, id: any, name: string, rate: any, tag_ids: Array<any | null>, protein_id: any, flavor_id?: any | null }> } | null };
 
 export type MakersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1558,7 +1670,7 @@ export type ProteinByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id: any } }> } | null } }> } | null, reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, favorite?: string | null, rate: any, description: string, protein_id: any } }> } | null } }> } | null };
+export type ProteinByIdQuery = { __typename?: 'Query', proteinsCollection?: { __typename?: 'proteinsConnection', edges: Array<{ __typename?: 'proteinsEdge', node: { __typename?: 'proteins', id: any, name: string, src: string, featuresCollection?: { __typename?: 'featuresConnection', edges: Array<{ __typename?: 'featuresEdge', node: { __typename?: 'features', id: any, description: string } }> } | null, flavorsCollection?: { __typename?: 'flavorsConnection', edges: Array<{ __typename?: 'flavorsEdge', node: { __typename?: 'flavors', id: any, name: string, src: string, sellersCollection?: { __typename?: 'sellersConnection', edges: Array<{ __typename?: 'sellersEdge', node: { __typename?: 'sellers', id: any, amazon?: string | null, rakuten?: string | null, yahoo?: string | null, official: string, flavor_id?: any | null } }> } | null, productsCollection?: { __typename?: 'productsConnection', edges: Array<{ __typename?: 'productsEdge', node: { __typename?: 'products', id: any, capacity: string, price: string, flavor_id: any } }> } | null } }> } | null, reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, favorite?: string | null, rate: any, description: string, protein_id: any, flavor_id?: any | null, tag_ids: Array<any | null> } }> } | null } }> } | null };
 
 export type FactsByProteinIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
@@ -1572,7 +1684,12 @@ export type ReviewsCollectionQueryVariables = Exact<{
 }>;
 
 
-export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, title: string, rate: any, description: string, protein_id: any, flavor_id?: any | null } }> } | null };
+export type ReviewsCollectionQuery = { __typename?: 'Query', reviewsCollection?: { __typename?: 'reviewsConnection', edges: Array<{ __typename?: 'reviewsEdge', node: { __typename?: 'reviews', id: any, name: string, rate: any, description: string, protein_id: any, flavor_id?: any | null, tag_ids: Array<any | null> } }> } | null };
+
+export type TagsCollectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TagsCollectionQuery = { __typename?: 'Query', tagsCollection?: { __typename?: 'tagsConnection', edges: Array<{ __typename?: 'tagsEdge', node: { __typename?: 'tags', id: any, label: string } }> } | null };
 
 
 export const InsertIntoReviewsCollectionDocument = gql`
@@ -1584,7 +1701,7 @@ export const InsertIntoReviewsCollectionDocument = gql`
       id
       name
       rate
-      title
+      tag_ids
       protein_id
       flavor_id
     }
@@ -1768,11 +1885,12 @@ export const ProteinByIdDocument = gql`
             node {
               id
               name
-              title
               favorite
               rate
               description
               protein_id
+              flavor_id
+              tag_ids
             }
           }
         }
@@ -1866,11 +1984,11 @@ export const ReviewsCollectionDocument = gql`
       node {
         id
         name
-        title
         rate
         description
         protein_id
         flavor_id
+        tag_ids
       }
     }
   }
@@ -1904,3 +2022,42 @@ export function useReviewsCollectionLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type ReviewsCollectionQueryHookResult = ReturnType<typeof useReviewsCollectionQuery>;
 export type ReviewsCollectionLazyQueryHookResult = ReturnType<typeof useReviewsCollectionLazyQuery>;
 export type ReviewsCollectionQueryResult = Apollo.QueryResult<ReviewsCollectionQuery, ReviewsCollectionQueryVariables>;
+export const TagsCollectionDocument = gql`
+    query TagsCollection {
+  tagsCollection {
+    edges {
+      node {
+        id
+        label
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTagsCollectionQuery__
+ *
+ * To run a query within a React component, call `useTagsCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTagsCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTagsCollectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTagsCollectionQuery(baseOptions?: Apollo.QueryHookOptions<TagsCollectionQuery, TagsCollectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TagsCollectionQuery, TagsCollectionQueryVariables>(TagsCollectionDocument, options);
+      }
+export function useTagsCollectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TagsCollectionQuery, TagsCollectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TagsCollectionQuery, TagsCollectionQueryVariables>(TagsCollectionDocument, options);
+        }
+export type TagsCollectionQueryHookResult = ReturnType<typeof useTagsCollectionQuery>;
+export type TagsCollectionLazyQueryHookResult = ReturnType<typeof useTagsCollectionLazyQuery>;
+export type TagsCollectionQueryResult = Apollo.QueryResult<TagsCollectionQuery, TagsCollectionQueryVariables>;
