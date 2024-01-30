@@ -96,6 +96,7 @@ export default function ReviewForm({ protein }: Props) {
         <div className="grid gap-1">
           <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 ">
             ニックネーム
+            <span className="ml-1 text-red-500">*</span>
           </label>
           <input
             id="name"
@@ -111,18 +112,24 @@ export default function ReviewForm({ protein }: Props) {
         </div>
 
         <div className="grid gap-2 mb-4">
-          <p className="text-sm font-bold text-gray-900 ">タグ</p>
+          <p className="text-sm font-bold text-gray-900">タグ</p>
           {TAGS.map((tag) => (
-            <div key={tag.id} className="flex items-center" onClick={() => selectTag(tag.id)}>
-              <input
-                id="default-checkbox g-2"
-                type="checkbox"
-                value={tag.id}
-                className="w-4 h-4 rounded"
-              />
-              <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-90">
-                {tag.label}
-              </label>
+            <div key={tag.id} className="flex items-center ">
+              <div onClick={() => selectTag(tag.id)}>
+                <input
+                  id="default-checkbox g-2"
+                  type="checkbox"
+                  value={tag.id}
+                  className="w-4 h-4 rounded"
+                  checked={tagIds.includes(tag.id)}
+                />
+                <label
+                  htmlFor="default-checkbox"
+                  className="ms-2 text-sm font-medium text-gray-90 hover:opacity-75 cursor-pointer"
+                >
+                  {tag.label}
+                </label>
+              </div>
             </div>
           ))}
         </div>
@@ -137,6 +144,7 @@ export default function ReviewForm({ protein }: Props) {
         <div>
           <label htmlFor="rate" className="block mb-2 text-sm font-bold text-gray-900 ">
             評価
+            <span className="ml-1 text-red-500">*</span>
           </label>
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (
@@ -179,9 +187,10 @@ export default function ReviewForm({ protein }: Props) {
         </div>
         <div className="grid gap-1">
           <label htmlFor="description" className="block text-sm font-bold text-gray-900 ">
-            レビューの内容
+            コメント
+            <span className="ml-1 text-red-500">*</span>
           </label>
-          <input
+          <textarea
             id="description"
             className={`border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ${
               errors.description?.message && "bg-red-50 border border-red-500 text-red-500"
