@@ -13,33 +13,11 @@ import { reviewsAtom } from "stores/proteinAtom"
 import styles from "@/app/_styles/animation.module.css"
 import { Protein } from "types/responses"
 import SelectOption from "../_components/selectOption"
+import { TAGS } from "_constants/reviews"
 
 type Props = {
   protein: Protein
 }
-
-const TAGS = [
-  {
-    id: "1",
-    label: "甘い",
-  },
-  {
-    id: "2",
-    label: "飲みやすい",
-  },
-  {
-    id: "3",
-    label: "溶けやすい",
-  },
-  {
-    id: "4",
-    label: "溶けにくい",
-  },
-  {
-    id: "5",
-    label: "お気に入り",
-  },
-]
 
 export default function ReviewForm({ protein }: Props) {
   const [reviews, setReviews] = useAtom(reviewsAtom)
