@@ -42,6 +42,7 @@ export default function ReviewForm({ protein }: Props) {
 
   const onSubmit = async (input: Omit<ReviewsInsertInput, "protein_id" | "create_at">) => {
     try {
+      setIsLoading(true)
       const review = await clientReviewRepo.create(
         { ...input, protein_id: protein.id, rate: String(input.rate) },
         insertIntoReviewsCollectionMutation,
@@ -51,6 +52,8 @@ export default function ReviewForm({ protein }: Props) {
       setRate(0)
     } catch (e) {
       console.log(e)
+    } finally {
+      setIsLoading(false)
     }
   }
 
