@@ -4,6 +4,7 @@ import { makerRepo } from "repos/makers"
 import { proteinRepo } from "repos/proteins"
 import { reviewRepo } from "repos/reviews"
 import dynamic from "next/dynamic"
+import { factRepo } from "repos/facts"
 
 export const revalidate = 0
 const ProteinContainer = dynamic(() => import("./_components/proteinContainer"), {
@@ -11,12 +12,12 @@ const ProteinContainer = dynamic(() => import("./_components/proteinContainer"),
 })
 
 export default async function Page({ params }: { params: { makerId: string; proteinId: string } }) {
-  const [{ protein }, { maker }] = await Promise.all([
+  const [{ protein }, { maker }, reviews, { fact }] = await Promise.all([
     proteinRepo.fetchById(Number(params.proteinId)),
     makerRepo.fetchById(Number(params.makerId)),
+    reviewRepo.fetchByProteinId(Number(params.proteinId)),
+    factRepo.fetchByProteinId(Number(params.proteinId)),
   ])
-
-  const reviews = await reviewRepo.fetchByProteinId(Number(params.proteinId))
 
   return (
     <MainContainer
@@ -27,7 +28,7 @@ export default async function Page({ params }: { params: { makerId: string; prot
         { name: protein.name },
       ]}
     >
-      <ProteinContainer protein={protein} reviews={reviews} />
+      <ProteinContainer protein={protein} reviews={reviews} fact={fact} />
     </MainContainer>
   )
 }

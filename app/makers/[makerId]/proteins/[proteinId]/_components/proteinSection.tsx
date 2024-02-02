@@ -10,7 +10,7 @@ import { staticUrl } from "_constants/urls"
 import { createStaticUrl, convertKey, calculateRateAverage } from "modules/utils"
 import { useMemo, useCallback, useEffect, Fragment } from "react"
 import { flavorAtom, productAtom } from "stores/proteinAtom"
-import { Protein, ShopKey, Product } from "types/responses"
+import { Protein, ShopKey, Product, Fact } from "types/responses"
 import FactContainer from "../_templates/factContainer"
 import FeatureList from "./featureList"
 import ProductList from "./productList"
@@ -18,10 +18,11 @@ import SelectOption from "./selectOption"
 
 type Props = {
   protein: Protein
+  fact: Fact
 }
 const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as ShopKey[]
 
-export default function ProteinSection({ protein }: Props) {
+export default function ProteinSection({ protein, fact }: Props) {
   const [flavor, setFlavor] = useAtom(flavorAtom)
   const [product, setProduct] = useAtom(productAtom)
 
@@ -92,7 +93,7 @@ export default function ProteinSection({ protein }: Props) {
         </div>
         <p className={`mb-3 font-bold text-lg lg:text-2xl ${montSerrat.className}`}>¥ {price}</p>
       </div>
-      <FactContainer proteinId={protein.id} />
+      {fact && <FactContainer fact={fact} />}
 
       <div>
         <ul className="grid gap-6">

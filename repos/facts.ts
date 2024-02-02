@@ -1,21 +1,23 @@
-import { useQuery } from "@apollo/client"
+import { getClient } from "api/apollo/client"
 import {
   FactsByProteinIdDocument,
   FactsByProteinIdQuery,
   FactsByProteinIdQueryVariables,
 } from "api/graphql/generated/graphql"
+const client = getClient()
 
-export const clientFactRepo = {
+export const factRepo = {
   /**
    * プロテインに紐づく概要や栄養素などの情報を取得する
    */
-  fetchByProteinId: (id: number) => {
-    const { data, error } = useQuery<FactsByProteinIdQuery, FactsByProteinIdQueryVariables>(
-      FactsByProteinIdDocument,
-      {
-        variables: { id },
-      },
-    )
+  fetchByProteinId: async (id: number) => {
+    const { data, error } = await client.query<
+      FactsByProteinIdQuery,
+      FactsByProteinIdQueryVariables
+    >({
+      query: FactsByProteinIdDocument,
+      variables: { id },
+    })
 
     if (error) throw error
     const fact = data?.factsCollection?.edges?.[0]?.node
