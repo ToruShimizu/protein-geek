@@ -3,9 +3,12 @@ import MainContainer from "@/app/_components/mainContainer"
 import { makerRepo } from "repos/makers"
 import { proteinRepo } from "repos/proteins"
 import { reviewRepo } from "repos/reviews"
-import ProteinContainer from "./_components/proteinContainer"
+import dynamic from "next/dynamic"
 
 export const revalidate = 0
+const ProteinContainer = dynamic(() => import("./_components/proteinContainer"), {
+  ssr: false,
+})
 
 export default async function Page({ params }: { params: { makerId: string; proteinId: string } }) {
   const [{ protein }, { maker }] = await Promise.all([
