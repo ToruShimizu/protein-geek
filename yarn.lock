@@ -5439,7 +5439,7 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
-tw-elements-react@^1.0.0:
+tw-elements-react@^1.0.0-alpha2:
   version "1.0.0-alpha2"
   resolved "https://registry.yarnpkg.com/tw-elements-react/-/tw-elements-react-1.0.0-alpha2.tgz#be66a45684488c850ba0c336b73caccfd1c95dc1"
   integrity sha512-RPsc4HQXTEujQsqusl5uCBjTC+4JmYUq9FTz/tYSSGrRl1SfoPo2vxy+YLa/II/6J8cQB+iuraNK3SisJBmGmQ==
