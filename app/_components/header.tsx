@@ -6,7 +6,9 @@ export default function Header() {
     <div>
       <header className="p-4 md:p-6">
         <h1 className={`flex font-extrabold text-xl md:text-3xl ${concertOne.className}`}>
-          <Link href="/">Protein Geek</Link>
+          <Link href="/" aria-label="メーカー一覧へ">
+            Protein Geek
+          </Link>
         </h1>
       </header>
       <hr className="border-1" />

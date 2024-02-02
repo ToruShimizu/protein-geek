@@ -17,20 +17,19 @@ export default function MakerList({ makers }: Props) {
     <UnorderedList>
       {makers.map(({ id, src, name }) => (
         <List key={id}>
-          <Link href={`/makers/${id}`}>
+          <Link href={`/makers/${id}`} aria-label={`${name}のプロテイン一覧へ`}>
             <div className="grid gap-2 group">
               {src && (
                 <div className="relative">
                   <Image
-                    width={0}
-                    height={0}
-                    sizes="100vw"
                     src={createStaticUrl({
                       baseUrl: staticUrl,
                       src,
                     })}
                     alt={name}
-                    style={{ width: "100%", height: "100%" }}
+                    width={500}
+                    height={500}
+                    priority
                   />
                   <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
                 </div>

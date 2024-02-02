@@ -10,7 +10,7 @@ import { staticUrl } from "_constants/urls"
 import { createStaticUrl, convertKey, calculateRateAverage } from "modules/utils"
 import { useMemo, useCallback, useEffect, Fragment } from "react"
 import { flavorAtom, productAtom } from "stores/proteinAtom"
-import { Protein, ShopKey, Product } from "types/responses"
+import { Protein, ShopKey, Product, Fact } from "types/responses"
 import FactContainer from "../_templates/factContainer"
 import FeatureList from "./featureList"
 import ProductList from "./productList"
@@ -18,10 +18,11 @@ import SelectOption from "./selectOption"
 
 type Props = {
   protein: Protein
+  fact: Fact
 }
 const SHOP_KEYS = ["amazon", "yahoo", "rakuten", "official"] as ShopKey[]
 
-export default function ProteinSection({ protein }: Props) {
+export default function ProteinSection({ protein, fact }: Props) {
   const [flavor, setFlavor] = useAtom(flavorAtom)
   const [product, setProduct] = useAtom(productAtom)
 
@@ -61,15 +62,14 @@ export default function ProteinSection({ protein }: Props) {
     <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
       <div>
         <Image
-          width={0}
-          height={0}
-          sizes="100vw"
           src={createStaticUrl({
             baseUrl: staticUrl,
             src: protein.src,
           })}
           alt={protein.name}
-          style={{ width: "100%", height: "100%" }}
+          priority
+          width={500}
+          height={500}
         />
       </div>
       <div className="grid gap-2">
@@ -93,7 +93,7 @@ export default function ProteinSection({ protein }: Props) {
         </div>
         <p className={`mb-3 font-bold text-lg lg:text-2xl ${montSerrat.className}`}>¥ {price}</p>
       </div>
-      <FactContainer proteinId={protein.id} />
+      {fact && <FactContainer fact={fact} />}
 
       <div>
         <ul className="grid gap-6">
@@ -103,7 +103,9 @@ export default function ProteinSection({ protein }: Props) {
               <Fragment key={key}>
                 {url && (
                   <li key={key}>
-                    <LinkButton href={url}>{convertKey(key)}</LinkButton>
+                    <LinkButton href={url} aria-label={`${convertKey(key)}の商品ページへ`}>
+                      {convertKey(key)}
+                    </LinkButton>
                   </li>
                 )}
               </Fragment>

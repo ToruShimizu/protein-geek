@@ -20,11 +20,14 @@ export default function SelectOption({
 }: Props) {
   return (
     <div className="grid gap-2">
-      <label htmlFor="flavors" className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>
+      <label
+        htmlFor={`flavor-${label}`}
+        className={`font-bold text-sm md:text-base ${notoSansJp.className}`}
+      >
         {label}
       </label>
       <select
-        id="flavors"
+        id={`flavor-${label}`}
         className={`border border-gray-300 focus:border-gray-300 focus:outline-none rounded-lg block w-full p-2 text-sm md:text-base  ${notoSansJp.className}`}
         defaultValue={defaultValue}
         onChange={(e) => onChange(e.target.value)}

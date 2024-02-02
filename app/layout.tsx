@@ -1,6 +1,5 @@
 import Header from "@/app/_components/header"
 import Footer from "@/app/_components/footer"
-import "tw-elements/dist/css/tw-elements.min.css"
 
 import "@/app/_styles/reset.css"
 import "@/app/_styles/globals.css"

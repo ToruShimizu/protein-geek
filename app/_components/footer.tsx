@@ -8,7 +8,11 @@ export default function Footer() {
         className={`block text-xs md:text-sm text-gray-500 text-center ${montSerrat.className} `}
       >
         © 2023&nbsp;
-        <Link href="/" className={`hover:underline ${concertOne.className}`}>
+        <Link
+          href="/"
+          className={`hover:underline ${concertOne.className}`}
+          aria-label="メーカー一覧へ"
+        >
           Protein Geek
         </Link>
         . All Rights Reserved.

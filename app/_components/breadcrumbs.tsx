@@ -39,7 +39,11 @@ export default function Breadcrumbs({ lists }: Props) {
             )}
 
             {href ? (
-              <Link href={href} className={`hover:underline hover:opacity-75 ${baseTextStyle}`}>
+              <Link
+                href={href}
+                className={`hover:underline hover:opacity-75 ${baseTextStyle}`}
+                aria-label="メーカー一覧へ"
+              >
                 {icon ?? name}
               </Link>
             ) : (
