@@ -3,7 +3,12 @@ import { Montserrat, Noto_Sans_JP, Varela_Round, Concert_One } from "next/font/g
 /**
  * サイト名
  */
-export const concertOne = Concert_One({ weight: "400", subsets: ["latin"], display: "swap" })
+export const concertOne = Concert_One({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+})
 
 /**
  * 主に英語表記で使うが、数字を太字で表現したい場合は数字でも使う
@@ -11,6 +16,7 @@ export const concertOne = Concert_One({ weight: "400", subsets: ["latin"], displ
 export const montSerrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 })
 
 /**
@@ -19,6 +25,7 @@ export const montSerrat = Montserrat({
 export const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 })
 
 /**
