@@ -27,7 +27,6 @@ export default function MakerList({ makers }: Props) {
                       src,
                     })}
                     alt={name}
-                    priority
                     width={500}
                     height={500}
                   />

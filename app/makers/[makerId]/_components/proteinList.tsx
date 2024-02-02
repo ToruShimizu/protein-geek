@@ -31,7 +31,6 @@ export default function ProteinList({ proteins }: Props) {
                       src,
                     })}
                     alt={name}
-                    priority
                     width={500}
                     height={500}
                   />
