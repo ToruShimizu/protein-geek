@@ -69,6 +69,7 @@ export default function ProteinSection({ protein }: Props) {
             src: protein.src,
           })}
           alt={protein.name}
+          loading="eager"
           style={{ width: "100%", height: "100%" }}
         />
       </div>
