@@ -29,6 +29,7 @@ export default function MakerList({ makers }: Props) {
                     alt={name}
                     width={500}
                     height={500}
+                    priority
                   />
                   <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
                 </div>
