@@ -120,14 +120,14 @@ export default function ReviewForm({ protein }: Props) {
             <div key={tag.id} className="flex items-center ">
               <div onClick={() => selectTag(tag.id)}>
                 <input
-                  id="default-checkbox g-2"
+                  id={`tag-${tag.id}`}
                   type="checkbox"
                   value={tag.id}
-                  className="w-4 h-4 rounded"
+                  className="default-checkbox g-2 w-4 h-4 rounded"
                   defaultChecked={tagIds.includes(tag.id)}
                 />
                 <label
-                  htmlFor="default-checkbox"
+                  htmlFor={`tag-${tag.id}`}
                   className="ms-2 text-sm font-medium text-gray-90 hover:opacity-75 cursor-pointer"
                 >
                   {tag.label}
@@ -161,7 +161,7 @@ export default function ReviewForm({ protein }: Props) {
                 onMouseEnter={() => setHoveredRate(index + 1)}
                 onMouseLeave={() => setHoveredRate(0)}
                 onClick={() => handleSetRate(index + 1)}
-                type="button"
+                aria-label="評価を選択する"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
