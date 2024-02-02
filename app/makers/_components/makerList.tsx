@@ -17,7 +17,7 @@ export default function MakerList({ makers }: Props) {
     <UnorderedList>
       {makers.map(({ id, src, name }) => (
         <List key={id}>
-          <Link href={`/makers/${id}`}>
+          <Link href={`/makers/${id}`} aria-label={`${name}のプロテイン一覧へ`}>
             <div className="grid gap-2 group">
               {src && (
                 <div className="relative">

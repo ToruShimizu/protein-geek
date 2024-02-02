@@ -104,7 +104,9 @@ export default function ProteinSection({ protein }: Props) {
               <Fragment key={key}>
                 {url && (
                   <li key={key}>
-                    <LinkButton href={url}>{convertKey(key)}</LinkButton>
+                    <LinkButton href={url} aria-label={`${convertKey(key)}の商品ページへ`}>
+                      {convertKey(key)}
+                    </LinkButton>
                   </li>
                 )}
               </Fragment>

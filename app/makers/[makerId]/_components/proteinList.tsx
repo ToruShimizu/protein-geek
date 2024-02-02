@@ -21,7 +21,7 @@ export default function ProteinList({ proteins }: Props) {
     <UnorderedList>
       {proteins.map(({ id, src, name, maker_id, reviews }) => (
         <List key={id}>
-          <Link href={`/makers/${maker_id}/proteins/${id}`}>
+          <Link href={`/makers/${maker_id}/proteins/${id}`} aria-label={`${name}の詳細ページへ`}>
             <div className="grid gap-2 group">
               {src && (
                 <div className="relative">
@@ -41,7 +41,7 @@ export default function ProteinList({ proteins }: Props) {
                 </div>
               )}
               <div className="grid gap-1">
-                <p className={`text-xs lg:text-sm font-bold text-gray-400 ${montSerrat.className}`}>
+                <p className={`text-xs lg:text-sm font-bold text-gray-700 ${montSerrat.className}`}>
                   {name}
                 </p>
                 {reviews.length > 0 && (

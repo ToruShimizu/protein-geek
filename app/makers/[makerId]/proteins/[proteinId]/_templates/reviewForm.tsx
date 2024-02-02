@@ -124,7 +124,7 @@ export default function ReviewForm({ protein }: Props) {
                   type="checkbox"
                   value={tag.id}
                   className="w-4 h-4 rounded"
-                  checked={tagIds.includes(tag.id)}
+                  defaultChecked={tagIds.includes(tag.id)}
                 />
                 <label
                   htmlFor="default-checkbox"
