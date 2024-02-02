@@ -12,6 +12,7 @@ export default function Footer() {
           href="/"
           className={`hover:underline ${concertOne.className}`}
           aria-label="メーカー一覧へ"
+          prefetch
         >
           Protein Geek
         </Link>

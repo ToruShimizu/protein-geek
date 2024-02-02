@@ -4,8 +4,6 @@ import PageTitle from "@/app/_components/pageTitle"
 import { makerRepo } from "repos/makers"
 import ProteinList from "./_components/proteinList"
 
-export const revalidate = 1
-
 export default async function Page({ params }: { params: { makerId: string } }) {
   const { maker, proteins } = await makerRepo.fetchById(Number(params.makerId))
 

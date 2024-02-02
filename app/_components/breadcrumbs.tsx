@@ -41,6 +41,7 @@ export default function Breadcrumbs({ lists }: Props) {
             {href ? (
               <Link
                 href={href}
+                prefetch
                 className={`hover:underline hover:opacity-75 ${baseTextStyle}`}
                 aria-label="メーカー一覧へ"
               >
