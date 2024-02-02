@@ -26,16 +26,14 @@ export default function ProteinList({ proteins }: Props) {
               {src && (
                 <div className="relative">
                   <Image
-                    width={0}
-                    height={0}
-                    sizes="100vw"
                     src={createStaticUrl({
                       baseUrl: staticUrl,
                       src,
                     })}
                     alt={name}
                     priority
-                    style={{ width: "100%", height: "100%" }}
+                    width={500}
+                    height={500}
                   />
                   <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
                 </div>

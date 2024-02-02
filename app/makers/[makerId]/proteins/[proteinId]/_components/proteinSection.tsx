@@ -61,16 +61,14 @@ export default function ProteinSection({ protein }: Props) {
     <section className="grid md:grid-cols-2 gap-x-16 gap-y-8">
       <div>
         <Image
-          width={0}
-          height={0}
-          sizes="100vw"
           src={createStaticUrl({
             baseUrl: staticUrl,
             src: protein.src,
           })}
           alt={protein.name}
           priority
-          style={{ width: "100%", height: "100%" }}
+          width={500}
+          height={500}
         />
       </div>
       <div className="grid gap-2">
