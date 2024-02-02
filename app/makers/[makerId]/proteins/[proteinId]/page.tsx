@@ -6,7 +6,6 @@ import { reviewRepo } from "repos/reviews"
 import dynamic from "next/dynamic"
 import { factRepo } from "repos/facts"
 
-export const revalidate = 0
 const ProteinContainer = dynamic(() => import("./_components/proteinContainer"), {
   ssr: false,
 })
