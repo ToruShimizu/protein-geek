@@ -162,12 +162,13 @@ export default function ReviewForm({ protein }: Props) {
                 onMouseLeave={() => setHoveredRate(0)}
                 onClick={() => handleSetRate(index + 1)}
                 aria-label="評価を選択する"
+                type="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill={index + 1 <= rate || index + 1 <= hoveredRate ? "currentColor" : "#D1D5DB"}
-                  className="mr-1 h-5 w-5 text-yellow-300"
+                  className="mr-1 h-8 w-8 text-yellow-300"
                 >
                   <path
                     fillRule="evenodd"
