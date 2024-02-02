@@ -1,5 +1,4 @@
 "use client"
-import { useEffect } from "react"
 import { notoSansJp } from "@/app/_styles/fonts"
 
 type Props = {
@@ -9,13 +8,6 @@ type Props = {
 }
 
 export default function AccordionItem({ id, title, children }: Props) {
-  useEffect(() => {
-    const init = async () => {
-      const { Collapse, initTE } = await import("tw-elements")
-      initTE({ Collapse })
-    }
-    init()
-  }, [])
   return (
     <div className="rounded-none border border-l-0 border-r-0 border-t-0 border-neutral-200 bg-white ">
       <h2 className="mb-0 font-bold text-lg" id={`accordion-heading-${id}`}>
