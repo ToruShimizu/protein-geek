@@ -9,7 +9,6 @@ export const concertOne = Concert_One({ weight: "400", subsets: ["latin"], displ
  * 主に英語表記で使うが、数字を太字で表現したい場合は数字でも使う
  */
 export const montSerrat = Montserrat({
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
 })
@@ -18,7 +17,6 @@ export const montSerrat = Montserrat({
  * 日本語表記
  */
 export const notoSansJp = Noto_Sans_JP({
-  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
 })
