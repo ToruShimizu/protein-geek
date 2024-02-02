@@ -34,7 +34,7 @@ export default function ProteinList({ proteins }: Props) {
                       src,
                     })}
                     alt={name}
-                    loading="eager"
+                    priority
                     style={{ width: "100%", height: "100%" }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 top-0 bg-stone-800 opacity-0 transition duration-300 ease-in-out group-hover:opacity-50"></div>
