@@ -114,17 +114,18 @@ export default function ReviewForm({ protein }: Props) {
           )}
         </div>
 
-        <div className="grid gap-2 mb-4">
+        <div className="grid gap-3 mb-4">
           <p className="text-sm font-bold text-gray-900">タグ</p>
           {TAGS.map((tag) => (
-            <div key={tag.id} className="flex items-center ">
-              <div onClick={() => selectTag(tag.id)}>
+            <div key={tag.id}>
+              <div className="flex items-center">
                 <input
                   id={`tag-${tag.id}`}
                   type="checkbox"
                   value={tag.id}
                   className="default-checkbox g-2 w-4 h-4 rounded"
                   defaultChecked={tagIds.includes(tag.id)}
+                  onChange={(e) => selectTag(e.target.value)}
                 />
                 <label
                   htmlFor={`tag-${tag.id}`}
@@ -211,7 +212,7 @@ export default function ReviewForm({ protein }: Props) {
           <div
             className={`${styles.button} h-12 px-8 w-full grid bg-gradient-to-br from-teal-400 via-teal-500 to-teal-600 items-center shadow-2xl cursor-pointer overflow-hidden transform hover:opacity-75 transition duration-300 ease-out`}
           >
-            {isLoading && (
+            {isLoading ? (
               <svg
                 aria-hidden="false"
                 role="status"
@@ -229,8 +230,9 @@ export default function ReviewForm({ protein }: Props) {
                   fill="currentColor"
                 />
               </svg>
+            ) : (
+              "レビューを投稿する"
             )}
-            レビューを投稿する
           </div>
         </button>
       </div>

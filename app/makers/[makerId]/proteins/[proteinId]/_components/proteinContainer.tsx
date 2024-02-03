@@ -9,7 +9,7 @@ import ReviewSection from "./reviewSection"
 
 type Props = {
   protein: Protein
-  reviews?: Review[]
+  reviews: Review[]
   fact: Fact
 }
 export default function ProteinContainer({ protein, reviews, fact }: Props) {
