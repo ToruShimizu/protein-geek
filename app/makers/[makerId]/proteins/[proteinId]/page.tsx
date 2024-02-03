@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: { makerId: string; prot
         { name: protein.name },
       ]}
     >
-      <ProteinContainer protein={protein} reviews={reviews} fact={fact} />
+      <ProteinContainer protein={protein} reviews={reviews ?? []} fact={fact} />
     </MainContainer>
   )
 }
