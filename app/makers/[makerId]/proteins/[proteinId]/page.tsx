@@ -10,6 +10,8 @@ const ProteinContainer = dynamic(() => import("./_components/proteinContainer"),
   ssr: false,
 })
 
+export const revalidate = 0
+
 export default async function Page({ params }: { params: { makerId: string; proteinId: string } }) {
   const [{ protein }, { maker }, reviews, { fact }] = await Promise.all([
     proteinRepo.fetchById(Number(params.proteinId)),
