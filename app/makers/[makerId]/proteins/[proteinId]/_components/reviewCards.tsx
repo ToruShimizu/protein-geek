@@ -15,7 +15,7 @@ export default function ReviewCards({ reviews, flavors }: Props) {
   return (
     <div className={`grid gap-4 ${notoSansJp.className}`}>
       {reviews.map((review) => (
-        <div key={review.id} className="grid gap-1 p-4 border border-gray-200 rounded-lg shadow">
+        <div key={review.id} className="grid gap-2 p-4 border border-gray-200 rounded-lg shadow">
           <span className="text-xs font-bold">ニックネーム</span>
           <p className="text-sm text-neutral-600">{review.name}</p>
           <span className="text-xs font-bold">おすすめの味</span>
