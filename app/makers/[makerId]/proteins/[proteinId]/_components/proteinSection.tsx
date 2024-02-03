@@ -34,24 +34,18 @@ export default function ProteinSection({ protein, fact }: Props) {
   const price = useMemo(() => product.price, [product.price])
   const average = calculateRateAverage(protein.reviews)
 
-  const onChange = useCallback(
-    (id: string) => {
-      const selectedFlavor = protein.flavors.find((flavor) => flavor.id === id)
+  const onChange = useCallback((id: string) => {
+    const selectedFlavor = protein.flavors.find((flavor) => flavor.id === id)
 
-      if (selectedFlavor) {
-        setFlavor(selectedFlavor)
-        setProduct(selectedFlavor.products[0])
-      }
-    },
-    [setFlavor],
-  )
+    if (selectedFlavor) {
+      setFlavor(selectedFlavor)
+      setProduct(selectedFlavor.products[0])
+    }
+  }, [])
 
-  const onClick = useCallback(
-    (product: Product) => {
-      setProduct(product)
-    },
-    [setProduct],
-  )
+  const onClick = useCallback((product: Product) => {
+    setProduct(product)
+  }, [])
 
   useEffect(() => {
     setFlavor(protein.flavors[0])
@@ -64,7 +58,7 @@ export default function ProteinSection({ protein, fact }: Props) {
         <Image
           src={createStaticUrl({
             baseUrl: staticUrl,
-            src: protein.src,
+            src: flavor.src,
           })}
           alt={protein.name}
           priority
