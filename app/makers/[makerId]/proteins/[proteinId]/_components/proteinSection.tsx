@@ -81,7 +81,7 @@ export default function ProteinSection({ protein, fact }: Props) {
           defaultValue={protein.flavors[0].id}
           onChange={onChange}
         />
-        <div className="grid gap-2">
+        <div className="grid gap-2 items-center">
           <h3 className={`font-bold text-sm md:text-base ${notoSansJp.className}`}>サイズ</h3>
           <ProductList products={flavor.products} selectedProduct={product} onClick={onClick} />
         </div>
