@@ -26,7 +26,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - run: "! git diff --name-only | grep yarn.lock"
+      - name: Check yarn.lock
+        run: "! git diff --name-only | grep yarn.lock"
 
       - name: Run lint
         run: yarn lint
