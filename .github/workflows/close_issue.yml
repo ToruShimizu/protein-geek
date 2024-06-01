@@ -1,0 +1,24 @@
+name: Auto Close Issues
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 毎日実行
+  workflow_dispatch:
+
+jobs:
+  auto-close:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Close stale issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Close issues older than 1 days
+          issues=$(gh issue list --state open --json number,createdAt --jq '.[] | select(.createdAt < (now - 1*86400 | todate)) | .number')
+
+          for issue in $issues; do
+            gh issue close $issue --comment "This issue has been automatically closed because it has not had any activity for 1 days."
+          done
