@@ -39,7 +39,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:${{ env.range }} -reason:"not planned"'
-
+      - name: Create summary
+        id: summary
+        run: |
+          echo "## Issue Metrics Summary" >> $GITHUB_STEP_SUMMARY
+          cat issue_metrics.md >> $GITHUB_STEP_SUMMARY
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
         with:
