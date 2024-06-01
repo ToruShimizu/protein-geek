@@ -29,7 +29,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: "repo:torushimizu/protein-geek s:pr created:2024-02-01..2024-02-28"
+          SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:2024-02-01..2024-02-28 -reason:"not planned"'
 
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
