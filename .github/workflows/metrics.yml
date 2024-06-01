@@ -39,10 +39,10 @@ jobs:
           echo "range=$start_date..$end_date" >> "$GITHUB_ENV"
 
       - name: Run issue-metrics tool
-        uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:${{ env.range }} -reason:"not planned"'
+        run: |
+          npx github:github/issue-metrics@v3 repo:example-user/example-repo is:pr created:${{ env.range }} -reason:"not planned" | tee issue_metrics.json
 
       - name: Set up Python
         uses: actions/setup-python@v2
