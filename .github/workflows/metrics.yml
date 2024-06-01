@@ -43,8 +43,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:${{ env.range }} -reason:"not planned"'
-        with:
-          output: issue_metrics.json
 
       - name: Set up Python
         uses: actions/setup-python@v2
