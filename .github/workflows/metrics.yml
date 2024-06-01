@@ -19,7 +19,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get dates for last month
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get dates for range
         shell: bash
         run: |
           start_date="${{ github.event.inputs.start_date }}"
@@ -40,6 +43,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:${{ env.range }} -reason:"not planned"'
+        with:
+          output: issue_metrics.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install matplotlib pandas
+
+      - name: Generate graph
+        run: |
+          python generate_graph.py
 
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
