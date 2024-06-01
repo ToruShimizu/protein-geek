@@ -1,6 +1,15 @@
 name: Monthly issue metrics
 on:
   workflow_dispatch:
+    inputs:
+      start_date:
+        description: "計測開始日 (YYYY-MM-DD)"
+        required: false
+        default: $(date -d "-1 month" +%Y-%m-01)
+      end_date:
+        description: "計測終了日 (YYYY-MM-DD)"
+        required: false
+        default: $(date -d "$(date +%Y-%m-01) -1 day" +%Y-%m-%d)
   schedule:
     - cron: "3 2 1 * *"
 
@@ -8,28 +17,29 @@ jobs:
   build:
     name: issue metrics
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: read
+
     steps:
       - name: Get dates for last month
         shell: bash
         run: |
-          # Calculate the first day of the previous month
-          first_day=2024-02-01
+          start_date="${{ github.event.inputs.start_date }}"
+          end_date="${{ github.event.inputs.end_date }}"
 
-          # Calculate the last day of the previous month
-          last_day=2024-02-28
+          if [ -z "$start_date" ]; then
+            start_date=$(date -d "-1 month" +%Y-%m-01)
+          fi
 
-          #Set an environment variable with the date range
-          echo "$first_day..$last_day"
-          echo "last_month=$first_day..$last_day" >> "$GITHUB_ENV"
+          if [ -z "$end_date" ]; then
+            end_date=$(date -d "$(date +%Y-%m-01) -1 day" +%Y-%m-%d)
+          fi
+
+          echo "range=$start_date..$end_date" >> "$GITHUB_ENV"
 
       - name: Run issue-metrics tool
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:2024-02-01..2024-02-28 -reason:"not planned"'
+          SEARCH_QUERY: 'repo:torushimizu/protein-geek is:pr created:${{ env.range }} -reason:"not planned"'
 
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
