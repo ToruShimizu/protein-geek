@@ -5,11 +5,11 @@ on:
       start_date:
         description: "計測開始日 (YYYY-MM-DD)"
         required: false
-        default: $(date -d "-1 month" +%Y-%m-01)
+
       end_date:
         description: "計測終了日 (YYYY-MM-DD)"
         required: false
-        default: $(date -d "$(date +%Y-%m-01) -1 day" +%Y-%m-%d)
+
   schedule:
     - cron: "3 2 1 * *"
 
