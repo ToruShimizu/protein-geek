@@ -1,0 +1,23 @@
+name: textlint
+on:
+  push:
+    paths:
+      - "**.md"
+      - ".github/workflows/textlint.yml"
+      - ".textlintrc"
+
+jobs:
+  build:
+    name: textlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Push auto-fixed files
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
